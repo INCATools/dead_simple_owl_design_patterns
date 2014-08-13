@@ -26,13 +26,15 @@ the pattern record IDs.
 
 ## Draft spec:
 
-__pattern\_name__ (string): the name of the pattern. Must have no spaces of special characters
-__owl\_entities__ (associative array): hash lookup for OWL entities used in the pattern, key = name, value = ID
-__vars__ (associative array): a hash lookup for vars in the pattern, key = var name, value = range expressed as manchester syntax
-__def__ (associative array): __text__ (string): sprintf definition text.  
-__def__ (associative array): __vars__ (array): List of vars for interpolation of class names into sprintf of text. 
-__EquivalentTo__ (associative array): __owl__ (string): Sprintf OWL Manchester syntax string.
-__EquivalentTo__ (associative array): __vars__ (array): List of vars for interpolation into sprintf owl MS text.
+* __pattern\_name__ (string): the name of the pattern. Must have no spaces of special characters
+* __owl\_entities__ (associative array): hash lookup for OWL entities used in the pattern, key = name, value = ID
+* __vars__ (associative array): a hash lookup for vars in the pattern, key = var name, value = range expressed as manchester syntax
+* __def__ (associative array): 
+  * __text__ (string): sprintf definition text.  
+  * __vars__ (array): List of vars for interpolation of class names into sprintf of text. 
+* __EquivalentTo__ (associative array): 
+  * __owl__ (string): Sprintf OWL Manchester syntax string.
+  * __vars__ (array): List of vars for interpolation into sprintf owl MS text.
 
 ~~~~.javascript
 
@@ -46,7 +48,7 @@ __EquivalentTo__ (associative array): __vars__ (array): List of vars for interpo
     "vars" : { 
 	"var1" : "'class2'" 
     },
-    "def": { // definition
+    "def": {
 	"text": "Ipsum lorum %s dolor sit amet, consectetur adipiscing elit. Fusce gravida non erat et gravida.", // 
 	"vars": ["var1"]
     },
