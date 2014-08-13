@@ -16,15 +16,13 @@ the pattern record IDs.
 
 ## Approach
 
-Use JSON format:  If kept simple, it is easy to read and edit.  
-It is easy to work with programatically - standard libraries are available to convert 
-it into datastructures in many languages.
+* Use JSON format:  If kept simple, it is easy to read and edit. It is easy to work with programatically - standard libraries are available to convertit into datastructures in many languages.
 
-All owl object properties and classes are listed in a name -> ID
-dictionary (hash lookup) attached to the class.
+* All owl object properties and classes are listed in a name -> ID dictionary (hash lookup) attached to the class.
 
-Variable interpolation into Manchester syntax and text is specified
-using sprintf format.  Variable names are stored in associated lists.
+* Variable interpolation into Manchester syntax and text is specified using sprintf format.  Variable names are stored in associated lists.
+
+* Varibles are specified in a dictionary with variable name as key and value as range specified as a Manchester syntax expresssion.
 
 ## Draft spec:
 
