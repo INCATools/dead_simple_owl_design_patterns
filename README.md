@@ -26,13 +26,14 @@ the pattern record IDs.
 
 ## Draft spec:
 
-See [draft example](https://github.com/dosumis/dead_simple_owl_design_patterns/blob/master/json/draft_json_example.json)
+__pattern\_name__ (string): the name of the pattern. Must have no spaces of special characters
+__owl\_entities__ (associative array): hash lookup for OWL entities used in the pattern, key = name, value = ID
+__vars__ (associative array): a hash lookup for vars in the pattern, key = var name, value = range expressed as manchester syntax
+__def__ (associative array): __text__ (string): sprintf definition text.  
+__def__ (associative array): __vars__ (array): List of vars for interpolation of class names into sprintf of text. 
+__EquivalentTo__ (associative array): __owl__ (string): Sprintf OWL Manchester syntax string.
+__EquivalentTo__ (associative array): __vars__ (array): List of vars for interpolation into sprintf owl MS text.
 
-pattern name:  string: the name of the pattern
-owl_entities:  hash lookup for OWL entities used in the pattern, key = name, value = ID
-vars:  a hash lookup for vars in the pattern, key = var name, value = range expressed as manchester syntax
-def: text: sprintf definition
-def: vars: a list 
 ~~~~.javascript
 
    { 
@@ -43,18 +44,21 @@ def: vars: a list
 	"class2" : "ID3", 
     },
     "vars" : { 
-	"var1" : "''name3" 
+	"var1" : "'class2'" 
     },
     "def": { // definition
 	"text": "Ipsum lorum %s dolor sit amet, consectetur adipiscing elit. Fusce gravida non erat et gravida.", // 
-	"vars": ["var1"] \ List of vars for interpolation into sprintf of text
+	"vars": ["var1"]
     },
     "EquivalentTo": {
 	"owl": "'name1 and name2",
-	"vars": ["imported"]
+	"vars": ["var1"]
     }
    }
 ~~~~
+
+See [draft example](https://github.com/dosumis/dead_simple_owl_design_patterns/blob/master/json/draft_json_example.json)
+
 
 ## Validator spec
 
