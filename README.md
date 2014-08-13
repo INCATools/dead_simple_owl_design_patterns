@@ -55,7 +55,7 @@ Manchester syntax expression use names (labels).  These are always single quoted
 	"vars": ["var1"]
     },
     "EquivalentTo": {
-	"owl": "'name1 and name2",
+	"owl": "'objectProperty1' some 'class1'",
 	"vars": ["var1"]
     }
    }
