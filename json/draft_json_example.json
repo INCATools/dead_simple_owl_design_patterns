@@ -4,9 +4,9 @@
 	"transport" : "GO_0006810", 
 	"extracellular region": "GO_0005576", 
 	"intracellular part" : "GO_0044424", 
-	"chemical entity" : "",
-	"protein" : "", 
-	"protein complex" : ""
+	"chemical entity" : "CHEBI_24431",
+	"protein" : "CHEBI_36080",
+	"protein complex" : "GO_0043234"
     },
     "vars" : {
 	"imported" : "'chemical entity' or 'protein' or 'protein complex" 
