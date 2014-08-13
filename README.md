@@ -28,20 +28,25 @@ the pattern record IDs.
 
 See [draft example](https://github.com/dosumis/dead_simple_owl_design_patterns/blob/master/json/draft_json_example.json)
 
+pattern name:  string: the name of the pattern
+owl_entities:  hash lookup for OWL entities used in the pattern, key = name, value = ID
+vars:  a hash lookup for vars in the pattern, key = var name, value = range expressed as manchester syntax
+def: text: sprintf definition
+def: vars: a list 
 ~~~~.javascript
 
    { 
     "pattern_name" : "some_name_no_spaces_of_special_chars",
-    "owl_entities" : { \\ a hash lookup for OWL entities used in the pattern, key = name, value = IO
+    "owl_entities" : { 
 	"class1" : "ID1", 
 	"objectProperty1" : "ID2", 
 	"class2" : "ID3", 
     },
-    "vars" : { \\ a hash lookup for vars in the pattern, key = var name, value = range expressed as manchester syntax
+    "vars" : { 
 	"var1" : "''name3" 
     },
     "def": { // definition
-	"text": "Ipsum lorum %s dolor sit amet, consectetur adipiscing elit. Fusce gravida non erat et gravida.", // sprintf definition
+	"text": "Ipsum lorum %s dolor sit amet, consectetur adipiscing elit. Fusce gravida non erat et gravida.", // 
 	"vars": ["var1"] \ List of vars for interpolation into sprintf of text
     },
     "EquivalentTo": {
