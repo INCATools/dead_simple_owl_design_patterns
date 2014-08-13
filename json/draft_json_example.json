@@ -1,11 +1,11 @@
 { 
-    'pattern_name' : 'import_into_cell'
+    'pattern_name' : 'import_into_cell',
     'owl_entities': {
 	'transport' : 'GO_0006810', 'extracellular region': 'GO_0005576', 'intracellular part' : 'GO_0044424', 'chemical entity' : '', 'protein' : '', 'protein complex' 
     },
     'vars' : {
 	'imported': "'chemical entity' OR 'protein' OR 'protein complex'" 
-    }
+    },
     'def': {
 	'text': 'The directed movement of %s from outside of a cell into the cytoplasmic compartment. This may occur via transport across the plasma membrane or via endocytosis.', 
 	'vars': ['imported']
