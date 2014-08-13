@@ -1,0 +1,17 @@
+{ 
+    'pattern_name' : 'import_into_cell' // no spaces in names
+    'owl_entities': {
+	'transport' : 'GO_0006810', 'extracellular region': 'GO_0005576', 'intracellular part' : 'GO_0044424', 'chemical entity' : '', 'protein' : '', 'protein complex' 
+    },
+    'vars' : {
+	'imported': "'chemical entity' OR 'protein' OR 'protein complex'" // Variables used in patterns + their ranges, expressed as MS.
+    }
+    'def': {
+	'text': 'The directed movement of %s from outside of a cell into the cytoplasmic compartment. This may occur via transport across the plasma membrane or via endocytosis.', 
+	'vars': ['imported'] // should be interpreted by parser as insertion of label.
+    },
+    'EquivalentTo': {
+	'owl': "'transport' and ('has target start location' some 'extracellular region') and ('has target end location' some 'intracellular part') and ('imports' some '%s')",
+	'vars': ['imported']
+    },
+}
