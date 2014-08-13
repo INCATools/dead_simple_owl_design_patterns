@@ -2,8 +2,8 @@
 
 ## Motivation
 
-We need a simple, lightweight standard for specifying design patterns
-for generating documentation, generating new terms and for
+The job of editing the GO and many other OBOish OWL ontologies increasingly involves coming up with new design patterns.  We need a simple, lightweight standard for specifying these design patterns that can then be used 
+for generating documentation, generating new terms
 retrofitting old ones. The solution must be readable and editable by anyone with a
 basic knowledge of OWL and the ability to read manchester syntax.  It must also be easy
 to use programatically without the need for custom parsers - i.e. it should follow some 
@@ -65,6 +65,8 @@ See [draft example](https://github.com/dosumis/dead_simple_owl_design_patterns/b
 
 
 ## Validator spec
+
+(Basic JSON validation can be done using standard libraries)
 
 A validator will test:
 * Integrity of the pattern
