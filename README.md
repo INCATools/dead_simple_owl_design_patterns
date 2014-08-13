@@ -70,6 +70,9 @@ See [draft example](https://github.com/dosumis/dead_simple_owl_design_patterns/b
 
 A validator will test:
 * Integrity of the pattern
+  * Are all keys valid?
+  * Are all values of the correct type?
+  * Are a minimal set of keys present?
   * Are all owl entities in patterns in the dict?
   * Do all sprintf statements have an matching list of the correct length?
 * Testing against a specified ontology:
