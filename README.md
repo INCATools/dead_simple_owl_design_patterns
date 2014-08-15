@@ -16,7 +16,7 @@ the pattern record IDs.
 
 ## Approach
 
-* JSON format is probably the ideal exchange format for programatic consumption. It is already javascript.  Standard libraries are available to convert it into datastructures in many languages. Developers are typically experience at consuming it. But it can be difficult for human editors to keep curly braces and quotes balanced and to add commas correctly.  The subset of YAML that can be converted to JSON is much easier for humans to keep well-formed, so this will be the master format.  YAML also has the great advantage over JSON of allowing comments to be embedded.
+* JSON format is probably the ideal exchange format for programatic consumption. It is already javascript.  Standard libraries are available to convert it into datastructures in many languages. Developers are typically experience at consuming it. But it can be difficult for human editors to keep curly braces and quotes balanced and to add commas correctly.  The subset of YAML that can be converted to JSON is much easier for humans to keep well-formed, so this will be the master format.  YAML also has the great advantage over JSON of allowing comments to be embedded. [Conversion between YAML and JSON is trivial](http://yamltojson.com/)
 
 * All owl object properties and classes are listed in a name -> ID dictionary (hash lookup) attached to the class.
 
