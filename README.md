@@ -38,57 +38,10 @@ Manchester syntax expression use names (labels).  These are always single quoted
   * __owl__ (string): Sprintf OWL Manchester syntax string.
   * __vars__ (array): List of vars for interpolation into sprintf owl MS text.
 
-### yaml
-```.yaml
 
-pattern_name : some_name_with_no_spaces_or_special_chars
-owl_entities :  
-  class1 : ID1 
-  objectProperty1 : ID2 
-  class2 : ID3 
-    
-vars :  
-  var1 : 'class2' 
-    
-def: 
-  text: Ipsum lorum %s dolor sit amet, consectetur adipiscing elit. Fusce gravida non erat et gravida.
-  vars:
-    - var1
-    
-EquivalentTo: 
-  owl: 'objectProperty1' some 'class1'
-  vars:
-    - var1
-```
+Draft yaml example - [import_into_cell](yaml/import_into_cell.yaml)
 
-### json
-
-```.javascript
-
-   { 
-    "pattern_name" : "some_name_no_spaces_of_special_chars",
-    "owl_entities" : { 
-	"class1" : "ID1", 
-	"objectProperty1" : "ID2", 
-	"class2" : "ID3", 
-    },
-    "vars" : { 
-	"var1" : "'class2'" 
-    },
-    "def": {
-	"text": "Ipsum lorum %s dolor sit amet, consectetur adipiscing elit. Fusce gravida non erat et gravida.", // 
-	"vars": ["var1"]
-    },
-    "EquivalentTo": {
-	"owl": "'objectProperty1' some 'class1'",
-	"vars": ["var1"]
-    }
-   }
-```
-
-See [draft json example](json/import_into_cell.json)
-
-See [draft yaml example](yaml/import_into_cell.yaml)
+Draft json example - [import_into_cell](json/import_into_cell.json)
 
 
 ## Validator spec
