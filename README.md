@@ -86,9 +86,9 @@ EquivalentTo:
    }
 ```
 
-See [draft json example](json/draft_json_example.json)
+See [draft json example](json/import_into_cell.json)
 
-See [draft yaml example](yaml/)
+See [draft yaml example](yaml/import_into_cell.yaml)
 
 
 ## Validator spec
