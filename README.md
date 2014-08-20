@@ -26,7 +26,7 @@ the pattern record IDs.
 
 ## Draft spec:
 
-Manchester syntax expression use names (labels).  These are always single quoted.
+Manchester syntax expressions use names (labels).  These are always single quoted inside an expression that is double quoted. (Note single quotes in term names must be escaped).
 
 * __pattern\_name__ (string): the name of the pattern. No spaces or special characters allowed.
 * __owl\_entities__ (associative array): hash lookup for OWL entities used in the pattern, key = name, value = ID
