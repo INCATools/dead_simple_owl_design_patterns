@@ -1,0 +1,16 @@
+pattern_name: integral_membrane_component
+owl_entities: 
+
+    
+vars: 
+  imported: "'membrane'"
+    
+def: 
+  text: The directed movement of %s from outside of a cell into the cytoplasmic compartment. This may occur via transport across the plasma membrane or via endocytosis. 
+  vars:
+    - imported
+    
+EquivalentTo: 
+  owl: "'transport' and ('has target start location' some 'extracellular region') and ('has target end location' some 'intracellular part') and ('imports' some '%s')"
+  vars:
+    - imported
