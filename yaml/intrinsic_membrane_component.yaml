@@ -1,0 +1,21 @@
+pattern_name: intrinsic_membrane_component
+owl_entities: 
+
+    
+vars: 
+  membrane: "'membrane'"
+    
+def: 
+  text: The component of the %s consisting of gene products and protein complexes that have some covalently attached part (e.g. peptide sequence or GPI anchor), which spans or is embedded in one or both leaflets the membrane.
+  vars:
+    - membrane
+    
+EquivalentTo: 
+  owl: "'integral component of membrane' and ('part of' some '%s')"
+  vars:
+    - membrane
+    
+SubClassOf:
+  owl: "'part of' some ('intrinsic component of membrane' and 'part of' some '%s')  # Needs more testing. Use of nesting obviously problematic for OWL translation.
+  vars: 
+    - membrane
