@@ -1,14 +1,22 @@
 pattern_name: import_into_cell
-owl_entities: 
+classes: 
   transport: GO_0006810 
   extracellular region: GO_0005576 
   intracellular part: GO_0044424 
-  chemical entity: CHEBI_24431
-  protein: CHEBI_36080
-  protein complex: GO_0043234
+  chemical entity: CHEBI_24431  # encompasses protein
+  macromolecular complex: GO_0043234  # encompasses protein complex
+
+relations:
+  has target start location : RO_0002338
+  has target end location : RO_0002339
     
 vars: 
-  imported: "'chemical entity' or 'protein' or 'protein complex'"
+  imported: "'chemical entity' or 'macromolecular complex'"
+  
+name:
+  text: 
+  vars: %s import into cell
+    - imported
     
 def: 
   text: The directed movement of %s from outside of a cell into the cytoplasmic compartment. This may occur via transport across the plasma membrane or via endocytosis. 
