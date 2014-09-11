@@ -14,8 +14,8 @@ vars:
   imported: "'chemical entity' or 'macromolecular complex'"
   
 name:
-  text: 
-  vars: %s import into cell
+  text: %s import into cell
+  vars: 
     - imported
     
 def: 
