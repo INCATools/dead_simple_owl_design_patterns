@@ -19,7 +19,7 @@ name:
     - imported
     
 def: 
-  text: The directed movement of %s from outside of a cell into the cytoplasmic compartment. This may occur via transport across the plasma membrane or via endocytosis. 
+  text: "The directed movement of %s from outside of a cell into the cytoplasmic compartment. This may occur via transport across the plasma membrane or via endocytosis."
   vars:
     - imported
     
