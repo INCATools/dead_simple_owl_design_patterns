@@ -4,26 +4,26 @@ pattern_name: import_across_plasma_membrane
 classes: 
   transport: GO_0006810 
   extracellular region: GO_0005576 
-  cytosol: GO_
+  cytosol: GO_0005829
   chemical entity: CHEBI_24431  # encompasses protein
   macromolecular complex: GO_0043234  # encompasses protein complex
-  plasma membrane: GO_
+  plasma membrane: GO_0005886
 
 relations:
   has target start location: RO_0002338
   has target end location: RO_0002339
-  results in transport across: RO_
+  results in transport across: RO_0002342
     
 vars: 
   imported: "'chemical entity' or 'macromolecular complex'"
   
 name:
   text: 
-  vars: %s import into cell
+  vars: "%s import across plasma membrane"
     - imported
     
 def: 
-  text: The directed movement of %s from outside of a cell, across the plasma membrane, into the cytoplasmic compartment. 
+  text: The directed movement of %s from outside of a cell, across the plasma membrane and into the cytoplasmic compartment. 
   vars:
     - imported
     
