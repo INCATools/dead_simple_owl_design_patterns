@@ -29,11 +29,17 @@ the pattern record IDs.
 Manchester syntax expression use names (labels).  These are always single quoted.
 
 * __pattern\_name__ (string): the name of the pattern. No spaces or special characters allowed.
-* __owl\_entities__ (associative array): hash lookup for OWL entities used in the pattern, key = name, value = ID
+* __description__(string): Text describing the pattern and its uses.  For use in documentation - not in OWL files.
+* __classes__ (associative array): hash lookup for OWL classes used in the pattern. key = name, value = ID
+* __relations__ (associative array): hash lookup for OWL object properties (relations) used in the pattern. key = name, value = ID
 * __vars__ (associative array): a hash lookup for vars in the pattern, key = var name, value = range expressed as manchester syntax.
+* __name__  (associative array): 
+  * __text__ (string): sprintf label text
+  * __vars__ (string): list of vars for interpolation of class names into sprintf of text. 
 * __def__ (associative array): 
   * __text__ (string): sprintf definition text.  
   * __vars__ (array): List of vars for interpolation of class names into sprintf of text. 
+* __comment__(string)
 * __EquivalentTo__ (associative array): 
   * __owl__ (string): Sprintf OWL Manchester syntax string.
   * __vars__ (array): List of vars for interpolation into sprintf owl MS text.
@@ -46,7 +52,7 @@ Draft json example - [import_into_cell](json/import_into_cell.json)
 
 ## Validator spec
 
-(Basic JSON validation can be done using standard libraries)
+(Basic JSON/YAML validation can be done using standard libraries)
 
 A validator will test:
 * Integrity of the pattern
