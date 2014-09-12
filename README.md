@@ -26,7 +26,7 @@ the pattern record IDs.
 
 ## Draft spec:
 
-Manchester syntax expression use names (labels).  These are always single quoted.
+Manchester syntax expressions use names (labels).  These are always single quoted inside an expression that is double quoted. (Note single quotes in term names must be escaped).
 
 * __pattern\_name__ (string): the name of the pattern. No spaces or special characters allowed.
 * __description__(string): Text describing the pattern and its uses.  For use in documentation - not in OWL files.
@@ -35,7 +35,7 @@ Manchester syntax expression use names (labels).  These are always single quoted
 * __vars__ (associative array): a hash lookup for vars in the pattern, key = var name, value = range expressed as manchester syntax.
 * __name__  (associative array): 
   * __text__ (string): sprintf label text
-  * __vars__ (string): list of vars for interpolation of class names into sprintf of text. 
+  * __vars__ (string): list of vars for interpolation of class names into sprintf of text.
 * __def__ (associative array): 
   * __text__ (string): sprintf definition text.  
   * __vars__ (array): List of vars for interpolation of class names into sprintf of text. 
