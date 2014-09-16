@@ -5,14 +5,10 @@ from abc import ABCMeta, abstractmethod
 # Two major requirements:
 ## testing and documentation of patterns
 ## testing, doc and implementation of instances
-# Should these be split, or carried out by the same object? 
+
 
 # For now, have made one abstract superclass and two subclasses - abstract and applied.  Usage-wise, this means a user could end up applying an invalid class... - will not be tested automatically.
 
-
-# Pattern for turning a list, l in which the first arg is a sprintf statement and all subsequent args are the substitutions on that sprintf statement.
-# def sprintf_sub(self, l):
-#     return l[0] % tuple(map(lambda x: x.label, l[1:]))
     
 
 class pattern:
@@ -111,6 +107,7 @@ class pattern:
         
 
 class abstract_pattern(pattern):
+	"""Class for validating and documenting (as md), design patterns."""
     def __init__(self, pattern, ont):
        self.pattern = pattern # pattern python data structure
        self.ont = ont
