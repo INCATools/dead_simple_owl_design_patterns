@@ -45,9 +45,9 @@ Manchester syntax expressions use names (labels).  These are always single quote
   * __vars__ (array): List of vars for interpolation into sprintf owl MS text.
 
 
-Draft yaml example - [import_into_cell](yaml/import_into_cell.yaml)
+Draft yaml example - [import_into_cell](patterns/import_into_cell.yaml)
 
-Draft json example - [import_into_cell](json/import_into_cell.json)
+Draft json example - [import_into_cell](patterns/import_into_cell.json)
 
 
 ## Validator spec
