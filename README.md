@@ -41,7 +41,7 @@ Manchester syntax expressions use names (labels).  These are always single quote
   * __vars__ (array): List of vars for interpolation of class names into sprintf of text. 
 * __comment__(string)
 * __EquivalentTo__ (associative array): 
-  * __owl__ (string): Sprintf OWL Manchester syntax string.
+  * __text__ (string): Sprintf OWL Manchester syntax string.  All OWL entities must be quoted; %s not quoted).
   * __vars__ (array): List of vars for interpolation into sprintf owl MS text.
 
 
