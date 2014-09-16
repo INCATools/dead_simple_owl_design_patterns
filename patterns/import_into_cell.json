@@ -1,0 +1,36 @@
+{
+    "EquivalentTo": {
+        "text": "'transport' and ('has target start location' some 'extracellular region') and ('has target end location' some 'intracellular part') and ('imports' some %s)", 
+        "vars": [
+            "imported"
+        ]
+    }, 
+    "classes": {
+        "chemical entity": "CHEBI_24431", 
+        "extracellular region": "GO_0005576", 
+        "intracellular part": "GO_0044424", 
+        "macromolecular complex": "GO_0043234", 
+        "transport": "GO_0006810"
+    }, 
+    "def": {
+        "text": "The directed movement of %s from outside of a cell into the cytoplasmic compartment. This may occur via transport across the plasma membrane or via endocytosis.", 
+        "vars": [
+            "imported"
+        ]
+    }, 
+    "name": {
+        "text": "%s import into cell", 
+        "vars": [
+            "imported"
+        ]
+    }, 
+    "pattern_name": "import_into_cell", 
+    "relations": {
+        "has target end location": "RO_0002339", 
+        "has target start location": "RO_0002338", 
+        "imports": "RO_0002340"
+    }, 
+    "vars": {
+        "imported": "'chemical entity' or 'macromolecular complex'"
+    }
+}

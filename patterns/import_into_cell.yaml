@@ -7,8 +7,9 @@ classes:
   macromolecular complex: GO_0043234  # encompasses protein complex
 
 relations:
-  has target start location : RO_0002338
-  has target end location : RO_0002339
+  has target start location: RO_0002338
+  has target end location: RO_0002339
+  imports: RO_0002340
     
 vars: 
   imported: "'chemical entity' or 'macromolecular complex'"
@@ -24,7 +25,7 @@ def:
     - imported
     
 EquivalentTo: 
-  owl: "'transport' and ('has target start location' some 'extracellular region') and ('has target end location' some 'intracellular part') and ('imports' some '%s')"
+  text: "'transport' and ('has target start location' some 'extracellular region') and ('has target end location' some 'intracellular part') and ('imports' some %s)"
   vars:
     - imported
     
