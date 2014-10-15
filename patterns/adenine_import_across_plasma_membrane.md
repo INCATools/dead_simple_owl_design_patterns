@@ -1,7 +1,7 @@
 ## Template: import_across_plasma_membrane
 ### imported: [adenine](http://purl.obolibrary.org/obo/CHEBI:16708)
 
-__label:__ adeninc import across plasma membrane
+__label:__ adenine import across plasma membrane
 
 __def:__ The directed movement of adenine from outside of a cell, across the plasma membrane and into the cytoplasmic compartment.
 
