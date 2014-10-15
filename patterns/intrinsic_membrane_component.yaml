@@ -28,6 +28,6 @@ EquivalentTo:
     - membrane
     
 SubClassOf:
-  text: "'part of' some ('intrinsic component of membrane' and 'part of' some %s)"  # Needs more testing. Use of nesting obviously problematic for OWL translation.
+  text: "'part of' some ('intrinsic component of membrane' and 'part of' some %s)"
   vars: 
     - membrane
