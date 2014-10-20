@@ -3,7 +3,3 @@ __label:__ intrinsic component of \{ membrane \}
 
 __def:__ The component of the \{ membrane \} consisting of gene products and protein complexes that have some covalently attached part (e.g. peptide sequence or GPI anchor), which spans or is embedded in one or both leaflets the membrane.
 
-__equivalentTo:__ ['integral component of membrane'](http://purl.obolibrary.org/obo/GO_0016021) _and_ (__['part of'](http://purl.obolibrary.org/obo/RO_0000050)__ _some_ { membrane })
-
-__subClassOf:__ __['part of'](http://purl.obolibrary.org/obo/RO_0000050)__ _some_ (['intrinsic component of membrane'](http://purl.obolibrary.org/obo/GO_0031224) _and_ __['part of'](http://purl.obolibrary.org/obo/RO_0000050)__ _some_ { membrane })
-

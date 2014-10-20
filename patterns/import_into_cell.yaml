@@ -24,7 +24,7 @@ def:
   vars:
     - imported
     
-EquivalentTo: 
+equivalentTo: 
   text: "'transport' and ('has target start location' some 'extracellular region') and ('has target end location' some 'intracellular part') and ('imports' some %s)"
   vars:
     - imported
