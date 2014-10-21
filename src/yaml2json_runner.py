@@ -3,9 +3,10 @@
 import json_yaml_tools
 import glob
 import re
+import sys
 
 # FInd all YAML files in directory.
-yaml_files = glob.glob("../patterns/*.yaml")  # Not - glob returns full file path
+yaml_files = glob.glob(sys.argv[1] + "*.yaml")  # Note - glob returns full file path
 
 for f in yaml_files:
     m = re.search("(.+).yaml", f)
