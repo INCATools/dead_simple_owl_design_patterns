@@ -1,6 +1,7 @@
 import warnings
 import ms2Markdown
 import re
+import json
 from abc import ABCMeta#, abstractmethod
 
 # Two major requirements:
@@ -10,9 +11,22 @@ from abc import ABCMeta#, abstractmethod
 
 # For now, have made one abstract superclass and two subclasses - abstract and applied.  Usage-wise, this means a user could end up applying an invalid class... - will not be tested automatically.
 
+def load_json_from_file(path):
+    """Loads json from specified file. Returns the corresponding data structure.
+    """
     
+    json_file = open(path, "r")
+    json_string = json_file.read()
+    json_file.close()
+    return json.loads(json_string)
 
-class pattern:
+def gen_applied_pattern_from_json(path, dc, ont):
+    """Returns and applied pattern object 
+    """
+    pattern = load_json_from_file(path)
+    return applied_pattern(pattern, dc, ont)
+
+class metaPattern:
     __metaclass__ = ABCMeta     # Abstract class - should not be directly instantiated
 
     # class level vars
@@ -37,7 +51,7 @@ class pattern:
         """Checks if all fields and subfields are valid and if all compulsory fields are present"""
         # TO ADD:
         ## check pattern is dict ??
-        ## check if all vars used in sprintf are declared
+        ## A1 ! check if all vars used in sprintf are declared
         ## check for quoted '%s' in sprintf text (not allowed).
         ## check that only all subs are %s and that the number of %s matches the length of the var list.
         ## re.search(r"\%(.)", , )  => from this get list to check all %s and length to check against var list.
@@ -65,7 +79,12 @@ class pattern:
                     for key3 in self.sprintf_keys:
                         if key3 not in self.pattern[key]:
                             warnings.warn("The field %s lacks the compulsory subfield %s." % (key, key3))
-
+                    # Check that number of vars matches number %s in text field
+                    if not len(re.findall('%s', self.pattern[key]['text'])) == len(self.pattern[key]['vars']):
+                        warnings.warn("Wrong number of vars in field '%s' of %s" % (key, self.pattern['pattern_name']))
+                    for v in self.pattern[key]['vars']:
+                        if v not in self.pattern['vars']:
+                            warnings.warn("%s not in varlist %s" % (v, str(self.pattern['vars'])))
         if not oneOf:
             warnings.warn("Pattern must have at least one of: " + str(oneOf_list))
 
@@ -130,7 +149,7 @@ class pattern:
         return text % tuple(qvars)
         
 
-class abstract_pattern(pattern):
+class abstract_pattern(metaPattern):
     """Class for validating and documenting (as md), design patterns."""
     def __init__(self, pattern, ont):
         self.pattern = pattern # pattern python data structure
@@ -180,7 +199,7 @@ class abstract_pattern(pattern):
         return "Stub"
 
         
-class applied_pattern(pattern):
+class applied_pattern(metaPattern):
     """A pattern object with variable slots populated.
     Attributes with class expression values are named consistently with Manchester Syntax
     and use shortForm IDs.
@@ -188,7 +207,7 @@ class applied_pattern(pattern):
 
     def __init__(self, pattern, cdict, ont):
         """pattern = pattern python datastructure
-        cdict = specification of vars as dict of dicts:
+        cdict = specification of vars as dict of 2 element tuples:
         { var1 : ( name , id ), var2: ( ... }
         ont = ontology = as Brain object """
         # Perhaps should be extended to allow specification of relations too?
@@ -209,13 +228,13 @@ class applied_pattern(pattern):
         
         self.equivalentTo = False
         if "equivalentTo" in self.pattern:            
-            self.equivalentTo = self.name2Id(self._var_name_sub(self.pattern['equivalentTo']))
+            self.equivalentTo = self.name2Id(self._var_name_sub(self.pattern['equivalentTo'], quote=True))
         self.subClassOf = False
         if "subClassOf" in self.pattern:
-            self.subClassOf = self.name2Id(self._var_name_sub(self.pattern['subClassOf']))
+            self.subClassOf = self.name2Id(self._var_name_sub(self.pattern['subClassOf'], quote=True))
         self.GCI = False            
         if "GCI" in self.pattern:
-            self.GCI = self.name2Id(self._var_name_sub(self.pattern['GCI']))
+            self.GCI = self.name2Id(self._var_name_sub(self.pattern['GCI'], quote=True))
         
     def __str__(self):
         return str(self.pattern) + "\n\n" + str(self.cdict)
@@ -278,8 +297,6 @@ class applied_pattern(pattern):
         return "Stub"
         # Boolean check for the presence of inferred subclasses.
         
-    def get_text_def(self):
-        return self._var_name_sub(self.pattern['def'])
 
 
         
