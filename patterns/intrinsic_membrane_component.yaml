@@ -1,7 +1,6 @@
 pattern_name: intrinsic_membrane_component
 
 classes:
-  integral component of membrane: GO_0016021
   membrane: GO_0016020
   side of membrane: GO_0098552
   intrinsic component of membrane: GO_0031224
@@ -23,11 +22,6 @@ def:
     - membrane
     
 equivalentTo: 
-  text: "'integral component of membrane' and ('part of' some %s)"
+  text: "'intrinsic component of membrane' and ('part of' some %s)"
   vars:
-    - membrane
-    
-subClassOf:
-  text: "'part of' some ('intrinsic component of membrane' and 'part of' some %s)"  # Needs more testing. Use of nesting obviously problematic for OWL translation.
-  vars: 
     - membrane

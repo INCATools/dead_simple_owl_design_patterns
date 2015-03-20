@@ -1,0 +1,32 @@
+{
+    "classes": {
+        "cell": null, 
+        "expression pattern": null
+    }, 
+    "def": {
+        "text": "The sum total of all cells in a single organism in which expression of %s is occurring.", 
+        "vars": [
+            "expressed_feature"
+        ]
+    }, 
+    "equivalentTo": {
+        "text": "", 
+        "vars": [
+            "expressed_feature"
+        ]
+    }, 
+    "name": {
+        "text": "%s expression pattern", 
+        "vars": [
+            "expressed_feature"
+        ]
+    }, 
+    "pattern_name": "expression_pattern", 
+    "relations": {
+        "has part": null, 
+        "part of": "BFO_0000050"
+    }, 
+    "vars": {
+        "expressed_feature": "'gene'"
+    }
+}
