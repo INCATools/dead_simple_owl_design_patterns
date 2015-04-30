@@ -3,7 +3,8 @@
         "cellular_component": "GO_0005575", 
         "chemical entity": "CHEBI_24431", 
         "macromolecular complex": "GO_0032991", 
-        "membrane": "GO_0016020"
+        "membrane": "GO_0016020", 
+        "transcript": "SO_0000673"
     }, 
     "comment": {
         "text": "This term covers %s *across* the %s  through a channel or pore.  It does not cover import via vesicle fusion with %s, as in this case transport does not involve crossing the membrane.", 
@@ -47,7 +48,7 @@
         "transports or maintains localization of": "RO_0002313"
     }, 
     "vars": {
-        "cargo": "'chemical entity' or 'macromolecular complex'", 
+        "cargo": "'chemical entity' or 'macromolecular complex' or 'transcript'", 
         "end": "'cellular_compomnent'", 
         "membrane": "'membrane'", 
         "start": "'cellular_component'"

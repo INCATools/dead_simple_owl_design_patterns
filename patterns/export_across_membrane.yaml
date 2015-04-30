@@ -5,6 +5,7 @@ classes:
   cellular_component: GO_0005575
   chemical entity: CHEBI_24431
   macromolecular complex: GO_0032991
+  transcript: SO_0000673
 
 relations:
   transports or maintains localization of: RO_0002313
@@ -15,7 +16,7 @@ relations:
 
 vars: 
   membrane: "'membrane'"
-  cargo: "'chemical entity' or 'macromolecular complex'" # Add in one or more SO terms to range?
+  cargo: "'chemical entity' or 'macromolecular complex' or 'transcript'"
   start: "'cellular_component'"
   end: "'cellular_compomnent'"
 
