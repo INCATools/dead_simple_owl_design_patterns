@@ -32,6 +32,14 @@ def:
     - start
     - membrane
     - end
+    
+comment: 
+  text: "This term covers %s *across* the %s  through a channel or pore.  It does not cover import via vesicle fusion with %s, as in this case transport does not involve crossing the membrane."
+  vars:
+    - cargo
+    - membrane
+    - membrane
+
 
 equivalentTo: 
   text: "'transport' that

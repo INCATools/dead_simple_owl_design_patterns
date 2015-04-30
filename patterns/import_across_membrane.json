@@ -5,6 +5,14 @@
         "macromolecular complex": "GO_0032991", 
         "membrane": "GO_0016020"
     }, 
+    "comment": {
+        "text": "This term covers %s *across* the %s  through a channel or pore.  It does not cover import via vesicle fusion with %s, as in this case transport does not involve crossing the membrane.", 
+        "vars": [
+            "cargo", 
+            "membrane", 
+            "membrane"
+        ]
+    }, 
     "def": {
         "text": "The directed import of some %s from %s, across the %s and into the %s.", 
         "vars": [
