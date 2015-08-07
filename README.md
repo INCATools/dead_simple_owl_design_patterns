@@ -2,13 +2,17 @@
 
 ## Motivation
 
-The job of editing the GO and many other OBOish OWL ontologies increasingly involves coming up with new design patterns.  We need a simple, lightweight standard for specifying these design patterns that can then be used for generating documentation, generating new termsretrofitting old ones. The solution must be readable and editable by anyone with a basic knowledge of OWL and the ability to read manchester syntax.  It must also be easy to use programatically without the need for custom parsers - i.e. it should follow some existing data exchange standard.
+The job of editing the GO and many other OBOish OWL ontologies increasingly involves specifying OWL design patterns.  We need a simple, light-weight standard for specifying these design patterns that can then be used for generating documentation, generating new terms and retrofitting old ones. The solution must be readable and editable by anyone with a basic knowledge of OWL and the ability to read manchester syntax.  It must also be easy to use programatically without the need for custom parsers - i.e. it should follow some existing data exchange standard.
 
 Human readability and editability requires that Manchester syntax be written using labels, but sustainability and consistency checking requires that the pattern record IDs. 
 
 ## Approach
 
-* JSON format is probably the ideal exchange format for programatic consumption. It is already javascript.  Standard libraries are available to convert it into datastructures in many languages. Developers are typically experienced at consuming it. But it can be difficult for human editors to keep curly braces and quotes balanced and to add commas correctly.  The subset of YAML that can be converted to JSON is much easier for humans to keep well-formed, so this will be the master format. YAML also has the great advantage over JSON of allowing comments to be embedded. [Conversion between YAML and JSON is trivial](http://yamltojson.com/)
+* JSON format is probably the ideal exchange format for programatic consumption. 
+ * It is already javascript.  
+ * Standard libraries are available to convert it into datastructures in many languages. 
+ * Developers are typically experienced at consuming it. 
+ * ***But*** it can be difficult for human editors to keep curly braces and quotes balanced and to add commas correctly.  The subset of YAML that can be converted to JSON is much easier for humans to keep well-formed, so this will be the master format. YAML also has the great advantage over JSON of allowing comments to be embedded. [Conversion between YAML and JSON is trivial](http://yamltojson.com/)
 
 * All owl object properties and classes are listed in a name -> ID dictionaries (hash lookups) attached to the class.
 
