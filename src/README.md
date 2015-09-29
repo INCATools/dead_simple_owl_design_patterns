@@ -4,7 +4,7 @@ Requires [Jython 2.7](http://www.jython.org/downloads.html) and [Brain](https://
 
 Both are available via Maven.
 
-## pattern.py
+## src/pattern.py
 
 Pattern processing: 
 
@@ -27,5 +27,5 @@ Basic methods:
 
 ## Runners
 
-- yaml2json_runner.py - convert all ../paterns/*.yaml to json (may be run as Python)
-- abstract_pattern_runner.py  - validate all patterns(json), and generate markdown doc for patterns (must be run as Jython)
+- src/yaml2json_runner.py - convert all ../paterns/*.yaml to json (may be run as Python)
+- src/abstract_pattern_runner.py  - validate all patterns(json), and generate markdown doc for patterns (must be run as Jython)
