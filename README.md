@@ -12,7 +12,7 @@ Human readability and editability requires that Manchester syntax be written usi
  * It is already javascript.  
  * Standard libraries are available to convert it into datastructures in many languages. 
  * Developers are typically experienced at consuming it. 
- * ***But*** it can be difficult for human editors to keep curly braces and quotes balanced and to add commas correctly.  The subset of YAML that can be converted to JSON is much easier for humans to keep well-formed, so this will be the master format. YAML also has the great advantage over JSON of allowing comments to be embedded. [Conversion between YAML and JSON is trivial](http://yamltojson.com/)
+* *But* YAML is much easier than JSON for humans to edit (it can be difficult for human editors to keep curly braces and quotes balanced and to add commas correctly in JSON).  The subset of YAML that can be converted to JSON is much easier for humans to keep well-formed, so this will be the master format. YAML also has the great advantage over JSON of allowing comments to be embedded. [Conversion between YAML and JSON is trivial](http://yamltojson.com/)
 
 * All owl object properties and classes used in a pattern are listed in a label -> shortformID dictionaries (hash lookups).  OWL ShortFormIDs, which are assumed to be sufficient for entity resolution during usage of the pattern.  Labels are assumed to be sufficient for entity resolution _within_ a pattern.
 
