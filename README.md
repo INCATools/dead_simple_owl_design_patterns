@@ -1,4 +1,4 @@
-# Dead simple owl design pattern exchange format
+# Dead simple owl design pattern (DOS-DP) exchange format
 
 ## Motivation
 
@@ -12,7 +12,7 @@ Human readability and editability requires that Manchester syntax be written usi
   * JSON format is the ideal exchange format for programatic consumption: It is already javascript; Standard libraries are available to convert it into datastructures in many languages;Developers are typically experienced at consuming it. 
   * *But* YAML is much easier than JSON for humans to edit (it can be difficult for human editors to keep curly braces and quotes balanced and to add commas correctly in JSON). YAML also has the great advantage over JSON of allowing comments to be embedded. [Conversion between YAML and JSON is trivial](http://yamltojson.com/)
 
-* All owl object properties and classes used in a pattern are listed in a label -> shortformID dictionaries (hash lookups).  OWL ShortFormIDs, which are assumed to be sufficient for entity resolution during usage of the pattern.  Labels are assumed to be sufficient for entity resolution _within_ a pattern.
+* All pattern contain dictionaries (hash lookups) that can be used to lookup up OWL shortform IDs from labels.  OWL ShortFormIDs are assumed to be sufficient for entity resolution during usage of the pattern.  Labels are assumed to be sufficient for entity resolution _within_ a pattern.
 
 * Variable interpolation into Manchester syntax and text is specified using sprintf format.  Variable names are stored in associated lists.
 
@@ -59,6 +59,9 @@ A validator will test:
   * Are the entities in the dictionary non-obsolete?
   * Are the names up to date ?
 
+## Implementation
+
+The aim of this project is to specify a simple design pattern system that can easily be consumed, whatever your code base.  This repository includes [code for validation, documentation and generation of pattern-based classes](https://github.com/dosumis/dead_simple_owl_design_patterns/tree/master/src) written in Jython.
 
 
 
