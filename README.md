@@ -14,7 +14,7 @@ Human readability and editability requires that Manchester syntax be written usi
  * Developers are typically experienced at consuming it. 
  * ***But*** it can be difficult for human editors to keep curly braces and quotes balanced and to add commas correctly.  The subset of YAML that can be converted to JSON is much easier for humans to keep well-formed, so this will be the master format. YAML also has the great advantage over JSON of allowing comments to be embedded. [Conversion between YAML and JSON is trivial](http://yamltojson.com/)
 
-* All owl object properties and classes are listed in a name -> ID dictionaries (hash lookups) attached to the class.
+* All owl object properties and classes used in a pattern are listed in a label -> shortformID dictionaries (hash lookups).  OWL ShortFormIDs, which are assumed to be sufficient for entity resolution during usage of the pattern.  Labels are assumed to be sufficient for entity resolution _within_ a pattern.
 
 * Variable interpolation into Manchester syntax and text is specified using sprintf format.  Variable names are stored in associated lists.
 
