@@ -20,11 +20,6 @@ def:
   vars:
     - membrane
     
-comment: 
-  text: "Proteins that span the membrane but have the bulk on one side of the membrane may be additionally annotated with a term of the form integral to X side of the %s."
-  vars:
-    - membrane
-    
 equivalentTo: 
   text: "'spanning component of membrane' that 'part of' some %s"
   vars:
