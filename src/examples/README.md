@@ -2,8 +2,10 @@
 
 ### Example use
 
-./term_addition_runner.py ../../patterns/transport_across_membrane.py sodium_outer_mito_mem.json <path to go ed file>
+./term_addition_runner.py ../../patterns/transport\_across\_membrane.py sodium\_outer\_mito\_mem.json <path to go ed file>
 
-## TODO:
+(relative paths in example depend on checkout of whole repo)
+
+### Todo:
 
 Add wrapper for specification of terms in tsv.
