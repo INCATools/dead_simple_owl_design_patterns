@@ -39,6 +39,7 @@ class metaPattern:
                 "vars" :  { "compulsory" : True, "sprintf" : False },
                 "name" : { "compulsory" : True, "sprintf" : True, "msExpression" : False },
                 "def" : { "compulsory" : True, "sprintf" : True, "msExpression" : False}, 
+                "comment" : { "compulsory" : False, "OneOf" : False,"sprintf" : True, "msExpression" : False },
                 "equivalentTo" : { "compulsory" : False, "OneOf" : True, "sprintf" : True, "msExpression" : True }, 
                 "subClassOf" : { "compulsory" : False, "OneOf" : True, "sprintf" : True, "msExpression" : True }, 
                 "GCI" : { "compulsory" : False, "OneOf" : False, "sprintf" : True, "msExpression" : True } }  # Better to specify this in JSON OR YAML in first place.  This is hard to read and edit.
@@ -108,6 +109,11 @@ class metaPattern:
     def _validate_range(self):
         # Boolean check for classes in range class expression - may require a different reasoner.
         return "Stub"
+    
+    def _validate_MS(self):
+        # TBA - validation step to check syntax MSexpressions.  
+        # Can be done by trying by adding test class + axioms with sub 'Thing' for vars.
+        return "stub"
 
     def validate_abstract_pattern(self):
         """Validates pattern fields against spec and entities against ontology
@@ -118,6 +124,7 @@ class metaPattern:
         if not self._validate_entities():
             valid = False
         return valid
+
 
     def gen_name_id(self):
         """Returns a name:id dict for all entities in the pattern"""
@@ -228,17 +235,26 @@ class applied_pattern(metaPattern):
         
         self.equivalentTo = False
         if "equivalentTo" in self.pattern:            
-            self.equivalentTo = self.name2Id(self._var_name_sub(self.pattern['equivalentTo'], quote=True))
+            self.equivalentTo = self.name2Id(self._var_id_sub(self.pattern['equivalentTo']))
         self.subClassOf = False
         if "subClassOf" in self.pattern:
-            self.subClassOf = self.name2Id(self._var_name_sub(self.pattern['subClassOf'], quote=True))
+            self.subClassOf = self.name2Id(self._var_id_sub(self.pattern['subClassOf']))
         self.GCI = False            
         if "GCI" in self.pattern:
-            self.GCI = self.name2Id(self._var_name_sub(self.pattern['GCI'], quote=True))
+            self.GCI = self.name2Id(self._var_id_sub(self.pattern['GCI']))
         
     def __str__(self):
         return str(self.pattern) + "\n\n" + str(self.cdict)
         
+    def _var_id_sub(self, sprintf):  
+        """sprintf =  a dict with text and vars keys, 
+            vars = list for sprintf sub into text)
+        Returns sprintf text vars substituted for ids, as specified 
+        for applied pattern.
+        """
+        id_list = map(lambda x: self.cdict[x][1], sprintf["vars"] )
+        return sprintf["text"] % tuple(id_list)
+    
     def _var_name_sub(self, sprintf, quote=False):  
         """Takes a sprintf field as an arg and an optional boolean to specify quoting
         (a dict with text and vars keys, vars = list for sprintf sub into text)
@@ -250,6 +266,7 @@ class applied_pattern(metaPattern):
             q = "'"
         name_list = map(lambda x: q + self.cdict[x][0] + q, sprintf["vars"] )
         return sprintf["text"] % tuple(name_list)
+    
 
     def gen_markdown_doc(self):
         # spec: follow Manchester syntax
@@ -270,9 +287,9 @@ class applied_pattern(metaPattern):
         """Add a new class, with shortFormID = ID, following self.pattern, to self.ont"""
         self.ont.addClass(ID)
         self.ont.label(ID, self.label)
-        self.ont.annotation(ID, 'defID', self.definition)
+        self.ont.annotation(ID, 'IAO_0000115', self.definition)
         if 'equivalentTo' in self.pattern:
-            self.ont.equivalentTo(ID, self.equivalentTo)
+            self.ont.equivalentClasses(ID, self.equivalentTo)
         if 'subClassOf' in self.pattern:
             self.ont.subClassOf(ID, self.subClassOf)
         # Don't currently have means to generate GCIs!
@@ -292,6 +309,7 @@ class applied_pattern(metaPattern):
             else:
                 if not self.ont.knowsClass(c[1]):
                     warnings.warn("Unknown class, %s, specified for var %s" % (c[0], v))
+
                 
     def _has_subclasses(self, ont):
         return "Stub"
