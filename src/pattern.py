@@ -33,6 +33,7 @@ class metaPattern:
     # pkey_dict spec. A dict of dicts.  keys are field names.  Subdicts have two compulsory boolan keys: compulsory & sprintf (indicating field will be paired with list and processed via sprintf subs).   If "compulsory" is False, there must be an additional boolean: oneOf, indicating whther this is one of a set, at least one of which must be present.  If sprintf is true, a further boolean, "msExpression", records whether the sprintf subfield 'string' is a Manchester syntax expression.
     
     pkey_dict = { "pattern_name" : { "compulsory" : True, "sprintf" : False },
+                "Base_URI" : {"compulsory" : False, "sprintf" : False},
                 "Description" : { "compulsory" : False, "OneOf" : False, "sprintf" : False },
                 "classes" : { "compulsory" : True, "sprintf" : False } ,
                 "relations" : { "compulsory" : True, "sprintf" : False },
@@ -49,7 +50,7 @@ class metaPattern:
 
 
     def _validate_pattern_fields(self):
-        """Checks if all fields and subfields are valid and if all compulsory fields are present"""
+        """Checks if all field and subfield keys are valid and if all compulsory fields are present"""
         # TO ADD:
         ## check pattern is dict ??
         ## A1 ! check if all vars used in sprintf are declared
@@ -58,38 +59,56 @@ class metaPattern:
         ## re.search(r"\%(.)", , )  => from this get list to check all %s and length to check against var list.
         ## Given these checks - makes more sense to hardwire sprintf subfield names than use config approach.
         
-        for key, value in self.pattern.items():
-            if key not in self.pkey_dict:
-                warnings.warn("Pattern has unknown field: %s !" % key)
+        for field, field_content in self.pattern.items():
+            if field not in self.pkey_dict:
+                warnings.warn("Pattern has unknown field: %s !" % field)
+        
+        # The following is quote ugly and hard to follow.  Should probably be refactored
         oneOf = False
         oneOf_list = []
-        
-        for key, value in self.pkey_dict.items():
-            if value['compulsory']:
-                if key not in self.pattern:
-                    warnings.warn("Pattern is missing compulsory field: %s !" % key)
-            elif value['OneOf']:
-                oneOf_list.append(key)
-                if key in self.pattern:
+        for field, field_spec in self.pkey_dict.items():
+            if field_spec['compulsory']:
+                if field not in self.pattern:
+                    warnings.warn("Pattern is missing compulsory field: %s !" % field)
+            elif field_spec['OneOf']:
+                oneOf_list.append(field)
+                if field in self.pattern:
                     oneOf = True 
-            if value['sprintf']:
-                if key in self.pattern:
-                    for key2 in self.pattern[key]:
-                        if key2 not in self.sprintf_keys:
-                            warnings.warn("The field %s has an unknown subfield %s." % (key, key2))
-                    for key3 in self.sprintf_keys:
-                        if key3 not in self.pattern[key]:
-                            warnings.warn("The field %s lacks the compulsory subfield %s." % (key, key3))
+            if field_spec['sprintf']:
+                if field in self.pattern:
+                    for subfield in self.pattern[field]:
+                        if subfield not in self.sprintf_keys:
+                            warnings.warn("The field %s has an unknown subfield %s." % (field, subfield))
+                    for subfield in self.sprintf_keys:
+                        if subfield not in self.pattern[field]:
+                            warnings.warn("The field %s lacks the compulsory subfield %s." % (field, subfield))
                     # Check that number of vars matches number %s in text field
-                    if not len(re.findall('%s', self.pattern[key]['text'])) == len(self.pattern[key]['vars']):
-                        warnings.warn("Wrong number of vars in field '%s' of %s" % (key, self.pattern['pattern_name']))
-                    for v in self.pattern[key]['vars']:
+                    if not len(re.findall('%s', self.pattern[field]['text'])) == len(self.pattern[field]['vars']):
+                        warnings.warn("Wrong number of vars in field '%s' of %s" % (field, self.pattern['pattern_name']))
+                    for v in self.pattern[field]['vars']:
                         if v not in self.pattern['vars']:
                             warnings.warn("%s not in varlist %s" % (v, str(self.pattern['vars'])))
+# Move spec checks down:                            
+#           if field_spec['msExpression']:
+#               self._validate_quoted(field['text'])
+#               self._validate_ms
+                            
         if not oneOf:
             warnings.warn("Pattern must have at least one of: " + str(oneOf_list))
 
         # Poss to add: validate number of vars for sprintf subs
+        
+    def _validate_ms(self, sprintf):
+        """ takes a sprintf ms field as input.  
+        Subs quoted names for IDs.  
+        Subs %s for Thing.  
+        Runs SubClassOf query as a way of triggering exception if MS is bad."""
+        #self.name2Id(sprintf)
+        #re.sub("\'.+?\'", 'Thing', fu)
+        #self.ont.getSubClasses('fu', 0)
+        return
+ 
+        
 
     def _validate_entities(self):
         """ Checks if IDs are known/non-obsolete. Warns and returns False if not.
@@ -103,17 +122,27 @@ class metaPattern:
             if not self.ont.knowsObjectProperty(ID):
                 warnings.warn("Pattern contains unknown relation %s, %s." % (NAME, ID))
                 valid = False
+        
         # TODO - add check for obsoletion status
         return valid
+    
+    def _validate_quoted(self, ms):
+        # Check that everything quoted in an MS string is in dict:
+        c = self.pattern['classes'].copy()
+        lookup = c.update(self.pattern['relations'])
+        out = True
+        quoted = re.findall("\'(.+?)\'", ms)
+        for q in quoted:
+            if q not in lookup.keys():
+                warnings.warn("Quoted element (%s) in MS string (%s) is not specified in pattern dictionary."  % (q, ms))
+                out = False
+        return out
+                
 
     def _validate_range(self):
         # Boolean check for classes in range class expression - may require a different reasoner.
         return "Stub"
     
-    def _validate_MS(self):
-        # TBA - validation step to check syntax MSexpressions.  
-        # Can be done by trying by adding test class + axioms with sub 'Thing' for vars.
-        return "stub"
 
     def validate_abstract_pattern(self):
         """Validates pattern fields against spec and entities against ontology
@@ -150,7 +179,7 @@ class metaPattern:
         return msExpression
         
     def _var_quote_sub(self, text, VARS):
-        """Quotes all members of list VARS with {}, then uses the resulting list in sprintf sub with tartget 'text'"""
+        """Quotes all members of list VARS with {}, then uses the resulting list in sprintf sub with target 'text'"""
         ## No need to live on class.  Can be moved to tools.  - Add assert test.
         qvars = map(lambda x: "\{ " + x + " \}", VARS)
         return text % tuple(qvars)
