@@ -63,7 +63,7 @@ A validator will test:
 
 The aim of this project is to specify a simple design pattern system that can easily be consumed, whatever your code base.  This repository includes [code for validation, documentation and generation of pattern-based classes](https://github.com/dosumis/dead_simple_owl_design_patterns/tree/master/src) written in Jython.
 
-
+[![Build Status](https://travis-ci.org/dosumis/dead_simple_owl_design_patterns.svg?branch=master)](https://travis-ci.org/bio-ontology-research-group/behavior-ontology)
 
 
 
