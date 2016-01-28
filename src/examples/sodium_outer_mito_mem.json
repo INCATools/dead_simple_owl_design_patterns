@@ -1,0 +1,7 @@
+[
+ { "cargo" : [ "sodium(1+)", "CHEBI_29101" ],
+   "start" : [ "cytosol", "GO_0005829" ],
+   "end" : [ "mitochondrial intermembrane space", "GO_0005758" ],
+   "membrane" : [ "mitochondrial outer membrane", "GO_0005741" ]
+ }
+]

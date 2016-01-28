@@ -4,10 +4,10 @@
         "chemical entity": "CHEBI_24431", 
         "macromolecular complex": "GO_0032991", 
         "membrane": "GO_0016020", 
-        "transcript": "SO_0000673"
+        "transport": "GO_0006810"
     }, 
     "comment": {
-        "text": "This term covers %s *across* the %s  through a channel or pore.  It does not cover import via vesicle fusion with %s, as in this case transport does not involve crossing the membrane.", 
+        "text": "This term covers %s *across* the %s through a channel or pore. It does not cover import via vesicle fusion with %s or vesiculation, as in these cases transport does not involve crossing the membrane.", 
         "vars": [
             "cargo", 
             "membrane", 
@@ -15,7 +15,7 @@
         ]
     }, 
     "def": {
-        "text": "The directed import of some %s from %s, across the %s and into the %s.", 
+        "text": "The directed import of %s from %s, across the %s and into the %s.", 
         "vars": [
             "cargo", 
             "start", 
@@ -24,7 +24,7 @@
         ]
     }, 
     "equivalentTo": {
-        "text": "'transport' that and ('has target start location' some %s) and ('has target end location' some %s) and ('imports' some %s) and ('results in transport across' some %s)", 
+        "text": "'transport' and ('has target start location' some %s) and ('has target end location' some %s) and ('imports' some %s) and ('results in transport across' some %s)", 
         "vars": [
             "start", 
             "end", 

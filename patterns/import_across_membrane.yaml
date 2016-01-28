@@ -5,7 +5,7 @@ classes:
   cellular_component: GO_0005575
   chemical entity: CHEBI_24431
   macromolecular complex: GO_0032991
-  transcript: SO_0000673
+  transport: GO_0006810
 
 relations:
   transports or maintains localization of: RO_0002313
@@ -43,7 +43,7 @@ comment:
 
 
 equivalentTo: 
-  text: "'transport' that
+  text: "'transport'
     and ('has target start location' some %s)
     and ('has target end location' some %s)
     and ('imports' some %s)
