@@ -27,7 +27,7 @@ name:
     - membrane
 
 def: 
-  text: "The directed import of some %s from %s, across the %s and into the %s."
+  text: "The directed import of %s from %s, across the %s and into the %s."
   vars:
     - cargo
     - start
@@ -35,7 +35,7 @@ def:
     - end
 
 comment: 
-  text: "This term covers %s *across* the %s  through a channel or pore.  It does not cover import via vesicle fusion with %s, as in this case transport does not involve crossing the membrane."
+  text: "This term covers %s *across* the %s  through a channel or pore.  It does not cover export via vesicle fusion with %s, as in this case transport does not involve crossing the membrane."
   vars:
     - cargo
     - membrane
