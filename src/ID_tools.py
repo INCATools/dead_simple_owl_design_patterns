@@ -36,7 +36,9 @@ class ontId_owl(ontId):
             """Generate an OBOish OWL shortform ID given specifications of: 
             idp; accession length; Brain object and the start & end of an ID range.
             Assumes all existing IDs are used for *classes* in Ontology."""
+            self.idp = idp
             self.ont = ont
+            self.sep = '_'
             self._gen_lookups()
             self.accession = start
             self.end = end

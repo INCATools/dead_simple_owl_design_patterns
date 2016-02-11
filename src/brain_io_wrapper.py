@@ -6,7 +6,7 @@ from org.semanticweb.owlapi.model import IRI
 from java.io import File
 from org.semanticweb.owlapi.apibinding.OWLManager import createOWLOntologyManager
 
-# Kinds sucks this is needed. Should be written into some extension to Brain.
+# Kinda sucks that this is needed. Should be written into some extension to Brain.
 
 def load_brain_from_file(path):
     """Created a Brain object from a file, preserving ontology metadata.
@@ -19,9 +19,9 @@ def load_brain_from_file(path):
 
 def save_brain_as_ofn(brain, path):
     """
-    Wot is sez on the tin.
+    Wot it sez on' tin.
     brain = Brain object
     path = *FULL* path to file (relative paths not allowed).
     """
     ofn = OWLFunctionalSyntaxOntologyFormat()
-    brain.manager.saveOntology(brain.getOntology(), ofn, IRI.create(path))
+    brain.manager.saveOntology(brain.getOntology(), ofn, IRI.create("file://" + path))

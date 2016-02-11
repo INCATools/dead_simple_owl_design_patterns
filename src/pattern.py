@@ -30,10 +30,10 @@ class metaPattern:
     __metaclass__ = ABCMeta     # Abstract class - should not be directly instantiated
 
     # class level vars
-    # pkey_dict spec. A dict of dicts.  keys are field names.  Subdicts have two compulsory boolan keys: compulsory & sprintf (indicating field will be paired with list and processed via sprintf subs).   If "compulsory" is False, there must be an additional boolean: oneOf, indicating whther this is one of a set, at least one of which must be present.  If sprintf is true, a further boolean, "msExpression", records whether the sprintf subfield 'string' is a Manchester syntax expression.
+    # pkey_dict spec. A dict of dicts.  keys are field names.  Subdicts have two compulsory boolean keys: compulsory & sprintf (indicating field will be paired with list and processed via sprintf subs).   If "compulsory" is False, there must be an additional boolean: oneOf, indicating whther this is one of a set, at least one of which must be present.  If sprintf is true, a further boolean, "msExpression", records whether the sprintf subfield 'string' is a Manchester syntax expression.
     
     pkey_dict = { "pattern_name" : { "compulsory" : True, "sprintf" : False },
-                "Base_URI" : {"compulsory" : False, "sprintf" : False},
+                "Base_URI" : {"compulsory" : False, "OneOf" : False, "sprintf" : False},
                 "Description" : { "compulsory" : False, "OneOf" : False, "sprintf" : False },
                 "classes" : { "compulsory" : True, "sprintf" : False } ,
                 "relations" : { "compulsory" : True, "sprintf" : False },
@@ -63,7 +63,7 @@ class metaPattern:
             if field not in self.pkey_dict:
                 warnings.warn("Pattern has unknown field: %s !" % field)
         
-        # The following is quote ugly and hard to follow.  Should probably be refactored
+        # The following is quite ugly and hard to follow.  Should probably be refactored
         oneOf = False
         oneOf_list = []
         for field, field_spec in self.pkey_dict.items():
