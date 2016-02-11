@@ -64,6 +64,7 @@ A validator will test:
 The aim of this project is to specify a simple design pattern system that can easily be consumed, whatever your code base.  This repository includes [code for validation, documentation and generation of pattern-based classes](https://github.com/dosumis/dead_simple_owl_design_patterns/tree/master/src) written in Jython.
 
 
+## Uses
 
-
-
+ * [ENVO](http://obofoundry.org/ontology/envo.html): envo [patterns/](https://github.com/EnvironmentOntology/envo/tree/master/src/envo/patterns)
+ * [OBA](http://obofoundry.org/ontology/oba.html): oba [patterns/](https://github.com/EnvironmentOntology/oba/tree/master/src/oba/patterns)
