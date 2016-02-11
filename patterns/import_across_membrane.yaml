@@ -5,6 +5,7 @@ classes:
   cellular_component: GO_0005575
   chemical entity: CHEBI_24431
   macromolecular complex: GO_0032991
+  transcript: SO_0000673
   transport: GO_0006810
 
 relations:
