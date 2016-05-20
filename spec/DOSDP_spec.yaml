@@ -31,7 +31,7 @@
                Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var 
                field of the pattern. Where an OWL entity is specified, the label fo the OWL entity should be used in the substitution.
                type: []
-   	      required: ["annotationProperty", "text", "vars"]
+         required: ["annotationProperty", "text", "vars"]
       printf_owl:
          type: object
          properties:
