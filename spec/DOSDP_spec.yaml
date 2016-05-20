@@ -11,7 +11,7 @@
 
 field_types: # type_name: subfield_name: description, compulsory, cardinality, type
    printf_annotation:
-      annotationPropery:
+      annotationProperty:
          description: "A string corresponding to the rdfs:label of an owl annotation property.  If the annotation property has no label,  the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary."
          compulsory: True
          cardinality: 1
@@ -87,8 +87,9 @@ fields:  # Field name : type, cardinality, compulsory(binary), description.
        description: "A dictionary of OWL annotation properties key : label; value : short form id"
        compulsory: False
        
-   annotation:
-     type: printf_annotation: {}
+   annotations:
+     description: "A list, each member of which is a printf_annotation"
+     type:  []
      
    owl_axiom:
      type: printf_owl: {}
@@ -101,7 +102,7 @@ default_dictionaries: ## A default set of dictionaries for
       'label': 'rdfs:label'
       'definition': 'OBI:IAO_0000115'
 
-derived_fields:  # Primary fields with a pre-specified filler for one of the slots..  These serve to hide complexity from end users.  Users of DOS-DP are free to extend by adding new derived fields to fit the needs of their project.  
+derived_fields:  # Fields with a pre-specified filler for one of the slots..  These serve to hide complexity from end users.  Users of DOS-DP are free to extend by adding new derived fields to fit the needs of their project.  
 
    name: 
      type: printf_annotation: annotationProperty: 'label'
