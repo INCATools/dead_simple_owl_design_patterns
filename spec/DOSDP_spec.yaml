@@ -8,7 +8,7 @@ simple_types:
 
 compound_types: # type_name: subfield_name: description, compulsory(boolean), type
    printf_annotation:
-      annotationPropery:
+      annotationProperty:
          description: > A string corresponding to the rdfs:label of an owl annotation property.  
          If the annotation property has no label,  the shortForm ID should be used. 
          The annotation property must be listed in the annotation property dictionary.
