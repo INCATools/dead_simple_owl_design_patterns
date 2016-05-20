@@ -1,0 +1,126 @@
+#basic_types:
+#   string:
+#      description: "A UTF-8 string"
+#   string_list:
+#      description: "A collection of UTF-8 strings"
+#   string_dict: 
+#     description:  "A collection of key,value pairs.  keys and values must be strings"
+#   string_manchster: 
+#     description: "An OWL manchester syntax string."
+      
+
+field_types: # type_name: subfield_name: description, compulsory, cardinality, type
+   printf_annotation:
+      annotationPropery:
+         description: "A string corresponding to the rdfs:label of an owl annotation property.  If the annotation property has no label,  the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary."
+         compulsory: True
+         cardinality: 1
+      text: 
+         description: "A print format string."
+         complulsory: True
+         cardinality: 1
+       vars: 
+          description: "An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a var in the var field of the pattern."
+#         type: string_list
+          complulsory: True
+          cardinality: 1
+   printf_owl:
+      axiom_type:
+         description: "OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith.  GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)  This specifies the axiom type to be generated from the "
+         compulsory: True
+         cardinality: 1
+      text:
+         description: "A print format string.  Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classe, relations, dataProperties."
+         complulsory: True
+         cardinality: 1
+       vars: 
+          description: "An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a var in the var field of the pattern. Substitution should use the "
+         complulsory: True
+         cardinality: 1
+      
+
+fields:  # Field name : type, cardinality, compulsory(binary), description.
+   pattern_name:
+     type: string
+     compulsory: True
+     description: "The name of the pattern.  This must be an ASCII string with no spaces. The only special characters allowed are '_' and '-'.  By convention, this is used as the file name of the pattern - with an appropriate extension."
+     
+#  base_IRI:  # not rqd, give JSON-LD base.
+#     type: IRI
+#     description: "Specifies the base IRI to be used to generate new classes."
+
+   description: 
+      type: string
+      compulsory: False
+      description: "A free text description of the pattern."
+
+   vars:
+     type: dict
+     value_type: string_manchester
+     compulsory: true
+     description: "A dictionary of variables ranging over OWL classes.  Key = variable name, value = variable range as manchester syntax string."
+     
+   data_vars:
+      compulsory: False
+      cardinality: 1-many
+      data_type:
+        description: "A valid OWL datatype"
+        compulsory: True
+        cardinality: 1
+      vars:
+        description: "A list of var names"
+        compulsory: True
+        cardinality: 1
+
+   classes:
+     type: dict
+     description: "A dictionary of OWL classes. key :label; value : short form id"
+     compulsory: False
+   relations:
+     alternative_name: "ObjectProperties"
+     description: "A dictionary of OWL object properties. key : label; value : short form id"
+     compulsory: False
+   dataProperties:
+     description: "A dictionary of OWL data properties key : label; value : short form id"
+     compulsory: False
+   annotationProperties:
+       description: "A dictionary of OWL annotation properties key : label; value : short form id"
+       compulsory: False
+       
+   annotation:
+     type: printf_annotation: {}
+     
+   owl_axiom:
+     type: printf_owl: {}
+       
+   
+
+default_dictionaries: ## A default set of dictionaries for 
+
+   annotationProperties:
+      'label': 'rdfs:label'
+      'definition': 'OBI:IAO_0000115'
+
+derived_fields:  # Primary fields with a pre-specified filler for one of the slots..  These serve to hide complexity from end users.  Users of DOS-DP are free to extend by adding new derived fields to fit the needs of their project.  
+
+   name: 
+     type: printf_annotation: annotationProperty: 'label'
+
+   def: 
+     printf_annotation: annotationProperty: 'definition'
+
+   equivalentTo:
+      type: printf_owl: axiom_type: equivalentTo
+         
+   subClassOf:
+      type: printf_owl: axiom_type: subClassOf
+
+   disjointWith:
+      type: printf_owl: axiom_type: disjointWith
+
+   GCI:
+      type: printf_owl: axiom_type: GCI
+            
+
+
+
