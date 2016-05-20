@@ -70,17 +70,11 @@ fields:  # Field name : type, cardinality, compulsory(binary), description.
      Key = variable name, value = variable range as manchester syntax string.
      
    data_vars:
+      type: {}
       compulsory: False
-      cardinality: 1-many
-      data_type:
-        description: "A valid OWL datatype"
-        compulsory: True
-        cardinality: 1
-      vars:
-        type: []
-        description: "A list of var names"
-        compulsory: True
-        cardinality: 1
+      cardinality: 1
+      description: > A dictionary of variables ranging over OWL data-types.
+      Key = variable name, value = variable range specified as a valid OWL data-type.
 
    classes:
      type: {}
@@ -96,10 +90,10 @@ fields:  # Field name : type, cardinality, compulsory(binary), description.
       description: "A dictionary of OWL data properties key : label; value : short form id"
       compulsory: False
    annotationProperties:
-         type: {}
-       description: "A dictionary of OWL annotation properties key : label; value : short form id"
-       compulsory: False
-       
+      type: {}
+      description: "A dictionary of OWL annotation properties key : label; value : short form id"
+      compulsory: False
+
    annotation:
      type: printf_annotation: {}
      
@@ -121,14 +115,14 @@ derived_fields:  # field_name: type: fillers
 # and adding new derived fields to fit the needs of their project.  
 
    name: 
-     type: printf_annotation: annotationProperty: label
+      type: printf_annotation: annotationProperty: label
 
    def: 
-     printf_annotation: annotationProperty: definition
+      printf_annotation: annotationProperty: definition
 
    equivalentTo:
       type: printf_owl: axiom_type: equivalentTo
-         
+
    subClassOf:
       type: printf_owl: axiom_type: subClassOf
 
