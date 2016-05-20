@@ -1,3 +1,5 @@
+version: "0.1 beta-2"
+
 types:
    string_manchester: 
       description: "An OWL manchester syntax string."
@@ -47,11 +49,13 @@ fields:  # Field name : type, cardinality, compulsory(binary), description.
    pattern_name:
      type: "ASCII string"
      compulsory: True
-     description: "The name of the pattern.  This must be an ASCII string with no spaces. The only special characters allowed are '_' and '-'.  By convention, this is used as the file name of the pattern - with an appropriate extension."
+     description: > The name of the pattern.  This must be an ASCII string with no spaces. 
+     The only special characters allowed are '_' and '-'.  
+     By convention, this is used as the file name of the pattern - with an appropriate extension.
      
-#  base_IRI:  # not rqd, give JSON-LD base.
-#     type: IRI
-#     description: "Specifies the base IRI to be used to generate new classes."
+   base_IRI:  # not rqd, give JSON-LD base.
+      type: IRI
+      description: "Specifies the base IRI to be used to generate new classes."
 
    description:
       type: "UTF-8 string"
@@ -104,15 +108,15 @@ fields:  # Field name : type, cardinality, compulsory(binary), description.
        
    
 
-default_dictionaries: ## A default set of dictionaries for defining derived fields
+default_dictionaries: ## A default set of dictionaries for defining derived fields.
 
    annotationProperties:
       'label': 'rdfs:label'
       'definition': 'OBI:IAO_0000115'
 
-derived_fields:  
+derived_fields:  # field_name: type: fillers
 # Primary fields with a pre-specified filler for one of the slots.
-#These serve to hide complexity from end users.  
+# These serve to hide complexity from end users.  
 # Users of DOS-DP are free to extend by extending default dictionaries
 # and adding new derived fields to fit the needs of their project.  
 
