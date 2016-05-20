@@ -6,46 +6,40 @@ types:
    printf: 
       description: "A UTF-8 encoded printf format string."      
 
-field_types: # type_name: subfield_name: description, compulsory, cardinality, type
+field_types: # type_name: subfield_name: description, compulsory(boolean), type
    printf_annotation:
       annotationPropery:
          description: > A string corresponding to the rdfs:label of an owl annotation property.  
          If the annotation property has no label,  the shortForm ID should be used. 
          The annotation property must be listed in the annotation property dictionary.
          compulsory: True
-         cardinality: 1
       text:
          description: "A print format string."
          complulsory: True
-         cardinality: 1
-       vars: 
+       vars:
           description: > An ordered list of variables for substitution into the accompanying print format string. 
           Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var 
           field of the pattern. Where an OWL entity is specified, the label fo the OWL entity should be used in the substitution.
-#         type: string_list
+          type: []
           complulsory: True
-          cardinality: 1
    printf_owl:
       axiom_type:
          description: > OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith.  
          GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)  
          This specifies the axiom type to be generated from the text following substitution.
          compulsory: True
-         cardinality: 1
       text:
          description: > A print format string.  Each entry must correspond to an entry in o the name of a var in 
          the var field of the pattern. Entries in single quotes must correspond to the labels of entries in 
          owl_entity dictionaries (classe, relations, dataProperties.
          complulsory: True
-         cardinality: 1
        vars: 
           description: > An ordered list of variables for substitution into the accompanying print format string. 
           Each entry must correspond to the name of a var in the var field of the pattern."
          complulsory: True
-         cardinality: 1
-      
 
-fields:  # Field name : type, cardinality, compulsory(binary), description.
+
+fields:  # Field name : type, compulsory(boolean), description.
    pattern_name:
      type: "ASCII string"
      compulsory: True
@@ -72,7 +66,6 @@ fields:  # Field name : type, cardinality, compulsory(binary), description.
    data_vars:
       type: {}
       compulsory: False
-      cardinality: 1
       description: > A dictionary of variables ranging over OWL data-types.
       Key = variable name, value = variable range specified as a valid OWL data-type.
 
@@ -93,14 +86,15 @@ fields:  # Field name : type, cardinality, compulsory(binary), description.
       type: {}
       description: "A dictionary of OWL annotation properties key : label; value : short form id"
       compulsory: False
-
-   annotation:
-     type: printf_annotation: {}
-     
-   owl_axiom:
-     type: printf_owl: {}
-       
-   
+   annotations:
+      description: "A list, each member of which is a printf_annotation"
+      type:  []
+      value_type: printf_annotation: {}
+      compulsory: False
+   owl_axioms:
+      description: "A list, each member of which is a printf_annotation"
+      type: printf_owl: {}
+      compulsory: False
 
 default_dictionaries: ## A default set of dictionaries for defining derived fields.
 
@@ -112,9 +106,9 @@ derived_fields:  # field_name: type: fillers
 # Primary fields with a pre-specified filler for one of the slots.
 # These serve to hide complexity from end users.  
 # Users of DOS-DP are free to extend by extending default dictionaries
-# and adding new derived fields to fit the needs of their project.  
+# and adding new derived fields to fit the needs of their project.
 
-   name: 
+   name:
       type: printf_annotation: annotationProperty: label
 
    def: 
