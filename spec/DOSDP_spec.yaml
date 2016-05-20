@@ -12,7 +12,9 @@
 field_types: # type_name: subfield_name: description, compulsory, cardinality, type
    printf_annotation:
       annotationPropery:
-         description: "A string corresponding to the rdfs:label of an owl annotation property.  If the annotation property has no label,  the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary."
+         description: > A string corresponding to the rdfs:label of an owl annotation property.  
+         If the annotation property has no label,  the shortForm ID should be used. 
+         The annotation property must be listed in the annotation property dictionary.
          compulsory: True
          cardinality: 1
       text: 
@@ -20,21 +22,28 @@ field_types: # type_name: subfield_name: description, compulsory, cardinality, t
          complulsory: True
          cardinality: 1
        vars: 
-          description: "An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a var in the var field of the pattern."
+          description: > An ordered list of variables for substitution into the accompanying print format string. 
+          Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var 
+          field of the pattern. Where an OWL entity is specified, the label fo the OWL entity should be used in the substitution.
 #         type: string_list
           complulsory: True
           cardinality: 1
    printf_owl:
       axiom_type:
-         description: "OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith.  GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)  This specifies the axiom type to be generated from the "
+         description: > OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith.  
+         GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)  
+         This specifies the axiom type to be generated from the text following substitution.
          compulsory: True
          cardinality: 1
       text:
-         description: "A print format string.  Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classe, relations, dataProperties."
+         description: > A print format string.  Each entry must correspond to an entry in o the name of a var in 
+         the var field of the pattern. Entries in single quotes must correspond to the labels of entries in 
+         owl_entity dictionaries (classe, relations, dataProperties.
          complulsory: True
          cardinality: 1
        vars: 
-          description: "An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a var in the var field of the pattern. Substitution should use the "
+          description: > An ordered list of variables for substitution into the accompanying print format string. 
+          Each entry must correspond to the name of a var in the var field of the pattern."
          complulsory: True
          cardinality: 1
       
@@ -58,7 +67,8 @@ fields:  # Field name : type, cardinality, compulsory(binary), description.
      type: dict
      value_type: string_manchester
      compulsory: true
-     description: "A dictionary of variables ranging over OWL classes.  Key = variable name, value = variable range as manchester syntax string."
+     description: > A dictionary of variables ranging over OWL classes.  
+     Key = variable name, value = variable range as manchester syntax string.
      
    data_vars:
       compulsory: False
@@ -101,13 +111,17 @@ default_dictionaries: ## A default set of dictionaries for
       'label': 'rdfs:label'
       'definition': 'OBI:IAO_0000115'
 
-derived_fields:  # Primary fields with a pre-specified filler for one of the slots..  These serve to hide complexity from end users.  Users of DOS-DP are free to extend by adding new derived fields to fit the needs of their project.  
+derived_fields:  
+# Primary fields with a pre-specified filler for one of the slots.
+#These serve to hide complexity from end users.  
+# Users of DOS-DP are free to extend by extending default dictionaries
+# and adding new derived fields to fit the needs of their project.  
 
    name: 
-     type: printf_annotation: annotationProperty: 'label'
+     type: printf_annotation: annotationProperty: label
 
    def: 
-     printf_annotation: annotationProperty: 'definition'
+     printf_annotation: annotationProperty: definition
 
    equivalentTo:
       type: printf_owl: axiom_type: equivalentTo
@@ -120,7 +134,7 @@ derived_fields:  # Primary fields with a pre-specified filler for one of the slo
 
    GCI:
       type: printf_owl: axiom_type: GCI
-            
+
 
 
 
