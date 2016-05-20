@@ -1,12 +1,12 @@
 version: "0.1 beta-2"
 
-types:
+simple_types:
    string_manchester: 
       description: "An OWL manchester syntax string."
    printf: 
       description: "A UTF-8 encoded printf format string."      
 
-field_types: # type_name: subfield_name: description, compulsory(boolean), type
+compound_types: # type_name: subfield_name: description, compulsory(boolean), type
    printf_annotation:
       annotationPropery:
          description: > A string corresponding to the rdfs:label of an owl annotation property.  
@@ -40,16 +40,42 @@ field_types: # type_name: subfield_name: description, compulsory(boolean), type
 
 
 fields:  # Field name : type, compulsory(boolean), description.
+
    pattern_name:
-     type: "ASCII string"
+     type: "ASCII string"  # Should be specified more formally
      compulsory: True
      description: > The name of the pattern.  This must be an ASCII string with no spaces. 
      The only special characters allowed are '_' and '-'.  
      By convention, this is used as the file name of the pattern - with an appropriate extension.
      
    base_IRI:  # not rqd, give JSON-LD base.
-      type: IRI
+      type: IRI # Should be specified more formally
       description: "Specifies the base IRI to be used to generate new classes."
+      
+#### owl_entity Dictionaries
+
+   classes:
+     type: {}
+     description: "A dictionary of OWL classes. key :label; value : short form id"
+     compulsory: False
+   relations:
+      type: {}
+      alternative_name: "ObjectProperties"
+      description: "A dictionary of OWL object properties. key : label; value : short form id"
+      compulsory: False
+   dataProperties:
+      type: {}
+      description: "A dictionary of OWL data properties key : label; value : short form id"
+      compulsory: False
+   annotationProperties:
+      type: {}
+      description: "A dictionary of OWL annotation properties key : label; value : short form id"
+      compulsory: False
+
+   naming fields
+      type: []
+      description: "A list of annotation properties used as naming fields, in order of preference."
+      value_type: 'annotation property name.'
 
    description:
       type: "UTF-8 string"
@@ -69,23 +95,7 @@ fields:  # Field name : type, compulsory(boolean), description.
       description: > A dictionary of variables ranging over OWL data-types.
       Key = variable name, value = variable range specified as a valid OWL data-type.
 
-   classes:
-     type: {}
-     description: "A dictionary of OWL classes. key :label; value : short form id"
-     compulsory: False
-   relations:
-      type: {}
-      alternative_name: "ObjectProperties"
-      description: "A dictionary of OWL object properties. key : label; value : short form id"
-      compulsory: False
-   dataProperties:
-      type: {}
-      description: "A dictionary of OWL data properties key : label; value : short form id"
-      compulsory: False
-   annotationProperties:
-      type: {}
-      description: "A dictionary of OWL annotation properties key : label; value : short form id"
-      compulsory: False
+
    annotations:
       description: "A list, each member of which is a printf_annotation"
       type:  []
@@ -96,11 +106,13 @@ fields:  # Field name : type, compulsory(boolean), description.
       type: printf_owl: {}
       compulsory: False
 
-default_dictionaries: ## A default set of dictionaries for defining derived fields.
+defaults: ## A default set of dictionaries for defining derived fields.
 
    annotationProperties:
       'label': 'rdfs:label'
-      'definition': 'OBI:IAO_0000115'
+      'definition': 'obo:IAO_0000115'
+      
+   naming_fields: ['label']
 
 derived_fields:  # field_name: type: fillers
 # Primary fields with a pre-specified filler for one of the slots.
