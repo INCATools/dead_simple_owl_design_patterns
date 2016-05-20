@@ -32,7 +32,6 @@
                field of the pattern. Where an OWL entity is specified, the label fo the OWL entity should be used in the substitution.
                type: []
    	      required: ["annotationProperty", "text", "vars"]
-   	
       printf_owl:
          type: object
          properties:
