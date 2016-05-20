@@ -105,7 +105,7 @@ fields:  # Field name : type, cardinality, compulsory(binary), description.
        
    
 
-default_dictionaries: ## A default set of dictionaries for 
+default_dictionaries: ## A default set of dictionaries for defining derived fields
 
    annotationProperties:
       'label': 'rdfs:label'
