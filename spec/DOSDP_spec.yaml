@@ -29,9 +29,9 @@ compound_types: # type_name: subfield_name: description, compulsory(boolean), ty
          This specifies the axiom type to be generated from the text following substitution.
          compulsory: True
       text:
-         description: > A print format string.  Each entry must correspond to an entry in o the name of a var in 
+         description: > A print format string in OWL Manchester syntax.  Each entry must correspond to an entry in o the name of a var in 
          the var field of the pattern. Entries in single quotes must correspond to the labels of entries in 
-         owl_entity dictionaries (classe, relations, dataProperties.
+         owl_entity dictionaries (classes, relations, dataProperties)
          complulsory: True
        vars: 
           description: > An ordered list of variables for substitution into the accompanying print format string. 
