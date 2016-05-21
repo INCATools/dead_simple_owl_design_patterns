@@ -1,0 +1,244 @@
+{
+    "$schema": "http://json-schema.org/schema#", 
+    "DOS-DP": {
+        "properties": {
+            "GCI": {
+                "properties": {
+                    "axiom_type": {
+                        "enum": [
+                            "GCI"
+                        ]
+                    }
+                }, 
+                "type": {
+                    "$ref": "#/definitions/printf_owl"
+                }
+            }, 
+            "annotationProperties": {
+                "description": "A dictionary of OWL annotation properties key : label; value : short form id", 
+                "type": "object"
+            }, 
+            "annotations": {
+                "description": "A list, each member of which is a printf_annotation", 
+                "items": {
+                    "type": {
+                        "$ref": "#/definitions/printf_annotation"
+                    }
+                }, 
+                "type": "array"
+            }, 
+            "base_IRI": {
+                "description": "Specifies the base IRI to be used to generate new classes.", 
+                "type": "string"
+            }, 
+            "classes": {
+                "description": "A dictionary of OWL classes. key :label; value : short form id", 
+                "type": "object"
+            }, 
+            "dataProperties": {
+                "description": "A dictionary of OWL data properties key : label; value : short form id", 
+                "type": "object"
+            }, 
+            "data_vars": {
+                "description": "A dictionary of variables ranging over OWL data-types. Key = variable name, value = variable range specified as a valid OWL data-type.\n", 
+                "type": "object"
+            }, 
+            "description": {
+                "description": "A free text description of the pattern.  Must be UTF-8 encoded.", 
+                "type": "string"
+            }, 
+            "disjointWith": {
+                "properties": {
+                    "axiom_type": {
+                        "enum": [
+                            "disjointWith"
+                        ]
+                    }
+                }, 
+                "type": {
+                    "$ref": "#/definitions/printf_owl"
+                }
+            }, 
+            "equivalentTo": {
+                "properties": {
+                    "axiom_type": {
+                        "enum": [
+                            "equivalentTo"
+                        ]
+                    }
+                }, 
+                "type": {
+                    "$ref": "#/definitions/printf_owl"
+                }
+            }, 
+            "naming_fields": {
+                "description": "A list of annotation properties used as naming fields, in order of preference.", 
+                "items": {
+                    "type": "string"
+                }, 
+                "type": "array", 
+                "value_type": "annotation property name."
+            }, 
+            "objectProperties": {
+                "description": "A dictionary of OWL object properties. key : label; value : short form id", 
+                "type": "object"
+            }, 
+            "owl_axioms": {
+                "description": "A list, each member of which is a printf_annotation", 
+                "items": {
+                    "type": {
+                        "$ref": "#/definitions/printf_owl"
+                    }
+                }
+            }, 
+            "pattern_name": {
+                "description": "The name of the pattern.  This must be an ASCII string with no spaces.  The only special characters allowed are '_' and '-'.   By convention, this is used as the file name of the pattern - with an appropriate extension.\n", 
+                "type": "string"
+            }, 
+            "relations": {
+                "description": "A dictionary of OWL object properties. key : label; value : short form id", 
+                "type": "object"
+            }, 
+            "subClassOf": {
+                "properties": {
+                    "axiom_type": {
+                        "enum": [
+                            "subClassOf"
+                        ]
+                    }
+                }, 
+                "type": {
+                    "$ref": "#/definitions/printf_owl"
+                }
+            }, 
+            "vars": {
+                "description": "A dictionary of variables ranging over OWL classes.   Key = variable name, value = variable range as manchester syntax string.\n", 
+                "type": "object"
+            }
+        }, 
+        "required": [
+            "pattern_name"
+        ], 
+        "title": "Dead simple OWL design patterns"
+    }, 
+    "OBO": {
+        "properties": {
+            "annotationProperties": {
+                "properties": {
+                    "definition": {
+                        "items": {
+                            "enum": [
+                                "obo:IAO_0000115"
+                            ]
+                        }
+                    }, 
+                    "label": {
+                        "items": {
+                            "enum": [
+                                "rdfs:label"
+                            ]
+                        }
+                    }
+                }
+            }, 
+            "def": {
+                "properties": {
+                    "annotation_property": {
+                        "enum": [
+                            "definition"
+                        ]
+                    }
+                }, 
+                "type": {
+                    "$ref": "#/definitions/printf_annotation"
+                }
+            }, 
+            "name": {
+                "properties": {
+                    "annotation_property": {
+                        "enum": [
+                            "label"
+                        ]
+                    }
+                }, 
+                "type": {
+                    "$ref": "#/definitions/printf_annotation"
+                }
+            }, 
+            "naming_fields": {
+                "items": {
+                    "enum": [
+                        "label"
+                    ]
+                }, 
+                "length": 1, 
+                "type": {
+                    "$ref": "#/DOS-DP/naming_fields"
+                }
+            }
+        }, 
+        "type": {
+            "$ref": "#/DOS-DP"
+        }
+    }, 
+    "definitions": {
+        "printf": {
+            "description": "A UTF-8 encoded printf format string.", 
+            "type": "string"
+        }, 
+        "printf_annotation": {
+            "properties": {
+                "annotationProperty": {
+                    "description": "A string corresponding to the rdfs:label of an owl annotation property.   If the annotation property has no label,  the shortForm ID should be used.  The annotation property must be listed in the annotation property dictionary.\n", 
+                    "type": "string"
+                }, 
+                "text": {
+                    "description": "A print format string.", 
+                    "type": "printf_manchester"
+                }, 
+                "vars": {
+                    "description": "An ordered list of variables for substitution into the accompanying print format string.  Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var  field of the pattern. Where an OWL entity is specified, the label fo the OWL entity should be used in the substitution.\n", 
+                    "type": []
+                }
+            }, 
+            "required": [
+                "annotationProperty", 
+                "text", 
+                "vars"
+            ], 
+            "type": "object"
+        }, 
+        "printf_manchester": {
+            "description": "A UTF-8 encoded printf format string.", 
+            "type": "string"
+        }, 
+        "printf_owl": {
+            "properties": {
+                "axiom_type": {
+                    "description": "OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith.   GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)   This specifies the axiom type to be generated from the text following substitution.\n", 
+                    "type": "string"
+                }, 
+                "text": {
+                    "description": "A print format string in OWL Manchester syntax.  Each entry must correspond to an entry in o the name of a var in  the var field of the pattern. Entries in single quotes must correspond to the labels of entries in  owl_entity dictionaries (classes, relations, dataProperties)\n", 
+                    "type": "printf_manchester"
+                }, 
+                "vars": {
+                    "description": "An ordered list of variables for substitution into the accompanying print format string.  Each entry must correspond to the name of a var in the var field of the pattern.\"\n", 
+                    "type": "array"
+                }
+            }, 
+            "required": [
+                "axiom_type", 
+                "text", 
+                "vars"
+            ], 
+            "type": "object"
+        }, 
+        "string_manchester": {
+            "description": "An OWL manchester syntax string.", 
+            "type": "string"
+        }, 
+        "title": "DOSDP types"
+    }, 
+    "id": "https://github.com/dosumis/dead_simple_owl_design_patterns/edit/master/spec/DOSDP_spec.json"
+}
