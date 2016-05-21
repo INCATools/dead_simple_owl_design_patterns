@@ -9,22 +9,25 @@
    title: DOSDP types
    definitions: # type_name: subfield_name: description, compulsory(boolean), type
       string_manchester: 
+         type: string
          description: "An OWL manchester syntax string."
-      printf: 
+      printf:
+         type: string
          description: "A UTF-8 encoded printf format string."
-      printf_manchester: 
+      printf_manchester:
+         type: string
          description: "A UTF-8 encoded printf format string."
       printf_annotation:
          type: object
          properties:
             annotationProperty:
+               type: string
                description: > A string corresponding to the rdfs:label of an owl annotation property.  
                If the annotation property has no label,  the shortForm ID should be used. 
                The annotation property must be listed in the annotation property dictionary.
-               compulsory: True
             text:
+               type: string
                description: "A print format string."
-               complulsory: True
             vars:
                type: array
                description: > An ordered list of variables for substitution into the accompanying print format string. 
@@ -36,113 +39,131 @@
          type: object
          properties:
             axiom_type:
+               type: string
                description: > OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith.  
                GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)  
                This specifies the axiom type to be generated from the text following substitution.
             text:
+               type: string
                description: > A print format string in OWL Manchester syntax.  Each entry must correspond to an entry in o the name of a var in 
                the var field of the pattern. Entries in single quotes must correspond to the labels of entries in 
                owl_entity dictionaries (classes, relations, dataProperties)
-            vars: 
+            vars:
+               type: array
                description: > An ordered list of variables for substitution into the accompanying print format string. 
                Each entry must correspond to the name of a var in the var field of the pattern."
          required: ["axiom_type", "text", "vars"]
 }
 
-{  
-   title: "Dead simple OWL design patterns"
-   required: [ "pattern_name"]
-   properties:
-      pattern_name:
-        type: string  # possible to specifiy ASCII?
-        description: > The name of the pattern.  This must be an ASCII string with no spaces. 
-        The only special characters allowed are '_' and '-'.  
-        By convention, this is used as the file name of the pattern - with an appropriate extension.
-        
-      base_IRI:  # not rqd, give JSON-LD base.
-         type: string # how to spec IRI
-         description: "Specifies the base IRI to be used to generate new classes."
- 
-   #### owl_entity Dictionaries
-
-      classes:
-        type: object
-        description: "A dictionary of OWL classes. key :label; value : short form id"
-      relations:
-         type: object
-         alternative_name: "ObjectProperties"
-         description: "A dictionary of OWL object properties. key : label; value : short form id"
-      dataProperties:
-         type: object
-         description: "A dictionary of OWL data properties key : label; value : short form id"
-      annotationProperties:
-         type: object
-         description: "A dictionary of OWL annotation properties key : label; value : short form id"
-
-      naming fields
-         type: array
-         description: "A list of annotation properties used as naming fields, in order of preference."
-         value_type: 'annotation property name.'
+{  DOS-DP:
+      title: "Dead simple OWL design patterns"
+      required: [ "pattern_name"]
+      properties:
+         pattern_name:
+           type: string  # possible to specifiy ASCII?
+           description: > The name of the pattern.  This must be an ASCII string with no spaces. 
+           The only special characters allowed are '_' and '-'.  
+           By convention, this is used as the file name of the pattern - with an appropriate extension.
+           
+         base_IRI:  # not rqd, give JSON-LD base.
+            type: string # how to spec IRI
+            description: "Specifies the base IRI to be used to generate new classes."
+            
+      #### owl_entity Dictionaries
+      
+         classes:
+           type: object
+           description: "A dictionary of OWL classes. key :label; value : short form id"
+         relations:
+            type: object
+            alternative_name: "ObjectProperties"
+            description: "A dictionary of OWL object properties. key : label; value : short form id"
+         dataProperties:
+            type: object
+            description: "A dictionary of OWL data properties key : label; value : short form id"
+         annotationProperties:
+            type: object
+            description: "A dictionary of OWL annotation properties key : label; value : short form id"
    
-      description:
-         type: string # specify UTF-8 string?
-         description: "A free text description of the pattern.  Must be UTF-8 encoded."
+         naming fields
+            type: array
+            description: "A list of annotation properties used as naming fields, in order of preference."
+            value_type: 'annotation property name.'
+      
+         description:
+            type: string # specify UTF-8 string?
+            description: "A free text description of the pattern.  Must be UTF-8 encoded."
+      
+         vars:
+           type: object
+           value_type: string_manchester
+           compulsory: true
+           description: > A dictionary of variables ranging over OWL classes.  
+           Key = variable name, value = variable range as manchester syntax string.
+           
+         data_vars:
+            type: object
+            description: > A dictionary of variables ranging over OWL data-types.
+            Key = variable name, value = variable range specified as a valid OWL data-type.
    
-      vars:
-        type: object
-        value_type: string_manchester
-        compulsory: true
-        description: > A dictionary of variables ranging over OWL classes.  
-        Key = variable name, value = variable range as manchester syntax string.
-        
-      data_vars:
-         type: object
-         description: > A dictionary of variables ranging over OWL data-types.
-         Key = variable name, value = variable range specified as a valid OWL data-type.
-
-      annotations:
-         description: "A list, each member of which is a printf_annotation"
-         type:  array
-         value_type: "$ref": "#/definitions/pprintf_annotation"
-      owl_axioms:
-         description: "A list, each member of which is a printf_annotation"
-         value_ type: "$ref": "#/definitions/printf_owl"
+         annotations:
+            description: "A list, each member of which is a printf_annotation"
+            type:  array
+            value_type: "$ref": "#/definitions/pprintf_annotation"  # Is it possible to specify types of values for an array?
+         owl_axioms:
+            description: "A list, each member of which is a printf_annotation"
+            value_ type: "$ref": "#/definitions/printf_owl"
+            
+   # Derived (partially filled) fields. 
+   
+         equivalentTo:
+            type: printf_owl:
+            properties: 
+               axiom_type: enum: ['equivalentTo']
+      
+         subClassOf:
+            type: printf_owl: 
+            properties: 
+               axiom_type: enum: ['subClassOf']
+      
+         disjointWith:
+            type: printf_owl: 
+            properties: 
+               axiom_type: enum: ['disjointWith']   
+         GCI:
+            type: printf_owl
+            properties: 
+               axiom_type: enum: ['GCI']   
 }
 
 #### From here still needs work to make JSON-schema compliant.  How to specify defaults?
 
-defaults: ## A default set of dictionaries for defining derived fields.
-
-   annotationProperties:
-      'label': 'rdfs:label'
-      'definition': 'obo:IAO_0000115'
+{ 
+   OBO:
+      type: "$ref": "#/DOS-DP"
+      properties: 
+      # prrintf annotaion fields with a pre-specified filler annotation_property
+      # These serve to hide complexity from end users.  
+      # Users of DOS-DP are free to extend by extending default dictionaries
+      # and adding new derived fields to fit the needs of their project.
       
-   naming_fields: ['label']
-
-derived_fields:  # field_name: type: fillers
-# Primary fields with a pre-specified filler for one of the slots.
-# These serve to hide complexity from end users.  
-# Users of DOS-DP are free to extend by extending default dictionaries
-# and adding new derived fields to fit the needs of their project.
-
-   name:
-      type: printf_annotation: annotationProperty: label
-
-   def: 
-      printf_annotation: annotationProperty: definition
-
-   equivalentTo:
-      type: printf_owl: axiom_type: equivalentTo
-
-   subClassOf:
-      type: printf_owl: axiom_type: subClassOf
-
-   disjointWith:
-      type: printf_owl: axiom_type: disjointWith
-
-   GCI:
-      type: printf_owl: axiom_type: GCI
-
+         naming_fields: enum: ['label']  # How to specify this with enum?
+   
+      annotationProperties:
+         'label': 'rdfs:label'
+         'definition': 'obo:IAO_0000115'
+         
+   
+      name:
+         type: "$ref": "#/definitions/pprintf_annotation"
+         properties: 
+            annotation_property: enum: ['label']
+   
+      def: 
+         type: "$ref": "#/definitions/pprintf_annotation"
+         properties: 
+            annotation_property: enum: ['definition']
+}
 
 
 
