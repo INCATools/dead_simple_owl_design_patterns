@@ -34,18 +34,18 @@ definitions:
          annotationProperty:
             type: string
             description: >
-            A string corresponding to the rdfs:label of an owl annotation property.  
-            If the annotation property has no label,  the shortForm ID should be used. 
-            The annotation property must be listed in the annotation property dictionary.
+               A string corresponding to the rdfs:label of an owl annotation property.  
+               If the annotation property has no label,  the shortForm ID should be used. 
+               The annotation property must be listed in the annotation property dictionary.
          text:
             type: printf_manchester
             description: "A print format string."
          vars:
             type: array
             description: >
-            An ordered list of variables for substitution into the accompanying print format string. 
-            Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var 
-            field of the pattern. Where an OWL entity is specified, the label fo the OWL entity should be used in the substitution.
+               An ordered list of variables for substitution into the accompanying print format string. 
+               Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var 
+               field of the pattern. Where an OWL entity is specified, the label fo the OWL entity should be used in the substitution.
             type: []
       required: ["annotationProperty", "text", "vars"]
    printf_owl:
@@ -54,20 +54,20 @@ definitions:
          axiom_type:
             type: string
             description: >
-            OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith.  
-            GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)  
-            This specifies the axiom type to be generated from the text following substitution.
+               OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith.  
+               GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)  
+               This specifies the axiom type to be generated from the text following substitution.
          text:
             type: printf_manchester
             description: >
-            A print format string in OWL Manchester syntax.  Each entry must correspond to an entry in o the name of a var in 
-            the var field of the pattern. Entries in single quotes must correspond to the labels of entries in 
-            owl_entity dictionaries (classes, relations, dataProperties)
+               A print format string in OWL Manchester syntax.  Each entry must correspond to an entry in o the name of a var in 
+               the var field of the pattern. Entries in single quotes must correspond to the labels of entries in 
+               owl_entity dictionaries (classes, relations, dataProperties)
          vars:
             type: array
             description: >
-            An ordered list of variables for substitution into the accompanying print format string. 
-            Each entry must correspond to the name of a var in the var field of the pattern."
+               An ordered list of variables for substitution into the accompanying print format string. 
+               Each entry must correspond to the name of a var in the var field of the pattern."
       required: ["axiom_type", "text", "vars"]
 
 DOS-DP:
@@ -77,9 +77,9 @@ DOS-DP:
       pattern_name:
         type: string  # possible to specifiy ASCII?
         description: >
-        The name of the pattern.  This must be an ASCII string with no spaces. 
-        The only special characters allowed are '_' and '-'.  
-        By convention, this is used as the file name of the pattern - with an appropriate extension.
+           The name of the pattern.  This must be an ASCII string with no spaces. 
+           The only special characters allowed are '_' and '-'.  
+           By convention, this is used as the file name of the pattern - with an appropriate extension.
         
       base_IRI:  # not rqd, give JSON-LD base.
          type: string # how to spec IRI
@@ -118,14 +118,14 @@ DOS-DP:
         type: object
         value_type: string_manchester  # change this.
         description: >
-        A dictionary of variables ranging over OWL classes.  
-        Key = variable name, value = variable range as manchester syntax string.
+           A dictionary of variables ranging over OWL classes.  
+           Key = variable name, value = variable range as manchester syntax string.
         
       data_vars:
          type: object
          description: >
-         A dictionary of variables ranging over OWL data-types.
-         Key = variable name, value = variable range specified as a valid OWL data-type.
+            A dictionary of variables ranging over OWL data-types.
+            Key = variable name, value = variable range specified as a valid OWL data-type.
 
       annotations:
          description: "A list, each member of which is a printf_annotation"
