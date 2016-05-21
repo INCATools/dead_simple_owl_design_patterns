@@ -146,23 +146,25 @@
       # These serve to hide complexity from end users.  
       # Users of DOS-DP are free to extend by extending default dictionaries
       # and adding new derived fields to fit the needs of their project.
-      
+
+#      problem: In a regular printf_annotation, the annotation property slot is filled by the *label* of an AP
+#      But for this to make sense in enums, we need to encode a default lookup dictionary.  Not sure this is possible.
+#      annotationProperties:
+#         'label': 'rdfs:label'
+#         'definition': 'obo:IAO_0000115'
+
+
          naming_fields: enum: ['label']  # How to specify this with enum?
-   
-      annotationProperties:
-         'label': 'rdfs:label'
-         'definition': 'obo:IAO_0000115'
          
-   
-      name:
-         type: "$ref": "#/definitions/pprintf_annotation"
-         properties: 
-            annotation_property: enum: ['label']
-   
-      def: 
-         type: "$ref": "#/definitions/pprintf_annotation"
-         properties: 
-            annotation_property: enum: ['definition']
+         name:
+            type: "$ref": "#/definitions/printf_annotation"
+            properties: 
+               annotation_property: enum: ['label']
+      
+         def: 
+            type: "$ref": "#/definitions/printf_annotation"
+            properties: 
+               annotation_property: enum: ['definition']
 }
 
 
