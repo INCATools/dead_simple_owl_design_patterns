@@ -131,11 +131,13 @@ DOS-DP:
          description: "A list, each member of which is a printf_annotation"
          type:  array
          items: 
-            type: "$ref": "#/definitions/printf_annotation"  # Is it possible to specify types of values for an array?
+            type: 
+               "$ref": "#/definitions/printf_annotation"  # Is it possible to specify types of values for an array?
       owl_axioms:
          description: "A list, each member of which is a printf_annotation"
          items: 
-            type: "$ref": "#/definitions/printf_owl"
+            type: 
+               "$ref": "#/definitions/printf_owl"
          
 # Derived (partially filled) fields. General issue: Is specifying only one possible filler equivalent to prefilling.  
 # Does it allow us to hide the slot from users, or will this need to be some kind of extension?
@@ -160,7 +162,8 @@ DOS-DP:
             axiom_type: enum: ['GCI']   
 
 OBO:
-   type: "$ref": "#/DOS-DP"
+   type: 
+      "$ref": "#/DOS-DP"
    properties:
 
    # printf_annotation fields with a pre-specified filler for annotation_property
@@ -181,18 +184,21 @@ OBO:
                enum: ['obo:IAO_0000115']
 
       naming_fields: # Setting valid naming field to label only.
-         type: "$ref": "#/DOS-DP/naming_fields"
+         type: 
+            "$ref": "#/DOS-DP/naming_fields"
          length: 1
          items:
             enum: ['label']  # How to specify this with enum?
 
       name:
-         type: "$ref": "#/definitions/printf_annotation"
+         type: 
+            "$ref": "#/definitions/printf_annotation"
          properties: 
             annotation_property: enum: ['label']
 
       def: 
-         type: "$ref": "#/definitions/printf_annotation"
+         type: 
+            "$ref": "#/definitions/printf_annotation"
          properties: 
             annotation_property: enum: ['definition']
 
