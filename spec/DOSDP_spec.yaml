@@ -18,12 +18,12 @@
 definitions:
    title: DOSDP types
    # defining some simple types  - validation of these needs to be outside of JSON-schema validator.  Could ditch them...
-   string_manchester: 
-      type: string
-      description: "An OWL manchester syntax string."
-   printf:
-      type: string
-      description: "A UTF-8 encoded printf format string."
+#   string_manchester: 
+#      type: string
+#      description: "An OWL manchester syntax string."
+#   printf:
+#      type: string
+#      description: "A UTF-8 encoded printf format string."
    printf_manchester:
       type: string
       description: "A UTF-8 encoded printf format string."
@@ -38,7 +38,7 @@ definitions:
                If the annotation property has no label,  the shortForm ID should be used. 
                The annotation property must be listed in the annotation property dictionary.
          text:
-            type: printf_manchester
+            type: string
             description: "A print format string."
          vars:
             type: array
@@ -58,7 +58,7 @@ definitions:
                GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)  
                This specifies the axiom type to be generated from the text following substitution.
          text:
-            type: printf_manchester
+            type: string
             description: >
                A print format string in OWL Manchester syntax.  Each entry must correspond to an entry in o the name of a var in 
                the var field of the pattern. Entries in single quotes must correspond to the labels of entries in 
@@ -109,8 +109,7 @@ DOS-DP:
          items: 
             type: string
          description: "A list of annotation properties used as naming fields, in order of preference."
-         value_type: 'annotation property name.'
-   
+
       description:
          type: string # specify UTF-8 string?
          description: "A free text description of the pattern.  Must be UTF-8 encoded."
