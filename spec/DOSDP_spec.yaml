@@ -46,9 +46,8 @@ definitions:
                An ordered list of variables for substitution into the accompanying print format string. 
                Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var 
                field of the pattern. Where an OWL entity is specified, the label fo the OWL entity should be used in the substitution.
-            type: []
       required: ["annotationProperty", "text", "vars"]
-   printf_owl:
+   printf_owl_generic:
       type: object
       properties:
          axiom_type:
@@ -70,8 +69,8 @@ definitions:
                Each entry must correspond to the name of a var in the var field of the pattern."
       required: ["axiom_type", "text", "vars"]
 
-DOS-DP:
-   title: "Dead simple OWL design patterns"
+type: object
+   title: "DOS-DP"
    required: [ "pattern_name"]
    properties:
       pattern_name:
@@ -130,13 +129,11 @@ DOS-DP:
          description: "A list, each member of which is a printf_annotation"
          type:  array
          items: 
-            type: 
-               "$ref": "#/definitions/printf_annotation"  # Is it possible to specify types of values for an array?
+            "$ref": "#/definitions/printf_annotation"  # Is it possible to specify types of values for an array?
       owl_axioms:
          description: "A list, each member of which is a printf_annotation"
          items: 
-            type: 
-               "$ref": "#/definitions/printf_owl"
+            "$ref": "#/definitions/printf_owl"
          
 # Derived (partially filled) fields. General issue: Is specifying only one possible filler equivalent to prefilling.  
 # Does it allow us to hide the slot from users, or will this need to be some kind of extension?
