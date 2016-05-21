@@ -106,7 +106,8 @@ DOS-DP:
 
       naming_fields:
          type: array
-         items: type: string
+         items: 
+            type: string
          description: "A list of annotation properties used as naming fields, in order of preference."
          value_type: 'annotation property name.'
    
@@ -116,7 +117,6 @@ DOS-DP:
    
       vars:
         type: object
-        value_type: string_manchester  # change this.
         description: >
            A dictionary of variables ranging over OWL classes.  
            Key = variable name, value = variable range as manchester syntax string.
@@ -130,10 +130,12 @@ DOS-DP:
       annotations:
          description: "A list, each member of which is a printf_annotation"
          type:  array
-         items: type: "$ref": "#/definitions/printf_annotation"  # Is it possible to specify types of values for an array?
+         items: 
+            type: "$ref": "#/definitions/printf_annotation"  # Is it possible to specify types of values for an array?
       owl_axioms:
          description: "A list, each member of which is a printf_annotation"
-         items: type: "$ref": "#/definitions/printf_owl"
+         items: 
+            type: "$ref": "#/definitions/printf_owl"
          
 # Derived (partially filled) fields. General issue: Is specifying only one possible filler equivalent to prefilling.  
 # Does it allow us to hide the slot from users, or will this need to be some kind of extension?
@@ -156,8 +158,6 @@ DOS-DP:
          type: printf_owl
          properties: 
             axiom_type: enum: ['GCI']   
-
-
 
 OBO:
    type: "$ref": "#/DOS-DP"
