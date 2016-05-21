@@ -85,7 +85,7 @@
             type: object
             description: "A dictionary of OWL annotation properties key : label; value : short form id"
    
-         naming fields
+         naming_fields
             type: array
             description: "A list of annotation properties used as naming fields, in order of preference."
             value_type: 'annotation property name.'
