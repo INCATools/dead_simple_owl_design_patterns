@@ -143,21 +143,25 @@ DOS-DP:
 # Does it allow us to hide the slot from users, or will this need to be some kind of extension?
 
       equivalentTo:
-         type: printf_owl:
+         type:
+            "$ref": "#/definitions/printf_owl"
          properties: 
             axiom_type: enum: ['equivalentTo']
    
       subClassOf:
-         type: printf_owl: 
+         type: 
+            "$ref": "#/definitions/printf_owl"
          properties: 
             axiom_type: enum: ['subClassOf']
    
       disjointWith:
-         type: printf_owl: 
+         type: 
+            "$ref": "#/definitions/printf_owl"
          properties: 
             axiom_type: enum: ['disjointWith']   
       GCI:
-         type: printf_owl
+         type: 
+            "$ref": "#/definitions/printf_owl"
          properties: 
             axiom_type: enum: ['GCI']   
 
@@ -174,14 +178,14 @@ OBO:
 #      problem: In a regular printf_annotation, the annotation property slot is filled by the *label* of an AP
 #      But for this to make sense in enums, we need to encode a default lookup dictionary.   Here's an attempt:
 
-   annotationProperties:
-      properties:
-         'label':
-            items:
-               enum: ['rdfs:label']
-         'definition': 
-            items:
-               enum: ['obo:IAO_0000115']
+      annotationProperties:
+         properties:
+            'label':
+               items:
+                  enum: ['rdfs:label']
+            'definition': 
+               items:
+                  enum: ['obo:IAO_0000115']
 
       naming_fields: # Setting valid naming field to label only.
          type: 
