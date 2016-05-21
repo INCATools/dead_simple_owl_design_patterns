@@ -1,13 +1,23 @@
-# version: "0.1 beta-2"
+{ "$schema": "http://json-schema.org/schema#" }
+{ "id": "https://github.com/dosumis/dead_simple_owl_design_patterns/edit/master/spec/DOSDP_spec.json" }  # Define a PURL for this?  Or buy a domain?
 
-# The maste of this schema is written in YAML for ease of reading/writing, 
-# but follows JSON-schema (http://json-schema.org/)
+# The master of this schema is written in YAML for ease of reading/writing, 
+# but follows JSON-schema (http://json-schema.org/).  It should be convered to JSON for validation.
+
+# version: "0.1 beta-2"
 
 ## Possible extensions: Is there an easy way to import types from OWL?
 
+## For a pattern to be valid, in addition to passing JSON-LD checks, cross-refs to dictionaries must be present:
+### Any entry in a var subfield must be present in the var dictionaries.  Any reference to an owl entity by naming field must 
+### correspond to a key in one of the OWL entity dicts.
+
+
+
 {
    title: DOSDP types
-   definitions: # type_name: subfield_name: description, compulsory(boolean), type
+   definitions:
+      # defining some simple types  - validation of these needs to be outside of JSON-schema validator.  Could ditch them...
       string_manchester: 
          type: string
          description: "An OWL manchester syntax string."
@@ -17,6 +27,7 @@
       printf_manchester:
          type: string
          description: "A UTF-8 encoded printf format string."
+      # defining core objects
       printf_annotation:
          type: object
          properties:
@@ -26,7 +37,7 @@
                If the annotation property has no label,  the shortForm ID should be used. 
                The annotation property must be listed in the annotation property dictionary.
             text:
-               type: string
+               type: printf_manchester
                description: "A print format string."
             vars:
                type: array
@@ -44,7 +55,7 @@
                GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.)  
                This specifies the axiom type to be generated from the text following substitution.
             text:
-               type: string
+               type: printf_manchester
                description: > A print format string in OWL Manchester syntax.  Each entry must correspond to an entry in o the name of a var in 
                the var field of the pattern. Entries in single quotes must correspond to the labels of entries in 
                owl_entity dictionaries (classes, relations, dataProperties)
@@ -74,9 +85,12 @@
          classes:
            type: object
            description: "A dictionary of OWL classes. key :label; value : short form id"
-         relations:
+         objectProperties:
             type: object
-            alternative_name: "ObjectProperties"
+            description: "A dictionary of OWL object properties. key : label; value : short form id"
+         relations:
+            # Just an alternative name for the ObjectProperties dict
+            type: object
             description: "A dictionary of OWL object properties. key : label; value : short form id"
          dataProperties:
             type: object
@@ -85,8 +99,9 @@
             type: object
             description: "A dictionary of OWL annotation properties key : label; value : short form id"
    
-         naming_fields
+         naming_fields:
             type: array
+            items: type: string
             description: "A list of annotation properties used as naming fields, in order of preference."
             value_type: 'annotation property name.'
       
@@ -96,8 +111,7 @@
       
          vars:
            type: object
-           value_type: string_manchester
-           compulsory: true
+           value_type: string_manchester  # change this.
            description: > A dictionary of variables ranging over OWL classes.  
            Key = variable name, value = variable range as manchester syntax string.
            
@@ -109,12 +123,13 @@
          annotations:
             description: "A list, each member of which is a printf_annotation"
             type:  array
-            value_type: "$ref": "#/definitions/pprintf_annotation"  # Is it possible to specify types of values for an array?
+            items: type: "$ref": "#/definitions/printf_annotation"  # Is it possible to specify types of values for an array?
          owl_axioms:
             description: "A list, each member of which is a printf_annotation"
-            value_ type: "$ref": "#/definitions/printf_owl"
+            items: type: "$ref": "#/definitions/printf_owl"
             
-   # Derived (partially filled) fields. 
+   # Derived (partially filled) fields. General issue: Is specifying only one possible filler equivalent to prefilling.  
+   # Does it allow us to hide the slot from users, or will this need to be some kind of extension?
    
          equivalentTo:
             type: printf_owl:
@@ -136,31 +151,40 @@
                axiom_type: enum: ['GCI']   
 }
 
-#### From here still needs work to make JSON-schema compliant.  How to specify defaults?
 
 { 
    OBO:
       type: "$ref": "#/DOS-DP"
-      properties: 
-      # prrintf annotaion fields with a pre-specified filler annotation_property
+      properties:
+
+      # printf_annotation fields with a pre-specified filler for annotation_property
       # These serve to hide complexity from end users.  
-      # Users of DOS-DP are free to extend by extending default dictionaries
+      # Users of DOS-DP are free to extend by the AP dictionary
       # and adding new derived fields to fit the needs of their project.
 
 #      problem: In a regular printf_annotation, the annotation property slot is filled by the *label* of an AP
-#      But for this to make sense in enums, we need to encode a default lookup dictionary.  Not sure this is possible.
-#      annotationProperties:
-#         'label': 'rdfs:label'
-#         'definition': 'obo:IAO_0000115'
+#      But for this to make sense in enums, we need to encode a default lookup dictionary.   Here's an attempt:
 
+      annotationProperties:
+         properties:
+            'label':
+               items:
+                  enum: ['rdfs:label']
+            'definition': 
+               items:
+                  enum: ['obo:IAO_0000115']
 
-         naming_fields: enum: ['label']  # How to specify this with enum?
-         
+         naming_fields: # Setting valid naming field to label only.
+            type: "$ref": "#/DOS-DP/naming_fields"
+            length: 1
+            items:
+               enum: ['label']  # How to specify this with enum?
+
          name:
             type: "$ref": "#/definitions/printf_annotation"
             properties: 
                annotation_property: enum: ['label']
-      
+
          def: 
             type: "$ref": "#/definitions/printf_annotation"
             properties: 
