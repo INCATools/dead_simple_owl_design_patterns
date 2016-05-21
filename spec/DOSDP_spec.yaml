@@ -146,24 +146,28 @@ DOS-DP:
          type:
             "$ref": "#/definitions/printf_owl"
          properties: 
-            axiom_type: enum: ['equivalentTo']
+            axiom_type: 
+               enum: ['equivalentTo']
    
       subClassOf:
          type: 
             "$ref": "#/definitions/printf_owl"
          properties: 
-            axiom_type: enum: ['subClassOf']
+            axiom_type: 
+               enum: ['subClassOf']
    
       disjointWith:
          type: 
             "$ref": "#/definitions/printf_owl"
          properties: 
-            axiom_type: enum: ['disjointWith']   
+            axiom_type: 
+               enum: ['disjointWith']   
       GCI:
          type: 
             "$ref": "#/definitions/printf_owl"
          properties: 
-            axiom_type: enum: ['GCI']   
+            axiom_type: 
+               enum: ['GCI']   
 
 OBO:
    type: 
@@ -198,13 +202,15 @@ OBO:
          type: 
             "$ref": "#/definitions/printf_annotation"
          properties: 
-            annotation_property: enum: ['label']
+            annotation_property: 
+               enum: ['label']
 
       def: 
          type: 
             "$ref": "#/definitions/printf_annotation"
          properties: 
-            annotation_property: enum: ['definition']
+            annotation_property: 
+               enum: ['definition']
 
 
 
