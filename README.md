@@ -18,7 +18,11 @@ Human readability and editability requires that Manchester syntax be written usi
 
 * Variables are specified in a dictionary with variable name as key and value as range specified as a Manchester syntax expresssion.
 
-## Draft spec:
+## Specification:
+
+[Full specification using JSON-schema](https://github.com/dosumis/dead_simple_owl_design_patterns/tree/master/spec).
+
+The following is a quick guide to commonly used fields, with an emphasis on OBO-specific (derived) fields:
 
 Manchester syntax expressions use names (labels).  These are always single quoted inside an expression that is double quoted. (Note single quotes in term names must be escaped).
 
