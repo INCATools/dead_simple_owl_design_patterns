@@ -20,7 +20,7 @@ Human readability and editability requires that Manchester syntax be written usi
 
 ## Specification:
 
-[Full specification using JSON-schema](https://github.com/dosumis/dead_simple_owl_design_patterns/tree/master/spec).
+[Full specification using JSON-schema](https://github.com/dosumis/dead_simple_owl_design_patterns/tree/master/spec/README.md).
 
 The following is a quick guide to commonly used fields, with an emphasis on OBO-specific (derived) fields:
 
