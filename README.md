@@ -71,4 +71,4 @@ The aim of this project is to specify a simple design pattern system that can ea
 ## Uses
 
  * [ENVO](http://obofoundry.org/ontology/envo.html): envo [patterns/](https://github.com/EnvironmentOntology/envo/tree/master/src/envo/patterns)
- * [OBA](http://obofoundry.org/ontology/oba.html): oba [patterns/](https://github.com/EnvironmentOntology/oba/tree/master/src/oba/patterns)
+ * [OBA](http://obofoundry.org/ontology/oba.html): oba [patterns/](https://github.com/obophenotype/bio-attribute-ontology/tree/master/src/ontology/patterns)
