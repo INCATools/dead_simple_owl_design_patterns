@@ -1,0 +1,77 @@
+{
+    "annotationProperties": {
+        "comment": "rdfs:comment", 
+        "definition": "obo:IAO_0000115", 
+        "definition_cross_reference": "oboInOwl:hasDbXref", 
+        "has_broad_synonym": "oboInOwl:hasBroadSynonym", 
+        "has_exact_synonym": "oboInOwl:hasExactSynonym", 
+        "has_narrow_synonym": "oboInOwl:hasNarrowSynonym", 
+        "has_related_synonym": "oboInOwl:hasRelatedSynonym", 
+        "label": "rdfs:label"
+    }, 
+    "mappings": [
+        {
+            "field": "name", 
+            "maps_to": {
+                "$ref": "printf_annotation"
+            }, 
+            "with": {
+                "annotationProperty": "label"
+            }
+        }, 
+        {
+            "field": "def", 
+            "maps_to": {
+                "$ref": "printf_annotation"
+            }, 
+            "with": {
+                "annotationProperty": "definition"
+            }
+        }, 
+        {
+            "field": "exact_synonym", 
+            "maps_to": {
+                "$ref": "printf_annotation"
+            }, 
+            "with": {
+                "annotationProperty": "has_exact_synonym"
+            }
+        }, 
+        {
+            "field": "broad_synonym", 
+            "maps_to": {
+                "$ref": "printf_annotation"
+            }, 
+            "with": {
+                "annotationProperty": "has_broad_synonym"
+            }
+        }, 
+        {
+            "field": "narrow_synonym", 
+            "maps_to": {
+                "$ref": "printf_annotation"
+            }, 
+            "with": {
+                "annotationProperty": "has_narrow_synonym"
+            }
+        }, 
+        {
+            "field": "related_synonym", 
+            "maps_to": {
+                "$ref": "printf_annotation"
+            }, 
+            "with": {
+                "annotationProperty": "has_related_synonym"
+            }
+        }, 
+        {
+            "field": "xref", 
+            "maps_to": {
+                "$ref": "printf_annotation"
+            }, 
+            "with": {
+                "annotationProperty": "definition_cross_reference"
+            }
+        }
+    ]
+}
