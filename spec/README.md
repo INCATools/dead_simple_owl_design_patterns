@@ -19,11 +19,16 @@ converted to JSON for validation via JSON schema.
    less expressive than those using the full schema. For example, it
    is not possible to use the EquivalentTo field in cases where two
    equivalence axioms must be specified.   As this would break the
-   unique key constraint of JSON.
+   unique key constraint of JSON.  This schema imports
+   DOSDP\_schema\_core.(yaml/json) and is validated against
+   DOSDP\_mapping\_schema.(yaml/json).
    
 * DOSDP\_OBO_fields.(yaml/json) specifies a set of derived fields OBO
    annotation property axioms.  This allows users familiar with OBO
-   terminology to use familiar OBO tag names for annotation axioms.
+   terminology to use familiar OBO tag names for annotation
+   axioms. This schema imports DOSDP\_schema\_core.(yaml/json) and is
+   validated against DOSDP\_mapping\_schema.(yaml/json).
+   
    
     
   
