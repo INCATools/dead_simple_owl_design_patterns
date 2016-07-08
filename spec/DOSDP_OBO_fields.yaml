@@ -1,5 +1,7 @@
 # TODO - add import statements to generic mapping.
 
+## Question: is it really valid to use the $ref system here!?
+
 
 annotationProperties:
    label: "rdfs:label"
