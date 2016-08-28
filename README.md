@@ -72,3 +72,5 @@ The aim of this project is to specify a simple design pattern system that can ea
 
  * [ENVO](http://obofoundry.org/ontology/envo.html): envo [patterns/](https://github.com/EnvironmentOntology/envo/tree/master/src/envo/patterns)
  * [OBA](http://obofoundry.org/ontology/oba.html): oba [patterns/](https://github.com/obophenotype/bio-attribute-ontology/tree/master/src/ontology/patterns)
+ * draft environmental conditions ontology: ecto [patterns/](https://github.com/cmungall/environmental-conditions/tree/master/src/patterns)
+ * [Uberon](http://obofoundry.org/ontology/uberon.html): uberon [patterns/](https://github.com/obophenotype/uberon/tree/master/patterns)
