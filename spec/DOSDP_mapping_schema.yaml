@@ -10,7 +10,9 @@ definitions:
          field:
             type: string
             description: "name of field to map"
-         maps_to: "name of type mapped to"
+         maps_to: 
+            type: string
+            description: "name of type mapped to"
          with: 
             type: object
             description: > 
