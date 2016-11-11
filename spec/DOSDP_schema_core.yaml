@@ -1,93 +1,54 @@
-# The master of this schema is written in YAML for ease of reading/writing, 
-# but follows JSON-schema (http://json-schema.org/).  It should be convered to JSON for validation.
-# version: "0.1 beta-2"
-## Possible extensions: Is there an easy way to import types from OWL?
-## For a pattern to be valid, in addition to passing JSON-LD checks, cross-refs to dictionaries must be present:
-### Any entry in a var subfield must be present in the var dictionaries.  Any reference to an owl entity by naming field must 
-### correspond to a key in one of the OWL entity dicts.
-
-
-
-"$schema": "http://json-schema.org/schema#"
-"id": "https://github.com/dosumis/dead_simple_owl_design_patterns/edit/master/spec/DOSDP_spec.json" # Define a PURL for this? Register a domain?
-
-
-
-
-
-type: object
-title: "DOS-DP"
-required: [ "pattern_name"]
+$schema: http://json-schema.org/draft-04/schema#
+definitions:
+  printf_annotation:
+    properties:
+      annotationProperty: {description: 'A string corresponding to the rdfs:label
+          of an owl annotation property. If the annotation property has no label,
+          the shortForm ID should be used. The annotation property must be listed
+          in the annotation property dictionary.', type: string}
+      annotations:
+        items: {$ref: '#/definitions/printf_annotation'}
+        type: array
+      text: {description: A print format string., type: string}
+      vars:
+        description: An ordered list of variables for substitution into the accompanying
+          print format string. Each entry must correspond to the name of a variable
+          specified in either the 'vars' field or the data_var field of the pattern.
+          Where an OWL entity is specified, the label for the OWL entity should be
+          used in the substitution.
+        items: {type: string}
+        type: array
+    required: [annotationProperty, text, vars]
+    type: object
+  printf_owl:
+    properties:
+      annotations:
+        items: {$ref: '#/definitions/printf_annotation'}
+        type: array
+      axiom_type:
+        description: 'OWL axiom type expressed as manchester syntax: equivalentTo,
+          subClassOf, disjointWith. GCI  - for general class inclusion axioms, is
+          also valid (although missing from manchester syntax.) This specifies the
+          axiom type to be generated from the text following substitution.'
+        enum: [equivalentTo, subClassOf, disjointWith, GCI]
+        type: string
+      text: {description: 'A print format string in OWL Manchester syntax. Each entry
+          must correspond to an entry in o the name of a var in the var field of the
+          pattern. Entries in single quotes must correspond to the labels of entries
+          in owl_entity dictionaries (classes, relations, dataProperties)', type: string}
+      vars:
+        description: An ordered list of variables for substitution into the accompanying
+          print format string. Each entry must correspond to the name of a variable
+          specified in either the 'vars' field or the data_var field of the pattern.
+        items: {type: string}
+        type: array
+    required: [axiom_type, text, vars]
+    type: object
 properties:
-
-# Name, iri, description
-
-   pattern_name:
-      type: string  # possible to specifiy ASCII?
-      description: >
-         The name of the pattern.  This must be an ASCII string with
-         no spaces. The only special characters allowed are '_' and '-'.
-         By convention, this is used as the file name of the
-         pattern - with an appropriate extension.
-   
-   base_IRI:    # not rqd, give JSON-LD base.
-      type: string # how to spec IRI?
-      description: "Specifies the base IRI to be used to generate new classes."
-
-   description:
-      type: string # specify UTF-8 string?
-      description: "A free text description of the pattern.  Must be UTF-8 encoded."
-
-   readable_identifiers:
-      type: array
-      items: 
-         type: string
-      description: "A list of annotation properties used as naming fields, in order of preference."
-
-#### owl_entity Dictionaries
-
-   classes:
-      type: object
-      description: "A dictionary of OWL classes. key :label; value : short form id"
-   objectProperties:
-      type: object
-      description: "A dictionary of OWL object properties. key : label; value : short form id"
-   relations:
-      # Just an alternative name for the ObjectProperties dict
-      type: object
-      description: "A dictionary of OWL object properties. key : label; value : short form id"
-   dataProperties:
-      type: object
-      description: "A dictionary of OWL data properties key : label; value : short form id"
-   annotationProperties:
-      type: object
-      description: "A dictionary of OWL annotation properties key : label; value : short form id"
-
-   vars:
-   type: object
-   description: >
-      A dictionary of variables ranging over OWL classes.  
-      Key = variable name, value = variable range as manchester syntax string.
-   
-   data_vars:
-     type: object
-     description: >
-      A dictionary of variables ranging over OWL data-types.
-      Key = variable name, value = variable range specified as a valid OWL
-      data-type.
-
-   annotations:
-     description: "A list, each member of which is a printf_annotation"
-     type:  array
-     items: 
-      "$ref": "#/definitions/printf_annotation"  # Is it possible to specify types of values for an array?
-
-   owl_axioms:
-     description: "A list, each member of which is a printf_owl"
-     items: 
-     "$ref": "#/definitions/printf_owl"
-    
-# Add import to mappings. Add $refs below to make this work.
-#
-
-
+  annotations:
+    items: {$ref: '#/definitions/printf_annotation'}
+    type: array
+  logical_axioms:
+    items: {$ref: '#/definitions/printf_owl'}
+    type: array
+type: object
