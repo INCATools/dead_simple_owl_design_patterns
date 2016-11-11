@@ -1,15 +1,57 @@
+pattern_name: import_across_membrane
+
+classes: 
+  membrane: GO_0016020
+  cellular_component: GO_0005575
+  chemical entity: CHEBI_24431
+  macromolecular complex: GO_0032991
+  transcript: SO_0000673
+  transport: GO_0006810
+relations:
+  transports or maintains localization of: RO_0002313
+  has target start location: RO_0002338
+  has target end location: RO_0002339
+  results in transport across: RO_0002342
+  imports: RO_0002340
+annotation_properties:
+  label: 'rdfs:label'
+  definition: IAO_0000115
+
+readable_identifiers: 
+   - label
+   
+vars: 
+  membrane: "'membrane'"
+  cargo: "'chemical entity' or 'macromolecular complex' or 'transcript'"
+  start: "'cellular_component'"
+  end: "'cellular_compomnent'”
+  
 annotations:
-- annotationProperty: fu
-  annotations:
-  - annotationProperty: fu
-    text: fu %s bar
-    vars: [a, b, c]
-  text: fu %s bar
-  vars: [a, b, c]
-- annotationProperty: fu
-  text: fu %s bar
-  vars: [a, b, c]
-logical_axioms:
-- axiom_type: equivalentTo
-  text: fu %s bar
-  vars: [a, b, c]
+  -
+    annotationProperty: label
+     text: "%s import across %s"
+     vars: 
+        - cargo
+        - membrane
+  -
+    annotationProperty: definition
+    text: "The directed import of %s from %s, across the %s and into the %s."
+    vars:
+      - cargo
+      - start
+      - membrane
+      - end
+      
+owl_axioms:
+   -
+      axiom_type: equivalentTo
+      text: "'transport'
+        and ('has target start location' some %s)
+        and ('has target end location' some %s)
+        and ('imports' some %s)
+        and ('results in transport across' some %s)"
+     vars:
+       - start
+       - end
+       - cargo
+       - membrane
