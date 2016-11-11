@@ -1,1 +1,15 @@
-
+annotations:
+- annotationProperty: fu
+  annotations:
+  - annotationProperty: fu
+    text: fu %s bar
+    vars: [a, b, c]
+  text: fu %s bar
+  vars: [a, b, c]
+- annotationProperty: fu
+  text: fu %s bar
+  vars: [a, b, c]
+logical_axioms:
+- axiom_type: equivalentTo
+  text: fu %s bar
+  vars: [a, b, c]
