@@ -51,8 +51,8 @@ owl_axioms:
         and ('has target end location' some %s)
         and ('imports' some %s)
         and ('results in transport across' some %s)
-     vars:
-       - start
-       - end
-       - cargo
-       - membrane
+      vars:
+        - start
+        - end
+        - cargo
+        - membrane
