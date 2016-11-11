@@ -20,4 +20,4 @@ install:
 
 # test script
 script:
-   - python spec/schema_test.py
+   - python spec/test_schema.py
