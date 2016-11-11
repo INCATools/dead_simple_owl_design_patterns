@@ -14,7 +14,7 @@ relations:
   results in transport across: RO_0002342
   imports: RO_0002340
 annotation_properties:
-  label: 'rdfs:label'
+  label: "rdfs:label"
   definition: IAO_0000115
 
 readable_identifiers: 
@@ -24,15 +24,15 @@ vars:
   membrane: "'membrane'"
   cargo: "'chemical entity' or 'macromolecular complex' or 'transcript'"
   start: "'cellular_component'"
-  end: "'cellular_compomnent'”
+  end: "'cellular_compomnent'"
   
 annotations:
   -
     annotationProperty: label
-     text: "import of %s across %s"
-     vars: 
-        - cargo
-        - membrane
+    text: "%s import across %s"
+    vars:
+      - cargo
+      - membrane
   -
     annotationProperty: definition
     text: "The directed import of %s from %s, across the %s and into the %s."
