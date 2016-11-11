@@ -1,4 +1,4 @@
-yaml
+PyYAML
 json
 jsonschema
 
