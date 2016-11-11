@@ -1,5 +1,8 @@
 $schema: http://json-schema.org/draft-04/schema#
 id: https://github.com/dosumis/dead_simple_owl_design_patterns/edit/master/spec/DOSDP_spec.json # Use Purl?
+title: DOSDP
+type: object
+
 definitions:
   printf_annotation:
     properties:
@@ -56,11 +59,70 @@ definitions:
         type: array
     required: [axiom_type, text, vars]
     type: object
+
 properties:
+
+   pattern_name:
+      type: string  # possible to specifiy ASCII?
+      description: >
+         The name of the pattern.  This must be an ASCII string with
+         no spaces. The only special characters allowed are '_' and '-'.
+         By convention, this is used as the file name of the
+         pattern - with an appropriate extension.
+         
+   base_IRI:    # not rqd, give JSON-LD base.
+      type: string # how to spec IRI?
+      description: "Specifies the base IRI to be used to generate new classes."
+
+   description:
+      type: string # specify UTF-8 string?
+      description: "A free text description of the pattern.  Must be UTF-8 encoded."
+
+   readable_identifiers:
+      type: array
+      items: 
+         type: string
+      description: "A list of annotation properties used as naming fields, in order of preference."
+
+#### owl_entity Dictionaries
+
+   classes:
+      type: object
+      description: "A dictionary of OWL classes. key :label; value : short form id"
+   objectProperties:
+      type: object
+      description: "A dictionary of OWL object properties. key : label; value : short form id"
+   relations:
+      # Just an alternative name for the ObjectProperties dict
+      type: object
+      description: "A dictionary of OWL object properties. key : label; value : short form id"
+   dataProperties:
+      type: object
+      description: "A dictionary of OWL data properties key : label; value : short form id"
+   annotationProperties:
+      type: object
+      description: "A dictionary of OWL annotation properties key : label; value : short form id"
+
+# Var types
+
+   vars:
+      type: object
+      description: >
+       A dictionary of variables ranging over OWL classes.  
+       Key = variable name, value = variable range as manchester syntax string.
+   
+   data_vars:
+     type: object
+     description: >
+      A dictionary of variables ranging over OWL data-types.
+      Key = variable name, value = variable range specified as a valid OWL
+      data-type.
+
   annotations:
     items: {$ref: '#/definitions/printf_annotation'}
     type: array
+    
   logical_axioms:
     items: {$ref: '#/definitions/printf_owl'}
     type: array
-type: object
+    
