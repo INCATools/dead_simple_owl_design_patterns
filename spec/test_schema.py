@@ -7,7 +7,7 @@ dosdp_core = yaml.load(dosdp_core_file.read())
 v = Draft4Validator(dosdp_core)
 
 
-test_positive_file = open("test/postive_test.yaml", "r")
+test_positive_file = open("test/test_positive.yaml", "r")
 test_positive = yaml.load(test_positive_file.read())
 
 if not v.is_valid(test_positive):
