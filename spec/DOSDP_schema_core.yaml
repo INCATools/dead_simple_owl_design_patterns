@@ -112,17 +112,17 @@ properties:
        Key = variable name, value = variable range as manchester syntax string.
    
    data_vars:
-     type: object
-     description: >
-      A dictionary of variables ranging over OWL data-types.
-      Key = variable name, value = variable range specified as a valid OWL
-      data-type.
+      type: object
+      description: >
+       A dictionary of variables ranging over OWL data-types.
+       Key = variable name, value = variable range specified as a valid OWL
+       data-type.
 
-  annotations:
-    items: {$ref: '#/definitions/printf_annotation'}
-    type: array
-    
-  logical_axioms:
-    items: {$ref: '#/definitions/printf_owl'}
-    type: array
+   annotations:
+      items: {$ref: '#/definitions/printf_annotation'}
+      type: array
+     
+   logical_axioms:
+     items: {$ref: '#/definitions/printf_owl'}
+     type: array
     
