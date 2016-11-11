@@ -29,7 +29,7 @@ vars:
 annotations:
   -
     annotationProperty: label
-     text: "%s import across %s"
+     text: " %s import across %s"
      vars: 
         - cargo
         - membrane
@@ -45,11 +45,12 @@ annotations:
 owl_axioms:
    -
       axiom_type: equivalentTo
-      text: "'transport'
+      text: >
+        'transport'
         and ('has target start location' some %s)
         and ('has target end location' some %s)
         and ('imports' some %s)
-        and ('results in transport across' some %s)"
+        and ('results in transport across' some %s)
      vars:
        - start
        - end
