@@ -1,4 +1,3 @@
 PyYAML
-json
 jsonschema
 
