@@ -29,7 +29,7 @@ vars:
 annotations:
   -
     annotationProperty: label
-     text: " %s import across %s"
+     text: "import of %s across %s"
      vars: 
         - cargo
         - membrane
