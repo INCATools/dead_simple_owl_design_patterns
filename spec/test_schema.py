@@ -2,7 +2,7 @@ import yaml
 import json
 from jsonschema import Draft4Validator
 
-dosdp_core_file = open("DOSDP_schema_core.yaml")
+dosdp_core_file = open("DOSDP_schema_core.yaml", "w")
 dosdp_core = yaml.loads(dosdp_core_file)
 
 v = Draft4Validator(dosdp_core)
