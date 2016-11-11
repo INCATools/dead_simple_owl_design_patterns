@@ -13,7 +13,7 @@ relations:
   has target end location: RO_0002339
   results in transport across: RO_0002342
   imports: RO_0002340
-annotation_properties:
+annotationProperties:
   label: "rdfs:label"
   definition: IAO_0000115
 
@@ -42,7 +42,7 @@ annotations:
       - membrane
       - end
       
-owl_axioms:
+logical_axioms:
    -
       axiom_type: equivalentTo
       text: >
