@@ -120,12 +120,19 @@ properties:
        A dictionary of variables ranging over OWL data-types.
        Key = variable name, value = variable range specified as a valid OWL
        data-type.
+       
+#   string_list_vars:
+#      description: >
+#        A variable slot that takes an array of strings. 
+#      type: string
+            
+# axioms
 
    annotations:
       items: {$ref: '#/definitions/printf_annotation'}
       type: array
      
    logical_axioms:
-     items: {$ref: '#/definitions/printf_owl'}
-     type: array
+      items: {$ref: '#/definitions/printf_owl'}
+      type: array
     
