@@ -1,4 +1,4 @@
-#!/usr/bin/env Jython -Xmx4000m
+#!/usr/bin/env Jython -J-Xmx4000m
 from pattern import applied_pattern
 from pattern import load_json_from_file
 import sys
@@ -15,7 +15,7 @@ Arg 3 = A *full* path to the GO OWL file to be edited.
 
 ### Load up a brain with GO
 go = load_brain_from_file(sys.argv[3])
-goid = goId(go = go, start = 9000000, end = 9000100)
+goid = goId(go = go, start = 98900, end = 100000)
 pattern = load_json_from_file(path = sys.argv[1])
 var_spec = load_json_from_file(path = sys.argv[2])
 
