@@ -19,3 +19,9 @@ def yaml2json(YamlFilePath, JsonFilePath):
     j = open(JsonFilePath, "w")
     j.write(json.dumps(pdm, sort_keys=True, indent=4))
     j.close()
+
+def json2yaml(JsonFilePath, YamlFilePath):
+    pdm = load_json_from_file(JsonFilePath)
+    y = open(YamlFilePath, "w")
+    y.write(yaml.dumps(pdm))
+
