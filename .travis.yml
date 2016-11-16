@@ -8,6 +8,9 @@ python:
 install:
    - pip install -r requirements.txt
 
+# Jython script testing disabled.  The purpose of this travis job is currently to test 
+# that schema docs are valid an can be used to validate a standard set of test patterns.
+
 # install jython
 # before_install:
 #  - export JYTHON_URL='http://central.maven.org/maven2/org/python/jython-installer/2.7.0/jython-installer-2.7.0.jar'
