@@ -1,54 +1,70 @@
+id: https://github.com/dosumis/dead_simple_owl_design_patterns/edit/master/spec/DOSDP_OBO_fields.json 
+# Import refs need some work.
+title: DOSDP_OBO_fields
 
-annotationProperties:
-   label: "rdfs:label"
-   comment: "rdfs:comment"
-   definition: "obo:IAO_0000115"
-   has_exact_synonym: "oboInOwl:hasExactSynonym"
-   has_broad_synonym: "oboInOwl:hasBroadSynonym"
-   has_narrow_synonym: "oboInOwl:hasNarrowSynonym"
-   has_related_synonym: "oboInOwl:hasRelatedSynonym"
-   definition_cross_reference: "oboInOwl:hasDbXref"
+# This schema doc contains additional fields that are not part of JSON-schema.  
+# These are intended for for use in mapping in implementations.
 
-mappings:
-   - 
-      field: name
-      maps_to: 
-         $ref: printf_annotation
-      with:
-        annotationProperty: label
-   - 
-      field: def
-      maps_to: 
-         $ref: printf_annotation
-      with:
-        annotationProperty: definition
-   - 
-      field: exact_synonym
-      maps_to: 
-         $ref: printf_annotation
-      with:
-        annotationProperty: has_exact_synonym
-   - 
-      field: broad_synonym
-      maps_to: 
-         $ref: printf_annotation
-      with:
-        annotationProperty: has_broad_synonym
-   - 
-      field: narrow_synonym
-      maps_to: 
-         $ref: printf_annotation
-      with:
-        annotationProperty: has_narrow_synonym
-   - 
-      field: related_synonym
-      maps_to: 
-         $ref: printf_annotation
-      with:
-        annotationProperty: has_related_synonym
-   - 
-      field: xref
-      maps_to: 
-         $ref: printf_annotation
-      with:
-        annotationProperty: definition_cross_reference
+curies:
+   rdfs: http://www.w3.org/2000/01/rdf-schema#
+   obo: http://purl.obolibary.org/obo/
+   oboInOwl: http://www.geneontology.org/formats/oboInOwl#
+
+definitions: 
+   printf_annotation_obo: 
+      type: object
+      additionalProperties: False
+      required: [text, vars]
+      properties:
+         annotations:
+            items: {$ref: '#/definitions/printf_annotation_obo'}
+            type: array
+         text:
+            description: A print format string.
+            type: string
+         vars:
+            description: >
+             An ordered list of variables for substitution into the accompanying
+             print format string. Each entry must correspond to the name of a variable
+             specified in either the 'vars' field or the data_var field of the pattern.
+             Where an OWL entity is specified, the label for the OWL entity should be
+             used in the substitution.
+            items: {type: string}
+            type: array
+
+type: object
+properties: 
+   allOf: 
+      - "$ref" : "DOSDP_schema_core"
+      - properties:  
+            name:
+               type: { $ref: '#/definitions/printf_annotation_obo' }
+               mapping: "rdfs:label"
+            comment:
+               type: { $ref: '#/definitions/printf_annotation_obo' }
+               mapping: "rdfs:comment"
+            def:
+               type: { $ref: '#/definitions/printf_annotation_obo' }
+               mapping: "obo:IAO_0000115"
+            exact_synonym:
+               type: array
+               items: { $ref: '#/definitions/printf_annotation_obo' }
+               mapping: "oboInOwl:hasExactSynonym"
+            narrow_synonym:
+               type: array
+               items: { $ref: '#/definitions/printf_annotation_obo' }
+               mapping: "oboInOwl:hasNarrowSynonym"
+            related_synonym:
+               type: array
+               items: { $ref: '#/definitions/printf_annotation_obo' }
+               mapping: "oboInOwl:hasRelatedSynonym"
+            broad_synonym:
+               type: array
+               items: { $ref: '#/definitions/printf_annotation_obo' }
+               mapping: "oboInOwl:hasBroadSynonym"
+            xref:
+               type: array
+               items: { $ref: '#/definitions/printf_annotation_obo' }
+               mapping: "oboInOwl:hasDbXref"
+               
+
