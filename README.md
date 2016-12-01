@@ -63,7 +63,7 @@ Draft json example - [import_into_cell](patterns/import_into_cell.json)
  * test length of var array matches number of interpolation slots in string
  * test that all var names are valid for the pattern
 * For printf_owl fields:
-  * Do quoted names in the printf field correspond to dictionary entries in the pattern?
+  * Check quoted names in the printf field correspond to dictionary entries in the pattern?
   
 * Tests against referenced ontologies:
   * Are the entities in the dictionaries present and non-obsolete in the latest releases of the relevant ontologies?
