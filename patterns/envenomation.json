@@ -10,7 +10,7 @@
         ]
     }, 
     "equivalentTo": {
-        "text": "'envenomation resulting in modification of morphology or physiology of other organism' and 'has part' some '%s'", 
+        "text": "'envenomation resulting in modification of morphology or physiology of other organism' and 'has part' some %s", 
         "vars": [
             "mod"
         ]

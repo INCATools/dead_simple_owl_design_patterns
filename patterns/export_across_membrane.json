@@ -4,10 +4,11 @@
         "chemical entity": "CHEBI_24431", 
         "macromolecular complex": "GO_0032991", 
         "membrane": "GO_0016020", 
-        "transcript": "SO_0000673"
+        "transcript": "SO_0000673", 
+        "transport": "GO_0006810"
     }, 
     "comment": {
-        "text": "This term covers %s *across* the %s  through a channel or pore.  It does not cover import via vesicle fusion with %s, as in this case transport does not involve crossing the membrane.", 
+        "text": "This term covers %s *across* the %s  through a channel or pore.  It does not cover export via vesicle fusion with %s, as in this case transport does not involve crossing the membrane.", 
         "vars": [
             "cargo", 
             "membrane", 
@@ -15,7 +16,7 @@
         ]
     }, 
     "def": {
-        "text": "The directed import of some %s from %s, across the %s and into the %s.", 
+        "text": "The directed import of %s from %s, across the %s and into the %s.", 
         "vars": [
             "cargo", 
             "start", 
@@ -49,7 +50,7 @@
     }, 
     "vars": {
         "cargo": "'chemical entity' or 'macromolecular complex' or 'transcript'", 
-        "end": "'cellular_compomnent'", 
+        "end": "'cellular_component'", 
         "membrane": "'membrane'", 
         "start": "'cellular_component'"
     }

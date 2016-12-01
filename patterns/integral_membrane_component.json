@@ -5,7 +5,7 @@
         "side of membrane": "GO_0098552"
     }, 
     "def": {
-        "text": "The component of the %s consisting of gene products and protein complexes that have some part that penetrates at least one leaflet of the membrane bilayer. This component includes gene products that are buried in the bilayer with no exposure outside the bilayer.", 
+        "text": "The component of the %s consisting of the gene products and protein complexes having at least some part of their peptide sequence embedded in the hydrophobic region of the membrane.", 
         "vars": [
             "membrane"
         ]

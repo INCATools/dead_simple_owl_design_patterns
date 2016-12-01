@@ -4,6 +4,7 @@
         "chemical entity": "CHEBI_24431", 
         "macromolecular complex": "GO_0032991", 
         "membrane": "GO_0016020", 
+        "transcript": "SO_0000673", 
         "transport": "GO_0006810"
     }, 
     "comment": {
@@ -49,7 +50,7 @@
     }, 
     "vars": {
         "cargo": "'chemical entity' or 'macromolecular complex' or 'transcript'", 
-        "end": "'cellular_compomnent'", 
+        "end": "'cellular_component'", 
         "membrane": "'membrane'", 
         "start": "'cellular_component'"
     }

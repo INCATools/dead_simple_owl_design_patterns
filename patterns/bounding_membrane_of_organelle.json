@@ -10,7 +10,7 @@
         ]
     }, 
     "equivalentTo": {
-        "text": "'whole membrane' that 'bounding layer of' some %s)", 
+        "text": "'whole membrane' that ('bounding layer of' some %s)", 
         "vars": [
             "organelle"
         ]
