@@ -5,6 +5,9 @@ import glob
 import re
 import sys
 
+"""Convert all yaml files in a specified directory (arg1) into json files
+"""
+
 # FInd all YAML files in directory.
 yaml_files = glob.glob(sys.argv[1] + "*.yaml")  # Note - glob returns full file path
 
