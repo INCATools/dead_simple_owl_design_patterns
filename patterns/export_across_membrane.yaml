@@ -6,6 +6,7 @@ classes:
   chemical entity: CHEBI_24431
   macromolecular complex: GO_0032991
   transcript: SO_0000673
+  transport: GO_0006810
 
 relations:
   transports or maintains localization of: RO_0002313
@@ -18,7 +19,7 @@ vars:
   membrane: "'membrane'"
   cargo: "'chemical entity' or 'macromolecular complex' or 'transcript'"
   start: "'cellular_component'"
-  end: "'cellular_compomnent'"
+  end: "'cellular_component'"
 
 name: 
   text: "%s export across %s"
