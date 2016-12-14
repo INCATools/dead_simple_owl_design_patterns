@@ -16,7 +16,7 @@ Human readability and editability requires that Manchester syntax be written usi
 
 * All pattern contain dictionaries (hash lookups) that can be used to lookup up OWL shortform IDs from labels.  OWL ShortFormIDs are assumed to be sufficient for entity resolution during usage of the pattern.  Labels are assumed to be sufficient for entity resolution _within_ a pattern.
 
-* Variable interpolation into Manchester syntax and text is specified using sprintf format.  Variable names are stored in associated lists.
+* Variable interpolation into Manchester syntax and text is specified using [printf format strings](https://en.wikipedia.org/wiki/Printf_format_string).  Variable names are stored in associated lists.
 
 * Variables are specified in a dictionary with variable name as key and value as range specified as a Manchester syntax expresssion.
 
