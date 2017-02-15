@@ -2,14 +2,8 @@ import yaml
 from jsonschema import Draft4Validator
 import warnings
 
-dosdp_core_file = open("DOSDP_schema_core.yaml", "r")
-dosdp_core = yaml.load(dosdp_core_file.read())
-dosdp_obo_file = open("DOSDP_OBO_fields.yaml", "r")
-dosdp_obo = yaml.load(dosdp_obo_file.read())
-
-dosdp = {}
-dosdp.update(dosdp_core)
-dosdp.update(dosdp_obo)
+dosdp_full_file = open("DOSDP_schema_full.yaml", "r")
+dosdp yaml.load(dosdp_core_file.read())
 
 def test_jschema(validator, file_path):
     test_file = open(file_path, "r")
@@ -18,7 +12,7 @@ def test_jschema(validator, file_path):
     if not validator.is_valid(test_pattern):
         es = validator.iter_errors(test_pattern)
         for e in es:
-            warnings.warn(e)
+            warnings.warn(str(e))
             return False
     else:
         return True
