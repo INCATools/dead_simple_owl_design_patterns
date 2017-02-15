@@ -2,8 +2,6 @@ $schema: http://json-schema.org/draft-04/schema#
 id: https://github.com/dosumis/dead_simple_owl_design_patterns/edit/master/spec/DOSDP_spec.json # Use Purl?
 title: DOSDP
 type: object
-additionalProperties: False
-
 
 definitions:
   printf_annotation:
