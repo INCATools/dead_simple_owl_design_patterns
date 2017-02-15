@@ -3,7 +3,7 @@ from jsonschema import Draft4Validator
 import warnings
 
 dosdp_full_file = open("DOSDP_schema_full.yaml", "r")
-dosdp yaml.load(dosdp_core_file.read())
+dosdp = yaml.load(dosdp_full_file.read())
 
 def test_jschema(validator, file_path):
     test_file = open(file_path, "r")
