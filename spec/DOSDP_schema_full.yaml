@@ -147,7 +147,6 @@ definitions:
          A single list variable (list_var or data_list_var).  Each item in this list 
          should be used to generate a separate annotation axiom.
         type: string
-
       xrefs:
         description: >
          Use of this field will add the same xref set to all annotation axioms generated.
@@ -289,21 +288,36 @@ properties:
     required: [nodes, edges]
     properties:
       nodes:
-         type: object
+        description: > 
+                       Key = name of individual within this pattern doc
+                       Value = Type of individual specified using either 
+                       the quoted name of a class in the class dictionary of this pattern
+                       or a var name.  This field does not support typing via 
+                       anonymous class expressions
+        type: object
       edges:
         type: object
         additionalProperties: False
         required: [edge]
         properties:
           edge:
+            description: >
+                          A triple specified as an ordered array with 3 elements
+                          [subject, rel, object]
+                            * rel must be the quoted name of a relation from the relations
+                              (object property) dictionary.
+                            * subject and object must be the name of an individual
+                              specified in the nodes field.
             type: array
             items: { type: string }
+            minItems: 3
+            maxItems: 3
           annotations:
             type: array 
             items: { $ref: '#/definitions/annotation' }
-          not: 
+          not:
+            description: "Optional field for negated OPAs"
             type: boolean
-      
 
  
 
