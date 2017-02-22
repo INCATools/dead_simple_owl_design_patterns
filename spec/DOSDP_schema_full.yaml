@@ -263,19 +263,19 @@ properties:
   
   # TODO: make all these into list_annotations 
   exact_synonym:
-    $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo'
     mapping: "oboInOwl:hasExactSynonym"
   narrow_synonym:
-    $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo'
     mapping: "oboInOwl:hasNarrowSynonym"
   related_synonym:
-    $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo'
     mapping: "oboInOwl:hasRelatedSynonym"
   broad_synonym:
-    $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo'
     mapping: "oboInOwl:hasBroadSynonym"
   xref:
-    $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo'
     mapping: "oboInOwl:hasDbXref"
 
 # instance graph spec - TODO be split to a separate file
