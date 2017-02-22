@@ -52,7 +52,7 @@ definitions:
          A single list variable (list_var or data_list_var).  Each item in this list 
          should be used to generate a separate annotation axiom.
         type: string
-  annotation:
+  annotations:
    oneOf: 
      - { $ref: "#/definitions/printf_annotation" }
      - { $ref: "#/definitions/list_annotation" }
@@ -63,7 +63,7 @@ definitions:
     required: [axiom_type, text, vars]
     properties:
       annotations:
-        items: {$ref: '#/definitions/printf_annotation'}
+        items: {$ref: '#/definitions/annotations'}
         type: array
       axiom_type:
         description: > 
@@ -94,7 +94,7 @@ definitions:
     required: [text, vars]
     properties:
       annotations:
-        items: {$ref: '#/definitions/printf_annotation'}
+        items: {$ref: '#/definitions/annotations'}
         type: array
       text: 
         type: string
@@ -118,11 +118,13 @@ definitions:
     required: [text, vars]
     properties:
       annotations:
-        items: { $ref: "#/definitions/annotation" } 
+        items: { $ref: "#/definitions/annotations" } 
         type: array
       xrefs:
-        type: array
-        items: { $ref: '#/definitions/list_annotation_obo' }
+        description: > 
+         Takes the name of a single data_list_var specifying a list of database 
+         cross references.
+        type: string
         mapping: "oboInOwl:hasDbXref" 
       text:
         description: A print format string.
@@ -148,10 +150,11 @@ definitions:
          should be used to generate a separate annotation axiom.
         type: string
       xrefs:
-        description: >
-         Use of this field will add the same xref set to all annotation axioms generated.
-        type: array
-        items: { $ref: '#/definitions/list_annotation_obo' }
+        description: > 
+         Takes the name of a single data_list_var specifying a list of database 
+         cross references. Use of this field should add the same xref set to all 
+         annotation axioms generated.
+        type: string
         mapping: "oboInOwl:hasDbXref"          
         
         
@@ -260,24 +263,19 @@ properties:
   
   # TODO: make all these into list_annotations 
   exact_synonym:
-    type: array
-    items: { $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo' }
     mapping: "oboInOwl:hasExactSynonym"
   narrow_synonym:
-    type: array
-    items: { $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo' }
     mapping: "oboInOwl:hasNarrowSynonym"
   related_synonym:
-    type: array
-    items: { $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo' }
     mapping: "oboInOwl:hasRelatedSynonym"
   broad_synonym:
-    type: array
-    items: { $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo' }
     mapping: "oboInOwl:hasBroadSynonym"
   xref:
-    type: array
-    items: { $ref: '#/definitions/list_annotation_obo' }
+    $ref: '#/definitions/list_annotation_obo' }
     mapping: "oboInOwl:hasDbXref"
 
 # instance graph spec - TODO be split to a separate file
