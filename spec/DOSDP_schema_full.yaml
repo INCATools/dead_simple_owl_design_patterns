@@ -20,7 +20,7 @@ definitions:
          in the annotation property dictionary.'
         type: string
       annotations:
-        items: { $ref: "#/definitions/annotation" } 
+        items: { $ref: "#/definitions/annotations" } 
         type: array
       text:
         description: A print format string.
@@ -312,7 +312,7 @@ properties:
             maxItems: 3
           annotations:
             type: array 
-            items: { $ref: '#/definitions/annotation' }
+            items: { $ref: '#/definitions/annotations' }
           not:
             description: "Optional field for negated OPAs"
             type: boolean
