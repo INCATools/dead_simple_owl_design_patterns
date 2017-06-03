@@ -10,10 +10,8 @@ vars:
   '.':'.'
   
 data_list_vars:
-  def_xrefs: 
-     xrefs: "xsd:string"
-  cross_references:
-     xrefs: "xsd:string"
+  def_xrefs: "xsd:string"
+  cross_references: "xsd:string"
   
 name:
   text: '.'
