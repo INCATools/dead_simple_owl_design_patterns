@@ -1,0 +1,36 @@
+pattern_name: .
+
+classes:
+  '.':'.'
+  
+relations:
+  '.':'.'
+  
+vars: 
+  '.':'.'
+  
+data_list_vars:
+  def_xrefs: 
+     xrefs: "xsd:string"
+  cross_references:
+     xrefs: "xsd:string"
+  
+name:
+  text: '.'
+  vars: 
+    - '.'
+    
+def: 
+  text: '.'
+  vars:
+    - '.'
+  xrefs: def_xrefs
+  
+xrefs: cross_references
+
+namespace: '.'
+
+equivalentTo: 
+  text: '.'
+  vars:
+    - '.'
