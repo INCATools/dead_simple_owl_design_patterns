@@ -155,13 +155,7 @@ definitions:
          cross references. Use of this field should add the same xref set to all 
          annotation axioms generated.
         type: string
-        mapping: "oboInOwl:hasDbXref"          
-        
-$schema: "http://json-schema.org/draft-04/schema#"
-#id: 'https://github.com/dosumis/dead_simple_owl_design_patterns/edit/master/spec/DOSDP_spec.json' # Use Purl?
-title: DOSDP
-type: object
-additionalProperties: False
+        mapping: "oboInOwl:hasDbXref"
 
 
 definitions:
