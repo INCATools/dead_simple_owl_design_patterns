@@ -58,7 +58,7 @@ Draft json example - [import_into_cell](patterns/import_into_cell.json)
 2. validate against JSON schema (e.g. see [test_schema.py](https://github.com/dosumis/dead_simple_owl_design_patterns/blob/master/spec/test_schema.py))
 
 
-### Recommendations for additional validation outside of JSON schema:
+### Recommendations for additional validation outside of JSON schema:
 
 * For all printf fields, 
   * test length of var array matches number of interpolation slots in string
