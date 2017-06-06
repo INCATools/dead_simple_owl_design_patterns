@@ -57,21 +57,23 @@ Draft json example - [import_into_cell](patterns/import_into_cell.json)
 1. test converstion of YAML to JSON
 2. validate against JSON schema (e.g. see [test_schema.py](https://github.com/dosumis/dead_simple_owl_design_patterns/blob/master/spec/test_schema.py))
 
+
 ### Recommendations for additional validation outside of JSON schema:
 
 * For all printf fields, 
- * test length of var array matches number of interpolation slots in string
- * test that all var names are valid for the pattern
+  * test length of var array matches number of interpolation slots in string
+  * test that all var names are valid for the pattern
 * For printf_owl fields:
-  * Check quoted names in the printf field correspond to dictionary entries in the pattern.
+   * Check quoted names in the printf field correspond to dictionary entries in the pattern.
   
 * Tests against referenced ontologies:
-  * Are the entities in the dictionaries present and non-obsolete in the latest releases of the relevant ontologies?
-  * Are the readable names up to date ?
-  * For all printf manchester syntax strings: Is a valid Manchester syntax string generated when variable slots are filled using the range for each variable?  
+   * Are the entities in the dictionaries present and non-obsolete in the latest releases of the relevant ontologies?
+   * Are the readable names up to date ?
+   * For all printf manchester syntax strings: Is a valid Manchester syntax string generated when variable slots are filled using the range for each variable?
+   
 * Validation when creating instances:
-  * Are values for variable slots present and non-obsolete in the latest releases of the relevant ontologies?
-  * Are values for the variable slots in the specified range?
+   * Are values for variable slots present and non-obsolete in the latest releases of the relevant ontologies?
+   * Are values for the variable slots in the specified range?
 
 
 ## Implementation
