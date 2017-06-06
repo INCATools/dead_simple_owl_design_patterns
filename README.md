@@ -14,7 +14,7 @@ Human readability and editability requires that Manchester syntax be written usi
   * JSON format is the ideal exchange format for programatic consumption: It is already javascript; Standard libraries are available to convert it into datastructures in many languages;Developers are typically experienced at consuming it. 
   * *But* YAML is much easier than JSON for humans to edit (it can be difficult for human editors to keep curly braces and quotes balanced and to add commas correctly in JSON). YAML also has the great advantage over JSON of allowing comments to be embedded. [Conversion between YAML and JSON is trivial](http://yamltojson.com/)
 
-* All pattern contain dictionaries (hash lookups) that can be used to lookup up OWL shortform IDs from labels.  OWL ShortFormIDs are assumed to be sufficient for entity resolution during usage of the pattern.  Labels are assumed to be sufficient for entity resolution _within_ a pattern.
+* All patterns contain dictionaries (hash lookups) that can be used to lookup up OWL shortform IDs from labels.  OWL ShortFormIDs are assumed to be sufficient for entity resolution during usage of the pattern.  Labels are assumed to be sufficient for entity resolution _within_ a pattern.
 
 * Variable interpolation into Manchester syntax and text is specified using [printf format strings](https://en.wikipedia.org/wiki/Printf_format_string).  Variable names are stored in associated lists.
 
@@ -63,7 +63,7 @@ Draft json example - [import_into_cell](patterns/import_into_cell.json)
  * test length of var array matches number of interpolation slots in string
  * test that all var names are valid for the pattern
 * For printf_owl fields:
-  * Check quoted names in the printf field correspond to dictionary entries in the pattern?
+  * Check quoted names in the printf field correspond to dictionary entries in the pattern.
   
 * Tests against referenced ontologies:
   * Are the entities in the dictionaries present and non-obsolete in the latest releases of the relevant ontologies?
@@ -76,7 +76,10 @@ Draft json example - [import_into_cell](patterns/import_into_cell.json)
 
 ## Implementation
 
-The aim of this project is to specify a simple design pattern system that can easily be consumed, whatever your code base.  This repository includes [code for validation, documentation and generation of pattern-based classes](https://github.com/dosumis/dead_simple_owl_design_patterns/tree/master/src) written in Jython.
+The aim of this project is to specify a simple design pattern system that can easily be consumed, whatever your code base.
+This repository includes a simple Python validator (src/simple_pattern_tester.py).
+
+For implementation, we recommend [dosdp-tools](https://github.com/balhoff/dosdp-tools).
 
 
 ## Uses
