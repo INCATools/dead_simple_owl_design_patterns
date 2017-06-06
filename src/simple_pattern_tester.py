@@ -13,6 +13,12 @@ All files in directory with these extensions are assumed to be dosdp
 pattern files.
 """
 
+# TODO - add check for quoted entities in printf_obo fields
+# For this is would be very useful to get field type (as specified by $ref to local definitions)
+# or, even better, to get fields from instance by type.
+# This is the kind of thing I would exepct the validator to be able to do, but I can't see how
+# It's possible currently.
+
 def test_jschema(validator, test_pattern):
     if not validator.is_valid(test_pattern):
         es = validator.iter_errors(test_pattern)
@@ -54,7 +60,7 @@ pattern_docs = glob.glob(sys.argv[1] + "*.yaml")
 pattern_docs.extend(glob.glob(sys.argv[1] + "*.yml"))
 stat = True
 for pattern_doc in pattern_docs:
-    print("Checking %s" % pattern_doc)
+    warnings.warn("Checking %s" % pattern_doc)
     file = open(pattern_doc, "r")
     pattern = yaml.load(file.read())
     if not test_jschema(v, pattern): stat = False
