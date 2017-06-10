@@ -2,6 +2,13 @@
 
 # Dead simple owl design pattern (DOS-DP) exchange format
 
+## For details please see:
+
+[Dead Simple OWL Design Patterns](https://jbiomedsem.biomedcentral.com/articles/10.1186/s13326-017-0126-0)
+David Osumi-Sutherland, Melanie Courtot, James P. Balhoff and Christopher Mungall
+Journal of Biomedical Semantics 2017 8:18 DOI:10.1186/s13326-017-0126-0
+
+
 ## Motivation
 
 The job of editing the GO and many other OBOish OWL ontologies increasingly involves specifying OWL design patterns.  We need a simple, light-weight standard for specifying these design patterns that can then be used for generating documentation, generating new terms and retrofitting old ones. The solution must be readable and editable by anyone with a basic knowledge of OWL and the ability to read manchester syntax.  It must also be easy to use programatically without the need for custom parsers - i.e. it should follow some existing data exchange standard.
