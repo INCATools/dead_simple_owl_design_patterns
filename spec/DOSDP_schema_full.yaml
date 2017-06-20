@@ -264,6 +264,26 @@ definitions:
         items: {type: string}
         type: array
 
+  regex_sub:
+    additionalProperties: False
+    required: [in, out, match, sub]
+    type: object
+    properties:
+      in: 
+        type: string 
+        description: name of input var
+      out: 
+        type: string 
+        description: > 
+          Name of output var.  If input var specified an OWL entity then 
+          readable identifier is used as input to substitution
+      match:
+        type: string 
+        description: perl style regex match             
+        sub: 
+          type: string 
+          description: perl style regex sub.  May include backreferences.  
+
   # TODO - split into separate schema file
   printf_annotation_obo: 
     type: object
@@ -532,6 +552,14 @@ properties:
         A dictionary of variables rrefering to lists of some specified OWL data-types.
         Key = variable name, value = variable range of all items in list, 
         specified as a valid OWL data-type.
+        
+# Var munging
+
+  substitutions:
+    type: array
+    items: { $ref : '#/definitions/regex_sub' }
+
+# Specifying axioms:
 
   annotations:
     items: { $ref: '#/definitions/printf_annotation'}
