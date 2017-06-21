@@ -10,7 +10,7 @@ definitions:
   printf_annotation:
     type: object
     additionalProperties: False
-    required: [annotationProperty, text, vars]
+    required: [annotationProperty, text]
     properties:
       annotationProperty:
         description: > 
@@ -31,7 +31,8 @@ definitions:
          print format string. Each entry must correspond to the name of a variable
          specified in either the 'vars' field or the data_var field of the pattern.
          Where an OWL entity is specified, the label for the OWL entity should be
-         used in the substitution.
+         used in the substitution.  An empty var list can be specified simply by
+         leaving this field out.
         items: {type: string}
         type: array
         
@@ -84,7 +85,8 @@ definitions:
         description: >
          An ordered list of variables for substitution into the accompanying
          print format string. Each entry must correspond to the name of a variable
-         specified in either the 'vars' field or the data_var field of the pattern.
+         specified in either the 'vars' field or the data_var field of the pattern.  
+         An empty var list can be specified simply by leaving this field out.
         items: {type: string}
         type: array
 
@@ -115,7 +117,7 @@ definitions:
   printf_annotation_obo: 
     type: object
     additionalProperties: False
-    required: [text, vars]
+    required: [text]
     properties:
       annotations:
         items: { $ref: "#/definitions/annotations" } 
