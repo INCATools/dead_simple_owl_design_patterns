@@ -24,6 +24,7 @@ Doublequote may be used to escape whole cells but is not compulsory:
 
 ```
 
+Core spec
 
 ```json
 {
@@ -59,7 +60,7 @@ Doublequote may be used to escape whole cells but is not compulsory:
       "datatype": "string",
       "required": false
     }],
-    "primaryKey": "defined class"
+    "primaryKey": "defined_class"
   }
 }
 ```
