@@ -338,23 +338,23 @@ definitions:
     required: [edge]
     properties:
       edge:
-      description: >
-        A triple specified as an ordered array with 3 elements
-        [subject, rel, object]
-        * rel must be the quoted name of a relation from the relations
+        description: >
+          A triple specified as an ordered array with 3 elements
+          [subject, rel, object]
+          * rel must be the quoted name of a relation from the relations
           (object property) dictionary.
-        * subject and object must be the name of an individual
+          * subject and object must be the name of an individual
           specified in the nodes field.
-      type: array
-      items: { type: string }
-      minItems: 3
-      maxItems: 3
-    annotations:
-      type: array 
-      items: { $ref: '#/definitions/annotations' }
-    not:
-      description: "Optional field for negated OPAs"
-      type: boolean
+        type: array
+        items: { type: string }
+        minItems: 3
+        maxItems: 3
+      annotations:
+        type: array 
+        items: { $ref: '#/definitions/annotations' }
+      not:
+        description: "Optional field for negated OPAs"
+        type: boolean
 
 properties:
   pattern_name:
