@@ -282,9 +282,9 @@ definitions:
       match:
         type: string 
         description: perl style regex match             
-        sub: 
-          type: string 
-          description: perl style regex sub.  May include backreferences.  
+      sub: 
+        type: string 
+        description: perl style regex sub.  May include backreferences.  
 
   # TODO - split into separate schema file
   printf_annotation_obo: 
