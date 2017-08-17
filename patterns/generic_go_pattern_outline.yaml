@@ -27,9 +27,11 @@ def:
   text: '.'
   vars:
     - '.'
-  xrefs: def_xrefs
+  xrefs: 
+     value: def_xrefs
   
-xrefs: cross_references
+xrefs: 
+   value: cross_references
 
 namespace: 
   text: '.'
@@ -39,10 +41,14 @@ equivalentTo:
   vars:
     - '.'
     
-exact_synonyms: exact_syn
-narrow_synonyms: narrow_syn
-broad_synonyms: broad_syn
-related_synonyms: related_syn
+exact_synonyms: 
+   value: exact_syn
+narrow_synonyms: 
+   value: narrow_syn
+broad_synonyms: 
+   value: broad_syn
+related_synonyms: 
+   value: related_syn
 
  
    
