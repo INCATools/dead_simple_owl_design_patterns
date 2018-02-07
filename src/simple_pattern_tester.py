@@ -1,4 +1,4 @@
-import yaml
+#import yaml
 from jsonschema import Draft4Validator
 import sys
 import glob
@@ -6,6 +6,7 @@ import re
 import warnings
 import requests
 from jsonpath_rw import parse
+from ruamel.yaml import YAML
 
 """ARG = path to directory with pattern files in yaml
 Files must have the extension .yaml or .yml.
@@ -17,7 +18,9 @@ def test_jschema(validator, test_pattern):
     if not validator.is_valid(test_pattern):
         es = validator.iter_errors(test_pattern)
         for e in es:
-            warnings.warn(str("\n".join([e.message, str(e.instance)])))
+            warnings.warn(" => ".join([str(e.schema_path),
+                                        str(e.message), 
+                                        str(e.context)]))
             return False
     else:
         return True
@@ -31,7 +34,7 @@ def test_vars(pattern):
         warnings.warn("Pattern has no vars")  
         return True ## If this is to be compulsory, should be spec'd as such in json_schema
     if 'data_vars' in pattern.keys():
-        vars.update(set(pattern.data_vars.keys()))
+        vars.update(set(pattern['data_vars'].keys()))
     if 'substitutions' in pattern.keys():
         subvars = [X['out'] for X in pattern['substitutions']]
         vars.update(set(subvars))       
@@ -77,7 +80,10 @@ schema_url = 'https://raw.githubusercontent.com/dosumis/dead_simple_owl_design_p
 
 dosdp_full_text = requests.get(schema_url)
 
-dosdp = yaml.load(dosdp_full_text.text)
+ryaml = YAML(typ='safe')
+
+dosdp = ryaml.load(dosdp_full_text.text)
+# TODO - Add better parsing for ryaml execptions.
 
 v = Draft4Validator(dosdp)
 
@@ -87,7 +93,7 @@ stat = True
 for pattern_doc in pattern_docs:
     warnings.warn("Checking %s" % pattern_doc)
     file = open(pattern_doc, "r")
-    pattern = yaml.load(file.read())
+    pattern = ryaml.load(file.read())
     if not test_jschema(v, pattern): stat = False
     if not test_vars(pattern): stat = False
     if not test_text_fields(pattern): stat = False
