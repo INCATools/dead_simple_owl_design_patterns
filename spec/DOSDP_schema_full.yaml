@@ -203,129 +203,6 @@ definitions:
         type: string
         mapping: "oboInOwl:hasDbXref"
 
-properties:
-  pattern_name:
-    type: string  # possible to specifiy ASCII?
-    description: >
-      The name of the pattern.  This must be an ASCII string with
-      no spaces. The only special characters allowed are '_' and '-'.
-      By convention, this is used as the file name of the
-      pattern - with an appropriate extension.
-
-  extension:
-    type: string
-    description: Extension to support some specific annotation property set.
-
-  base_IRI:  # not rqd, give JSON-LD base.
-    type: string # how to spec IRI?
-    description: "Specifies the base IRI to be used to generate new classes."
-
-  description:
-    type: string # specify UTF-8 string?
-    description: "A free text description of the pattern.  Must be UTF-8 encoded."
-
-  readable_identifiers:
-    type: array
-    items:  { type: string }
-    description: "A list of annotation properties used as naming fields, in order of preference."
-
-#### owl_entity Dictionaries
-
-  classes:
-    type: object
-    description: "A dictionary of OWL classes. key :label; value : short form id"
-  objectProperties:
-    type: object
-    description: "A dictionary of OWL object properties. key : label; value : short form id"
-  relations:
-    # Just an alternative name for the ObjectProperties dict
-    type: object
-    description: "A dictionary of OWL object properties. key : label; value : short form id"
-  dataProperties:
-    type: object
-    description: "A dictionary of OWL data properties key : label; value : short form id"
-  annotationProperties:
-    type: object
-    description: "A dictionary of OWL annotation properties key : label; value : short form id"
-
-# Var types
-
-  vars:
-    type: object
-    description: >
-     A dictionary of variables ranging over OWL classes.  
-     Key = variable name, value = variable range as manchester syntax string.
-     
-  list_vars:
-    type: object
-    description: >
-     A dictionary of variables refering to lists of owl classes.
-     Key = variable name, value = variable range of items in list specified as a valid OWL
-     data-type.
-  
-  data_vars:
-    type: object
-    description: >
-     A dictionary of variables ranging over OWL data-types.
-     Key = variable name, value = variable range specified as a valid OWL
-     data-type.
-     
-  data_list_vars:
-    description: >
-        A dictionary of variables rrefering to lists of some specified OWL data-types.
-        Key = variable name, value = variable range of all items in list, 
-        specified as a valid OWL data-type.
-
-  annotations:
-    items: { $ref: '#/definitions/printf_annotation'}
-    type: array
-    
-  logical_axioms:
-    items: { $ref: '#/definitions/printf_owl'}
-    type: array
-
-# logical convenience fields.  
-# Where only one of any OWL axiom type is present, these convenience fields may be used.
-
-  equivalentTo:
-    { $ref: '#/definitions/printf_owl_convenience' }
-
-  subClassOf:
-    { $ref: '#/definitions/printf_owl_convenience' }
-
-  GCI:
-    { $ref: '#/definitions/printf_owl_convenience' }
- 
-  disjointWith: 
-    { $ref: '#/definitions/printf_owl_convenience' }
-
-# OBO fields - TODO split to a separate file with import statement.
-
-  name:
-    { $ref: '#/definitions/printf_annotation_obo', mapping: "rdfs:label" }
-  comment:
-    { $ref: '#/definitions/printf_annotation_obo', mapping: "rdfs:comment" }
-  def:
-    { $ref: '#/definitions/printf_annotation_obo', mapping: "obo:IAO_0000115" }
-  namespace:
-    { $ref: '#/definitions/printf_annotation_obo', mapping: "oboInOwl:hasOBONamespace" }
-
-  # TODO: make all these into list_annotations 
-  exact_synonym:
-    $ref: '#/definitions/list_annotation_obo'
-    mapping: "oboInOwl:hasExactSynonym"
-  narrow_synonym:
-    $ref: '#/definitions/list_annotation_obo'
-    mapping: "oboInOwl:hasNarrowSynonym"
-  related_synonym:
-    $ref: '#/definitions/list_annotation_obo'
-    mapping: "oboInOwl:hasRelatedSynonym"
-  broad_synonym:
-    $ref: '#/definitions/list_annotation_obo'
-    mapping: "oboInOwl:hasBroadSynonym"
-  xref:
-    $ref: '#/definitions/list_annotation_obo'
-    mapping: "oboInOwl:hasDbXref"
 
 # Generic properties
 
@@ -437,7 +314,9 @@ properties:
     { $ref: '#/definitions/printf_annotation_obo', mapping: "rdfs:comment" }
   def:
     { $ref: '#/definitions/printf_annotation_obo', mapping: "obo:IAO_0000115" }
-  
+  namespace:
+    { $ref: '#/definitions/printf_annotation_obo', mapping: "oboInOwl:hasOBONamespace" }
+
   # TODO: make all these into list_annotations 
   exact_synonym:
     $ref: '#/definitions/list_annotation_obo'
