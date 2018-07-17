@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dosumis/dead_simple_owl_design_patterns.svg?branch=master)](https://travis-ci.org/dosumis/dead_simple_owl_design_patterns)
+[![Build Status](https://travis-ci.org/INCATools/dead_simple_owl_design_patterns.svg?branch=master)](https://travis-ci.org/INCATools/dead_simple_owl_design_patterns)
 
 # Dead simple owl design pattern (DOS-DP) exchange format
 
