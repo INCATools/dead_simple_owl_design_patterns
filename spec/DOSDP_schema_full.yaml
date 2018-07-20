@@ -218,7 +218,8 @@ properties:
   pattern_iri: 
     type: string
     description: > 
-       Resolveable IRI of the pattern being specified.
+       A global identifier for the pattern. This can be a full IRI or a CURIE, using 
+       the same prefix mappings as other CURIEs in the pattern.
       
   base_IRI:  # not rqd, give JSON-LD base.
     type: string # how to spec IRI?
