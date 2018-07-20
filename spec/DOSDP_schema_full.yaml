@@ -215,6 +215,11 @@ properties:
       By convention, this is used as the file name of the
       pattern - with an appropriate extension.
       
+  pattern_iri: 
+    type: string
+    description: > 
+       Resolveable IRI of the pattern being specified.
+      
   base_IRI:  # not rqd, give JSON-LD base.
     type: string # how to spec IRI?
     description: "Specifies the base IRI to be used to generate new classes."
