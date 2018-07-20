@@ -215,6 +215,12 @@ properties:
       By convention, this is used as the file name of the
       pattern - with an appropriate extension.
       
+  pattern_iri: 
+    type: string
+    description: > 
+       A global identifier for the pattern. This can be a full IRI or a CURIE, using 
+       the same prefix mappings as other CURIEs in the pattern.
+      
   base_IRI:  # not rqd, give JSON-LD base.
     type: string # how to spec IRI?
     description: "Specifies the base IRI to be used to generate new classes."
