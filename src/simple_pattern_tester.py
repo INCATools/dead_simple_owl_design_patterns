@@ -1,4 +1,4 @@
-#import yaml
+q#!/usr/bin/env python3
 from jsonschema import Draft4Validator
 import sys
 import glob
@@ -58,6 +58,7 @@ def test_text_fields(pattern):
     if 'relations' in pattern.keys(): owl_entities.update(set(pattern['relations'].keys()))
     expr = parse('*..text')
     text_fields = [match for match in expr.find(pattern)]
+    stat=True
     if text_fields:
         for field in text_fields:
             # Test for even number single quotes
@@ -65,7 +66,7 @@ def test_text_fields(pattern):
             m = re.findall("'", val)
             if divmod(len(m), 2)[1]:
                 warnings.warn("text field '%s' has an odd number of single quotes." % val)
-                state  = False
+                stat  = False
             # Test that single quoted strings are OWL entities in dict.
             m = re.findall("'(.+?)'", val)
             quoted = set(m)
@@ -74,7 +75,8 @@ def test_text_fields(pattern):
                   % (field.full_path, str(quoted.difference(owl_entities)), str(owl_entities)))
                 stat = False
     else:
-         warnings.warn("Pattern has no text fields")    
+         warnings.warn("Pattern has no text fields")
+    return stat
 
 schema_url = 'https://raw.githubusercontent.com/dosumis/dead_simple_owl_design_patterns/master/spec/DOSDP_schema_full.yaml'
 
