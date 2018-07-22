@@ -1,4 +1,4 @@
-q#!/usr/bin/env python3
+#!/usr/bin/env python3
 from jsonschema import Draft4Validator
 import sys
 import glob
