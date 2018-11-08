@@ -53,10 +53,27 @@ definitions:
          A single list variable (list_var or data_list_var).  Each item in this list 
          should be used to generate a separate annotation axiom.
         type: string
+
+  iri_value_annotation:
+    type: object
+    additionalProperties: False
+    required: [annotationProperty, var]
+    properties:
+      annotationProperty:
+        description: A string corresponding to a key in the annotation property dictionary.
+        type: string
+      var:
+        description: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
+        type: string
+      annotations:
+        items: { $ref: "#/definitions/annotations" } 
+        type: array
+
   annotations:
    oneOf: 
      - { $ref: "#/definitions/printf_annotation" }
      - { $ref: "#/definitions/list_annotation" }
+     - { $ref: "#/definitions/iri_value_annotation" }
 
   printf_owl:
     type: object
@@ -290,7 +307,7 @@ properties:
 # Specifying axioms:
 
   annotations:
-    items: { $ref: '#/definitions/printf_annotation'}
+    items: { $ref: "#/definitions/annotations" } 
     type: array
     
   logical_axioms:
