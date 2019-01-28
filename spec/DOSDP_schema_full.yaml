@@ -245,6 +245,13 @@ properties:
   description:
     type: string # specify UTF-8 string?
     description: "A free text description of the pattern.  Must be UTF-8 encoded."
+    
+  tags:
+    type: list
+    items: string
+    description: >
+       A list of strings used to tag a pattern for the purposes of arbitrary, 
+       cross-cutting grouping of patterns.
 
   readable_identifiers:
     type: array
