@@ -241,6 +241,14 @@ properties:
   base_IRI:  # not rqd, give JSON-LD base.
     type: string # how to spec IRI?
     description: "Specifies the base IRI to be used to generate new classes."
+    
+  contributors:
+    type: array
+    items: string
+    description: >
+       A list of authors of a pattern. 
+       We recommend that each author is specified using an ORCID (full URL). 
+       We do not recommend that this list is instantiated in terms generated using a pattern.
 
   description:
     type: string # specify UTF-8 string?
