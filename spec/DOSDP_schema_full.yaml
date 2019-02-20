@@ -244,7 +244,7 @@ properties:
     
   contributors:
     type: array
-    items: string
+    items: { type: string }
     description: >
        A list of authors of a pattern.  
        Each author must be specified using a URL or Curie - we recommend ORCID. 
