@@ -1,31 +1,12 @@
-## Installation
+# Dead simple OWL design patterns
 
-Requires [Jython 2.7](http://www.jython.org/downloads.html) and [Brain](https://github.com/loopasam/Brain/wiki#local).
+Dead simple OWL design patterns (DOSDPs) provide a way to specify templates for generation of OWL classes and related axioms using YAML.
 
-Both are available via Maven.
+* Details: [Osumi-Sutherland et al, 2017](https://jbiomedsem.biomedcentral.com/articles/10.1186/s13326-017-0126-0) JBMS 8:18; DOI:10.1186/s13326-017-0126-0. 
 
-## src/pattern.py
+* Specification (JSON schema written in YAML)[spec/DOSDP_schema_full.yaml]  
 
-Pattern processing: 
-
-- pattern.abstract_pattern(pattern, ont) - initialisation validates pattern doc
-- pattern.applied_pattern(pattern, cdict, ont) - intitialisation validates pattern doc + var spec. 
-
-   - ont = 'a Brain object'
-   - pattern = 'pattern document as python data structure' (e.g. loaded from JSON or YAML file)
-   - cdict = specification of vars as dict of 2 element lists or tuples:
-        { var1 : ( name , id ), var2: ( ... }
-
-Basic methods:
-
- - pattern.abstract_pattern.gen_markdown_doc()
- - pattern.applied_pattern.add_class_to_ont(ID)
-   - ID = OWL shortFormID. ID generation should be done separately. BaseURI should be set during construction of Brain object. 
- - pattern.applid_pattern.gen_markdown_doc()
+* Test your YAML files for schema compliance with [simple_pattern_tester.py](/src/simple_pattern_tester.py)
 
 
-
-## Runners
-
-- src/yaml2json_runner.py - convert all ../paterns/*.yaml to json (may be run as Python)
-- src/abstract_pattern_runner.py  - validate all patterns(json), and generate markdown doc for patterns (must be run as Jython)
+This work was funded by the Gene Ontology Consortium P41 grant from the National Human Genome Research Institute (NHGRI) [grant 5U41HG002273- 14] and by BD2K [grant U01 HG009453] and with the support of the Director, Office of Science, Office of Basic Energy Sciences, of the US Department of Energy (DE-AC02- 05CH11231).
