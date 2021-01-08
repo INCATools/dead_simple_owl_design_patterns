@@ -1,4 +1,4 @@
-$schema: "http://json-schema.org/draft-04/schema#"
+$schema: "http://json-schema.org/draft-07/schema#"
 #id: 'https://github.com/dosumis/dead_simple_owl_design_patterns/edit/master/spec/DOSDP_spec.json' # Use Purl?
 title: DOSDP
 type: object
@@ -290,12 +290,16 @@ properties:
 
   vars:
     type: object
+    propertyNames: 
+       pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
     description: >
      A dictionary of variables ranging over OWL classes.  
      Key = variable name, value = variable range as manchester syntax string.
      
   list_vars:
     type: object
+    propertyNames: 
+       pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
     description: >
      A dictionary of variables refering to lists of owl classes.
      Key = variable name, value = variable range of items in list specified as a valid OWL
@@ -303,12 +307,17 @@ properties:
   
   data_vars:
     type: object
+    propertyNames: 
+       pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
     description: >
      A dictionary of variables ranging over OWL data-types.
      Key = variable name, value = variable range specified as a valid OWL
      data-type.
      
   data_list_vars:
+    type: object
+    propertyNames: 
+       pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
     description: >
         A dictionary of variables rrefering to lists of some specified OWL data-types.
         Key = variable name, value = variable range of all items in list, 
