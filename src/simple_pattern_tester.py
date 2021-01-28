@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from jsonschema import Draft4Validator
+from jsonschema import Draft7Validator
 import sys
 import glob
 import re
