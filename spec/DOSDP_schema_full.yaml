@@ -255,6 +255,11 @@ properties:
     type: string # specify UTF-8 string?
     description: "A free text description of the pattern.  Must be UTF-8 encoded."
     
+  examples:
+    type: list
+    items: string
+    description:  "A list of example terms implementing this pattern."
+    
   tags:
     type: list
     items: string
