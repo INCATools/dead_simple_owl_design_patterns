@@ -260,6 +260,13 @@ properties:
     items: string
     description:  "A list of example terms implementing this pattern."
     
+  status:
+    type: string
+    description: "Implementation status of pattern."
+    enum: 
+       - development
+       - published
+    
   tags:
     type: list
     items: string
