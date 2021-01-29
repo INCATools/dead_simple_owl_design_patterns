@@ -8,20 +8,8 @@ python:
 install:
    - pip install -r requirements.txt
 
-# Jython script testing disabled.  The purpose of this travis job is currently to test 
-# that schema docs are valid an can be used to validate a standard set of test patterns.
-
-# install jython
-# before_install:
-#  - export JYTHON_URL='http://central.maven.org/maven2/org/python/jython-installer/2.7.0/jython-installer-2.7.0.jar'
-#  - wget $JYTHON_URL -O jython_installer.jar; java -jar jython_installer.jar -s -d $HOME/jython; export PATH=$HOME/jython/bin:$PATH;jython --version
-
-# before_script:
-#  - jython -c "print ''"    # Before run the test case, we need to make jython run some code
-#  - mvn package             # use maven to assemble java jar dependencies in lib folder
-#  - export CLASSPATH=lib/*  # set up class using a wildcard (supported as of Java 6 or later)
-
-# test script
 script:
    - cd spec
    - python test_schema.py
+   - cd ../src
+   - python simple_pattern_tester.py ../spec/test

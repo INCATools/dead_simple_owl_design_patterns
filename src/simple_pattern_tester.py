@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 from jsonschema import Draft7Validator
 import sys
 import glob
@@ -56,11 +57,13 @@ def test_text_fields(pattern):
     owl_entities = set()
     if 'classes' in pattern.keys(): owl_entities.update(set(pattern['classes'].keys()))
     if 'relations' in pattern.keys(): owl_entities.update(set(pattern['relations'].keys()))
-    expr = parse('*..text')
-    text_fields = [match for match in expr.find(pattern)]
+    expr = parse('logical_axioms.[*].text')
+    ms_fields = [match for match in expr.find(pattern)]
+    expr = parse('equivalentTo|subClassOf|GCI|disjointWith.text')
+    ms_fields.extend([match for match in expr.find(pattern)])
     stat=True
-    if text_fields:
-        for field in text_fields:
+    if ms_fields:
+        for field in ms_fields:
             # Test for even number single quotes
             val = field.value
             m = re.findall("'", val)
