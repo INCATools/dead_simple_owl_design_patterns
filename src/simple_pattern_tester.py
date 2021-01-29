@@ -87,7 +87,7 @@ ryaml = YAML(typ='safe')
 dosdp = ryaml.load(dosdp_full_text.text)
 # TODO - Add better parsing for ryaml execptions.
 
-v = Draft4Validator(dosdp)
+v = Draft7Validator(dosdp)
 
 pattern_docs = glob.glob(sys.argv[1] + "*.yaml")
 pattern_docs.extend(glob.glob(sys.argv[1] + "*.yml"))
