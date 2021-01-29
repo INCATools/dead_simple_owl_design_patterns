@@ -1,3 +1,7 @@
 PyYAML
 jsonschema
+requests
+jsonpath_rw
+ruamel.yaml
+
 
