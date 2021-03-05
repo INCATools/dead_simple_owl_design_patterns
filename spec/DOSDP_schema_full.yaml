@@ -276,20 +276,23 @@ properties:
 
   classes:
     type: object
-    description: "A dictionary of OWL classes. key :label; value : short form id"
+    description: "A dictionary of OWL classes. key :label; value : curie"
   objectProperties:
     type: object
-    description: "A dictionary of OWL object properties. key : label; value : short form id"
+    description: "A dictionary of OWL object properties. key : label; value : curie"
   relations:
     # Just an alternative name for the ObjectProperties dict
     type: object
-    description: "A dictionary of OWL object properties. key : label; value : short form id"
+    description: "A dictionary of OWL object properties. key : label; value : curie"
   dataProperties:
     type: object
-    description: "A dictionary of OWL data properties key : label; value : short form id"
+    description: "A dictionary of OWL data properties key : label; value : curie"
   annotationProperties:
     type: object
-    description: "A dictionary of OWL annotation properties key : label; value : short form id"
+    description: "A dictionary of OWL annotation properties key : label; value : curie"
+  individuals:
+    type: object
+    description: "A dictionary of OWL individuals key : label; value : curie"
 
 # Var types
 
@@ -309,6 +312,22 @@ properties:
      A dictionary of variables refering to lists of owl classes.
      Key = variable name, value = variable range of items in list specified as a valid OWL
      data-type.
+  
+  ind_vars:
+    type: object
+    propertyNames: 
+       pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
+    description: >
+     A dictionary of variables ranging over OWL individuals.  
+     Key = variable name, value = variable range as manchester syntax string.
+  
+  ind_list_vars:
+    type: object
+    propertyNames: 
+       pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
+    description: >
+     A dictionary of variables refering to lists of owl individuals.
+     Key = variable name, value = variable range of items in list.
   
   data_vars:
     type: object
