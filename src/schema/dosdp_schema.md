@@ -1,6 +1,13 @@
 # DOSDP
 
-{:toc}
+- [Properties](#properties)
+  * [OWL Entity Dictionaries](#owl-entity-dictionaries)
+  * [Var Types](#var-types)
+  * [Var Munging](#var-munging)
+  * [Axioms](#axioms)
+  * [Logical Convenience Fields](#logical-convenience-fields)
+  * [OBO fields](#obo-fields)
+  * [Instance Graph Spec](#instance-graph-spec)
  
 ## Properties
 
