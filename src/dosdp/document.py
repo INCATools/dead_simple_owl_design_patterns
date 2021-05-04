@@ -89,14 +89,33 @@ def handle_one_of_definitions(plain_documentation):
             logging.error('Failed to load pattern file: ' + DOSDP_SCHEMA)
 
 
-def print_documentation_header(doc_type_elements, md_out):
+def print_documentation_header(doc_type_elements, config, md_out):
     """
-    Add headings to the documentation
+    Adds headings and table of contents to the documentation.
     """
     md_out.write("# %s\n" % doc_type_elements["doc_title"])
     md_out.write("\n")
+
+    print_documentation_toc(config, md_out)
+
+    md_out.write("\n")
     md_out.write("## %s\n" % "Properties")
     md_out.write("\n")
+
+
+def print_documentation_toc(config, md_out):
+    """
+    Prints table of contents based on documentation config.
+    """
+    sections = config.sections()
+    for section in sections:
+        section_config = config[section]
+        if section == "root":
+            md_out.write("- [" + section_config["title"] + "](#" +
+                         section_config["title"].lower().replace(" ", "-") + ")\n")
+        else:
+            md_out.write("  * [" + section_config["title"] + "](#" +
+                         section_config["title"].lower().replace(" ", "-") + ")\n")
 
 
 def print_element(element, md_out, plain_doc, prefix="", nesting_list=[]):
@@ -170,7 +189,7 @@ def generate_documentation(yaml_schema):
     doc_type_elements = get_doc_type_elements()
 
     with open(DOSDP_SCHEMA_MD, "w") as md_out:
-        print_documentation_header(doc_type_elements, md_out)
+        print_documentation_header(doc_type_elements, config, md_out)
 
         for section in sections:
             elements = doc_type_elements[section]

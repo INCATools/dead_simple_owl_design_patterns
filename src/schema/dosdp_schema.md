@@ -8,7 +8,7 @@
   * [Logical Convenience Fields](#logical-convenience-fields)
   * [OBO fields](#obo-fields)
   * [Instance Graph Spec](#instance-graph-spec)
- 
+
 ## Properties
 
 - **`pattern_name`** *(string)*: The name of the pattern.  This must be an ASCII string with no spaces. The only special characters allowed are '_' and '-'. By convention, this is used as the file name of the pattern - with an appropriate extension.
