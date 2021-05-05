@@ -24,7 +24,7 @@ setup(
     ],
     packages=["dosdp", "schema"],
     include_package_data=True,
-    install_requires=["PyYAML", "jsonschema", "requests", "jsonpath_rw", "ruamel.yaml"],
+    install_requires=["PyYAML", "jsonschema", "requests", "jsonpath_rw", "ruamel.yaml", "jsonschema2md"],
     entry_points={
         "console_scripts": [
             "dosdp=dosdp.__main__:main",

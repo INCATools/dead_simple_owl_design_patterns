@@ -1,6 +1,6 @@
 import argparse
 import sys
-from validator import validate
+from dosdp import validator
 
 
 def main():
@@ -11,7 +11,7 @@ def main():
     args = parser.parse_args()
 
     if args.validate:
-        is_valid = validate(args.validate)
+        is_valid = validator.validate(args.validate)
 
         if not is_valid:
             sys.exit(1)
