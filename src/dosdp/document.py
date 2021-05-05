@@ -102,7 +102,11 @@ def get_element_name(is_definition, line):
 
 def find_mapping_definitions():
     """
-    'OneOf' definitions are not handled by the jsonschema2md. Manually adding documentation for these definitions.
+    'Mapping' definitions are not handled by the jsonschema2md. To manually add documentation for these definitions,
+    searches for all mapping definitions in the schema.
+
+    Return: Dictionary of mapping definitions. Key is path of the mapping element,
+    value is value of the mapping definition.
     """
     mapping_definitions = dict()
     ryaml = YAML(typ='safe')
@@ -111,13 +115,16 @@ def find_mapping_definitions():
             content = ryaml.load(stream)
             path = list()
             scan_element_for_mapping(content, mapping_definitions, path)
-        except YAMLError as exc:
+        except YAMLError:
             logging.error('Failed to load pattern file: ' + DOSDP_SCHEMA)
 
     return mapping_definitions
 
 
 def scan_element_for_mapping(element, mapping_definitions, path):
+    """
+    Recursively scans schema to identify mapping definitions. Fills the mapping definitions dictionary.
+    """
     for key in element.keys():
         path.append(key)
         if "mapping" == key:
