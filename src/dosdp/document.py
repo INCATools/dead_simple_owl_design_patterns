@@ -18,7 +18,7 @@ DOSDP_SCHEMA_MD = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../
 DOSDP_DOCUMENTATION_CONF = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../schema/dosdp_schema_doc.ini")
 
 
-def generate_plain_documentation(yaml_schema):
+def generate_plain_documentation(yaml_schema, mapping_definitions):
     """
     Generates a plain documentation using jsonschema2md library.
 
@@ -35,6 +35,9 @@ def generate_plain_documentation(yaml_schema):
         element_name = ""
 
         is_definition = False
+        element_path = list()
+        prev_indent = 0
+        curr_indent = 0
         for line in md_lines:
             if line.startswith("## Definitions"):
                 is_definition = True
@@ -46,9 +49,22 @@ def generate_plain_documentation(yaml_schema):
             if line.startswith("- **`"):
                 if element_name:
                     plain_documentation[element_name] = element_lines
-                element_lines = [line]
                 element_name = get_element_name(is_definition, line)
-            elif line and not line.startswith("## "):
+                element_path = [element_name]
+                line = insert_mapping_definition(element_path, line, mapping_definitions)
+                element_lines = [line]
+                curr_indent = 0
+            elif line and not line.startswith("#"):
+                prev_indent = curr_indent
+                curr_indent = len(line) - len(line.lstrip(' '))
+                if curr_indent == prev_indent:
+                    element_path.remove(element_path[-1])
+                elif curr_indent <= prev_indent:
+                    element_path.remove(element_path[-1])
+                    element_path.remove(element_path[-1])
+                element_path.append(get_element_name(False, line))
+
+                line = insert_mapping_definition(element_path, line, mapping_definitions)
                 element_lines.append(line)
 
         plain_documentation[element_name] = element_lines
@@ -57,16 +73,61 @@ def generate_plain_documentation(yaml_schema):
         return plain_documentation
 
 
+def insert_mapping_definition(element_path, line, mapping_definitions):
+    """
+    Inserts mapping definition to the element description if required. Otherwise, returns the line as is.
+    """
+    if "$".join(element_path).replace("def_", "").lower() in mapping_definitions:
+        if "*:" in line:
+            parts = line.split("*:")
+            line = parts[0] + "*:" + " Mapped to `" + \
+                   mapping_definitions["$".join(element_path).replace("def_", "").lower()] + "`. " + parts[1]
+    return line
+
+
 def get_element_name(is_definition, line):
     """
     Extract element name from jsonschema2md generated documentation line.
     """
     first_occur = line.index("**")
     second_occur = line.index("**", first_occur + 1)
-    element_name = line[first_occur + 3:second_occur - 1]
+    element_name = line[first_occur + 2:second_occur]
+    if "`" in element_name:
+        element_name = element_name.replace("`", "").strip()
     if is_definition:
         element_name = DEFINITION_PREFIX + element_name
+
     return element_name
+
+
+def find_mapping_definitions():
+    """
+    'OneOf' definitions are not handled by the jsonschema2md. Manually adding documentation for these definitions.
+    """
+    mapping_definitions = dict()
+    ryaml = YAML(typ='safe')
+    with open(DOSDP_SCHEMA, "r") as stream:
+        try:
+            content = ryaml.load(stream)
+            path = list()
+            scan_element_for_mapping(content, mapping_definitions, path)
+        except YAMLError as exc:
+            logging.error('Failed to load pattern file: ' + DOSDP_SCHEMA)
+
+    return mapping_definitions
+
+
+def scan_element_for_mapping(element, mapping_definitions, path):
+    for key in element.keys():
+        path.append(key)
+        if "mapping" == key:
+            path_refine = path[0:len(path) - 1]
+            if "definitions" in path_refine: path_refine.remove("definitions")
+            if "properties" in path_refine: path_refine.remove("properties")
+            mapping_definitions["$".join(path_refine)] = element["mapping"]
+        elif isinstance(element[key], dict):
+            scan_element_for_mapping(element[key], mapping_definitions, path)
+        path.remove(key)
 
 
 def handle_one_of_definitions(plain_documentation):
@@ -83,7 +144,7 @@ def handle_one_of_definitions(plain_documentation):
                     element_lines = ["- **`annotations`** *(array)*: One of the followings:"]
                     one_of_defs = definitions[key]["oneOf"]
                     for one_of_item in one_of_defs:
-                        element_lines.append("  - **Items**: Refer to *"+one_of_item["$ref"]+"*.")
+                        element_lines.append("  - **Items**: Refer to *" + one_of_item["$ref"] + "*.")
                     plain_documentation[DEFINITION_PREFIX + key] = element_lines
         except YAMLError as exc:
             logging.error('Failed to load pattern file: ' + DOSDP_SCHEMA)
@@ -126,13 +187,14 @@ def print_element(element, md_out, plain_doc, prefix="", nesting_list=[]):
     """
     lines = plain_doc[element]
     for line in lines:
+
         md_out.write("%s\n" % (prefix + (" " * (len(nesting_list) % 2)) + line))
         if CROSS_REF_TERM in line:
             nesting_list.append(element)
             ref_term_start = line.index(CROSS_REF_TERM) + len(CROSS_REF_TERM)
             referred_element = line[ref_term_start:len(line) - 2]
             if (DEFINITION_PREFIX + referred_element) not in nesting_list:
-                print_element(DEFINITION_PREFIX + referred_element, md_out, plain_doc, ">"+prefix, nesting_list)
+                print_element(DEFINITION_PREFIX + referred_element, md_out, plain_doc, ">" + prefix, nesting_list)
 
 
 def print_section_header(config, md_out, section):
@@ -180,7 +242,8 @@ def generate_documentation(yaml_schema):
     Generates documentation for the given YAML schema. Uses jsonschema2md to generate a plain documentation,
     then decorates generated documentation through using the documentation config (.ini file)
     """
-    plain_doc = generate_plain_documentation(yaml_schema)
+    mapping_definitions = find_mapping_definitions()
+    plain_doc = generate_plain_documentation(yaml_schema, mapping_definitions)
 
     config = configparser.ConfigParser()
     config.read(DOSDP_DOCUMENTATION_CONF)
@@ -201,5 +264,3 @@ def generate_documentation(yaml_schema):
 
 
 generate_documentation(DOSDP_SCHEMA)
-
-

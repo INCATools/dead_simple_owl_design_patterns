@@ -396,19 +396,19 @@ properties:
   name:
     $ref: '#/definitions/printf_annotation_obo'
     mapping: "rdfs:label"
-    doc_type: axioms
+    doc_type: obo
   comment:
     $ref: '#/definitions/printf_annotation_obo'
     mapping: "rdfs:comment"
-    doc_type: axioms
+    doc_type: obo
   def:
     $ref: '#/definitions/printf_annotation_obo'
     mapping: "obo:IAO_0000115"
-    doc_type: axioms
+    doc_type: obo
   namespace:
     $ref: '#/definitions/printf_annotation_obo'
     mapping: "oboInOwl:hasOBONamespace"
-    doc_type: axioms
+    doc_type: obo
 
   # TODO: make all these into list_annotations
   exact_synonym:
