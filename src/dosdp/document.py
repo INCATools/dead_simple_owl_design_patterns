@@ -244,7 +244,7 @@ def get_doc_type_elements():
     return doc_type_elements
 
 
-def generate_documentation(yaml_schema):
+def generate_documentation(yaml_schema, md_output=DOSDP_SCHEMA_MD):
     """
     Generates documentation for the given YAML schema. Uses jsonschema2md to generate a plain documentation,
     then decorates generated documentation through using the documentation config (.ini file)
@@ -258,7 +258,7 @@ def generate_documentation(yaml_schema):
 
     doc_type_elements = get_doc_type_elements()
 
-    with open(DOSDP_SCHEMA_MD, "w") as md_out:
+    with open(md_output, "w") as md_out:
         print_documentation_header(doc_type_elements, config, md_out)
 
         for section in sections:
