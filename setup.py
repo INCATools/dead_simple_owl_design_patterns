@@ -22,6 +22,7 @@ setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
+    package_dir={'': 'src'},
     packages=["dosdp", "schema"],
     include_package_data=True,
     install_requires=["PyYAML", "jsonschema", "requests", "jsonpath_rw", "ruamel.yaml", "jsonschema2md"],
