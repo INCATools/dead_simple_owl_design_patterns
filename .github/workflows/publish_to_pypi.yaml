@@ -30,7 +30,7 @@ jobs:
         pip install -r requirements.txt
     - name: Package distribution
       run: >-
-        python3
+        python
         setup.py
         sdist
         bdist_wheel
