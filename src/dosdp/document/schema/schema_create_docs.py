@@ -13,9 +13,10 @@ CROSS_REF_TERM = "Refer to *#/definitions/"
 
 logging.basicConfig(level=logging.INFO)
 
-DOSDP_SCHEMA = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../schema/dosdp_schema2.yaml")
-DOSDP_SCHEMA_MD = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../schema/dosdp_schema.md")
-DOSDP_DOCUMENTATION_CONF = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../schema/dosdp_schema_doc.ini")
+DOSDP_SCHEMA = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../../schema/dosdp_schema2.yaml")
+DOSDP_SCHEMA_MD = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../../schema/dosdp_schema.md")
+DOSDP_DOCUMENTATION_CONF = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                        "../../../schema/dosdp_schema_doc.ini")
 
 
 def generate_plain_documentation(yaml_schema, mapping_definitions):
@@ -194,7 +195,7 @@ def print_element(element, md_out, plain_doc, prefix="", nesting_list=[]):
     """
     lines = plain_doc[element]
     for line in lines:
-
+        line = customize_doc_content(line)
         md_out.write("%s\n" % (prefix + (" " * (len(nesting_list) % 2)) + line))
         if CROSS_REF_TERM in line:
             nesting_list.append(element)
@@ -202,6 +203,19 @@ def print_element(element, md_out, plain_doc, prefix="", nesting_list=[]):
             referred_element = line[ref_term_start:len(line) - 2]
             if (DEFINITION_PREFIX + referred_element) not in nesting_list:
                 print_element(DEFINITION_PREFIX + referred_element, md_out, plain_doc, ">" + prefix, nesting_list)
+
+
+def customize_doc_content(line):
+    """
+    Place content customizations to here. Such as don't display "array", use "list instead"
+    """
+    if "*(array)*" in line:
+        line = line.replace("*(array)*", "*(list)*")
+
+    if "*(array)*" in line:
+        line = line.replace("*(object)*", "*(dict)*")
+
+    return line
 
 
 def print_section_header(config, md_out, section):
@@ -244,7 +258,7 @@ def get_doc_type_elements():
     return doc_type_elements
 
 
-def generate_documentation(yaml_schema, md_output=DOSDP_SCHEMA_MD):
+def generate_schema_documentation(yaml_schema=DOSDP_SCHEMA, md_output=DOSDP_SCHEMA_MD):
     """
     Generates documentation for the given YAML schema. Uses jsonschema2md to generate a plain documentation,
     then decorates generated documentation through using the documentation config (.ini file)
@@ -258,6 +272,11 @@ def generate_documentation(yaml_schema, md_output=DOSDP_SCHEMA_MD):
 
     doc_type_elements = get_doc_type_elements()
 
+    if os.path.isdir(md_output):
+        file_name = os.path.basename(yaml_schema)
+        md_output = os.path.join(md_output, (os.path.splitext(file_name)[0] + ".md"))
+
+    logging.info("Target is: " + os.path.abspath(md_output))
     with open(md_output, "w") as md_out:
         print_documentation_header(doc_type_elements, config, md_out)
 
@@ -270,4 +289,4 @@ def generate_documentation(yaml_schema, md_output=DOSDP_SCHEMA_MD):
                 md_out.write("\n\n")
 
 
-generate_documentation(DOSDP_SCHEMA)
+# generate_schema_documentation(DOSDP_SCHEMA)

@@ -1,11 +1,45 @@
 import unittest
-from dosdp import document
+import os
+from dosdp.document.schema import schema_create_docs
+from dosdp.document import document
 
 
 class DocumentGenerationCase(unittest.TestCase):
 
+    def tearDown(self):
+        """
+        Delete files generated during tests
+        """
+        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../generic_test/acute.md")):
+            os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../generic_test/acute.md"))
+
+        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                       "../positive_test_set/patterns/data/acute.md")):
+            os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                   "../positive_test_set/patterns/data/acute.md"))
+
+        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                       "../positive_test_set/patterns/data/generated/acute.md")):
+            os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                   "../positive_test_set/patterns/data/generated/acute.md"))
+
+        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                       "../positive_test_set/patterns/data/generated/acute2.md")):
+            os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                   "../positive_test_set/patterns/data/generated/acute2.md"))
+
+        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                       "../../../dosdp/document/dosdp_schema2.md")):
+            os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                   "../../../dosdp/document/dosdp_schema2.md"))
+
+        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                       "../positive_test_set/patterns/data/generated/schema.md")):
+            os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                   "../positive_test_set/patterns/data/generated/schema.md"))
+
     def test_mapping_definition_search(self):
-        mappings = document.find_mapping_definitions()
+        mappings = schema_create_docs.find_mapping_definitions()
 
         for key in mappings.keys():
             print(key + " -->" + mappings[key])
@@ -21,6 +55,67 @@ class DocumentGenerationCase(unittest.TestCase):
 
         self.assertTrue("generated_synonyms$items" in mappings.keys())
         self.assertEqual("oboInOwl:hasExactSynonym", mappings["generated_synonyms$items"])
+
+    def test_is_schema(self):
+        self.assertTrue(document.is_dosdp_pattern_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                                    "../positive_test_set/patterns/anchored_membrane_component.yaml")))
+        self.assertFalse(document.is_dosdp_pattern_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                                     "../../dosdp_schema2.yaml")))
+        self.assertFalse(document.is_dosdp_pattern_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                                     "../../dosdp_schema.yaml")))
+        self.assertTrue(document.is_dosdp_pattern_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                                    "../positive_test_set/patterns/expression_pattern.yaml")))
+        self.assertFalse(document.is_dosdp_pattern_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                                     "../negative_test_set/dummy.yaml")))
+
+    def test_pattern_interface_single_param(self):
+        document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/acute.yaml"))
+        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                    "../generic_test/acute.md")))
+
+    def test_pattern_interface_two_param(self):
+        document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/acute.yaml"),
+                                                os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/acute.md"))
+        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                    "../positive_test_set/patterns/data/acute.md")))
+
+    def test_pattern_interface_folder_input(self):
+        document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/"),
+                                                os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/generated"))
+        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                    "../positive_test_set/patterns/data/generated/acute.md")))
+        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                    "../positive_test_set/patterns/data/generated/acute2.md")))
+        self.assertFalse(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                     "../positive_test_set/patterns/data/generated/dummy.md")))
+
+    def test_pattern_interface_non_pattern(self):
+        document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/dummy.yaml"))
+        self.assertFalse(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                     "../generic_test/dummy.md")))
+
+    def test_pattern_interface_folder_none_params(self):
+        document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/"))
+        self.assertFalse(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                     "../positive_test_set/patterns/data/generated/acute.md")))
+
+    def test_schema_interface(self):
+        document.generate_schema_documentation()
+        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                    "../../../dosdp/document/dosdp_schema2.md")))
+
+    def test_schema_interface_single_param(self):
+        document.generate_schema_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                            "../positive_test_set/patterns/data/generated/schema.md"))
+        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                    "../positive_test_set/patterns/data/generated/schema.md")))
 
 
 if __name__ == '__main__':

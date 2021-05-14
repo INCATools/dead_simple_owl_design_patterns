@@ -146,6 +146,7 @@ def validate(pattern):
                 if not test_vars(pattern): stat = False
                 if not test_text_fields(pattern): stat = False
             except YAMLError as exc:
+                stat = False
                 logging.error('Failed to load pattern file: ' + pattern_doc)
     if stat:
         logging.info("Validation completed without any issues to report.")

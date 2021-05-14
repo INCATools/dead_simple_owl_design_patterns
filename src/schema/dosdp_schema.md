@@ -20,7 +20,7 @@
 - **`base_IRI`** *(string)*: Specifies the base IRI to be used to generate new classes.
 
 
-- **`contributors`** *(array)*: A list of authors of a pattern. Each author must be specified using a URL or Curie - we recommend ORCID. We do not recommend that this list is instantiated in terms generated using a pattern, but where it is it should be instantiated as a set of annotation axioms using dc:contributor.
+- **`contributors`** *(list)*: A list of authors of a pattern. Each author must be specified using a URL or Curie - we recommend ORCID. We do not recommend that this list is instantiated in terms generated using a pattern, but where it is it should be instantiated as a set of annotation axioms using dc:contributor.
   - **Items** *(string)*
 
 
@@ -38,7 +38,7 @@
   - **Items** *(string)*
 
 
-- **`readable_identifiers`** *(array)*: A list of annotation properties used as naming fields, in order of preference.
+- **`readable_identifiers`** *(list)*: A list of annotation properties used as naming fields, in order of preference.
   - **Items** *(string)*
 
 
@@ -81,7 +81,7 @@
 
 
 
-- **`substitutions`** *(array)*
+- **`substitutions`** *(list)*
   - **Items**: Refer to *#/definitions/regex_sub*.
 > - **`regex_sub`** *(object)*: Cannot contain additional properties.
 >   - **`in`** *(string)*: name of input var.
@@ -94,16 +94,16 @@
 
 
 
-- **`annotations`** *(array)*
+- **`annotations`** *(list)*
   - **Items**: Refer to *#/definitions/annotations*.
-> - **`annotations`** *(array)*: One of the followings:
+> - **`annotations`** *(list)*: One of the followings:
 >   - **Items**: Refer to *#/definitions/printf_annotation*.
 >>- **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>  - **`annotations`** *(array)*
+>>  - **`annotations`** *(list)*
 >>    - **Items**: Refer to *#/definitions/annotations*.
 >>   - **`text`** *(string)*: A print format string.
->>   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>     - **Items** *(string)*
 >   - **Items**: Refer to *#/definitions/list_annotation*.
 >>- **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -113,23 +113,23 @@
 >> - **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>   - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>   - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>   - **`annotations`** *(array)*
+>>   - **`annotations`** *(list)*
 >>     - **Items**: Refer to *#/definitions/annotations*.
 
 
-- **`logical_axioms`** *(array)*
+- **`logical_axioms`** *(list)*
   - **Items**: Refer to *#/definitions/printf_owl*.
 > - **`printf_owl`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -139,11 +139,11 @@
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`axiom_type`** *(string)*: OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith. GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.) This specifies the axiom type to be generated from the text following substitution.'. Must be one of: `['equivalentTo', 'subClassOf', 'disjointWith', 'GCI']`.
 >   - **`text`** *(string)*: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. An empty var list can be specified simply by leaving this field out.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. An empty var list can be specified simply by leaving this field out.
 >     - **Items** *(string)*
 
 
@@ -153,16 +153,16 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 
 - **`equivalentTo`**: Refer to *#/definitions/printf_owl_convenience*.
 > - **`printf_owl_convenience`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -172,25 +172,25 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`text`** *(string)*: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
 >     - **Items** *(string)*
 
 
 - **`subClassOf`**: Refer to *#/definitions/printf_owl_convenience*.
 > - **`printf_owl_convenience`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -200,25 +200,25 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`text`** *(string)*: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
 >     - **Items** *(string)*
 
 
 - **`GCI`**: Refer to *#/definitions/printf_owl_convenience*.
 > - **`printf_owl_convenience`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -228,25 +228,25 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`text`** *(string)*: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
 >     - **Items** *(string)*
 
 
 - **`disjointWith`**: Refer to *#/definitions/printf_owl_convenience*.
 > - **`printf_owl_convenience`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -256,10 +256,10 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`text`** *(string)*: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
 >     - **Items** *(string)*
 
 
@@ -269,16 +269,16 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 
 - **`name`**: Mapped to `rdfs:label`.  Refer to *#/definitions/printf_annotation_obo*.
 > - **`printf_annotation_obo`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -288,26 +288,26 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`xrefs`** *(string)*: Mapped to `oboInOwl:hasDbXref`.  Takes the name of a single data_list_var specifying a list of database cross references.
 >   - **`text`** *(string)*: A print format string.
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
 >     - **Items** *(string)*
 
 
 - **`comment`**: Mapped to `rdfs:comment`.  Refer to *#/definitions/printf_annotation_obo*.
 > - **`printf_annotation_obo`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -317,26 +317,26 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`xrefs`** *(string)*: Mapped to `oboInOwl:hasDbXref`.  Takes the name of a single data_list_var specifying a list of database cross references.
 >   - **`text`** *(string)*: A print format string.
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
 >     - **Items** *(string)*
 
 
 - **`def`**: Mapped to `obo:IAO_0000115`.  Refer to *#/definitions/printf_annotation_obo*.
 > - **`printf_annotation_obo`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -346,26 +346,26 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`xrefs`** *(string)*: Mapped to `oboInOwl:hasDbXref`.  Takes the name of a single data_list_var specifying a list of database cross references.
 >   - **`text`** *(string)*: A print format string.
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
 >     - **Items** *(string)*
 
 
 - **`namespace`**: Mapped to `oboInOwl:hasOBONamespace`.  Refer to *#/definitions/printf_annotation_obo*.
 > - **`printf_annotation_obo`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -375,11 +375,11 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`xrefs`** *(string)*: Mapped to `oboInOwl:hasDbXref`.  Takes the name of a single data_list_var specifying a list of database cross references.
 >   - **`text`** *(string)*: A print format string.
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
 >     - **Items** *(string)*
 
 
@@ -413,19 +413,19 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >   - **`xrefs`** *(string)*: Mapped to `oboInOwl:hasDbXref`.  Takes the name of a single data_list_var specifying a list of database cross references. Use of this field should add the same xref set to all annotation axioms generated.
 
 
-- **`generated_synonyms`** *(array)*: An OBO convenience field to allow the specification of exact synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
+- **`generated_synonyms`** *(list)*: An OBO convenience field to allow the specification of exact synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
   - **Items**: Mapped to `oboInOwl:hasExactSynonym`.  Refer to *#/definitions/printf_annotation_obo*.
 > - **`printf_annotation_obo`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -435,27 +435,27 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`xrefs`** *(string)*: Mapped to `oboInOwl:hasDbXref`.  Takes the name of a single data_list_var specifying a list of database cross references.
 >   - **`text`** *(string)*: A print format string.
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
 >     - **Items** *(string)*
 
 
-- **`generated_narrow_synonyms`** *(array)*: An OBO convenience field to allow the specification of narrow synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
+- **`generated_narrow_synonyms`** *(list)*: An OBO convenience field to allow the specification of narrow synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
   - **Items**: Mapped to `oboInOwl:hasNarrowSynonym`.  Refer to *#/definitions/printf_annotation_obo*.
 > - **`printf_annotation_obo`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -465,27 +465,27 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`xrefs`** *(string)*: Mapped to `oboInOwl:hasDbXref`.  Takes the name of a single data_list_var specifying a list of database cross references.
 >   - **`text`** *(string)*: A print format string.
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
 >     - **Items** *(string)*
 
 
-- **`generated_broad_synonyms`** *(array)*: An OBO convenience field to allow the specification of broad synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
+- **`generated_broad_synonyms`** *(list)*: An OBO convenience field to allow the specification of broad synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
   - **Items**: Mapped to `oboInOwl:hasBroadSynonym`.  Refer to *#/definitions/printf_annotation_obo*.
 > - **`printf_annotation_obo`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -495,27 +495,27 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`xrefs`** *(string)*: Mapped to `oboInOwl:hasDbXref`.  Takes the name of a single data_list_var specifying a list of database cross references.
 >   - **`text`** *(string)*: A print format string.
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
 >     - **Items** *(string)*
 
 
-- **`generated_related_synonyms`** *(array)*: An OBO convenience field to allow the specification of related synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
+- **`generated_related_synonyms`** *(list)*: An OBO convenience field to allow the specification of related synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
   - **Items**: Mapped to `oboInOwl:hasBroadSynonym`.  Refer to *#/definitions/printf_annotation_obo*.
 > - **`printf_annotation_obo`** *(object)*: Cannot contain additional properties.
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -525,11 +525,11 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`xrefs`** *(string)*: Mapped to `oboInOwl:hasDbXref`.  Takes the name of a single data_list_var specifying a list of database cross references.
 >   - **`text`** *(string)*: A print format string.
->   - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>   - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
 >     - **Items** *(string)*
 
 
@@ -539,21 +539,21 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 
 - **`instance_graph`** *(object)*: Cannot contain additional properties.
   - **`nodes`** *(object)*: Key = name of individual within this pattern doc Value = Type of individual specified using either the quoted name of a class in the class dictionary of this pattern or a var name.  This field does not support typing via anonymous class expressions.
-  - **`edges`** *(array)*
+  - **`edges`** *(list)*
     - **Items**: Refer to *#/definitions/opa*.
 > - **`opa`** *(object)*: Cannot contain additional properties.
->   - **`edge`** *(array)*: A triple specified as an ordered array with 3 elements [subject, rel, object] * rel must be the quoted name of a relation from the relations (object property) dictionary. * subject and object must be the name of an individual specified in the nodes field.
+>   - **`edge`** *(list)*: A triple specified as an ordered array with 3 elements [subject, rel, object] * rel must be the quoted name of a relation from the relations (object property) dictionary. * subject and object must be the name of an individual specified in the nodes field.
 >     - **Items** *(string)*
->   - **`annotations`** *(array)*
+>   - **`annotations`** *(list)*
 >     - **Items**: Refer to *#/definitions/annotations*.
->>- **`annotations`** *(array)*: One of the followings:
+>>- **`annotations`** *(list)*: One of the followings:
 >>  - **Items**: Refer to *#/definitions/printf_annotation*.
 >>> - **`printf_annotation`** *(object)*: Cannot contain additional properties.
 >>>   - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
->>>   - **`annotations`** *(array)*
+>>>   - **`annotations`** *(list)*
 >>>     - **Items**: Refer to *#/definitions/annotations*.
 >>>  - **`text`** *(string)*: A print format string.
->>>  - **`vars`** *(array)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
+>>>  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >>>    - **Items** *(string)*
 >>  - **Items**: Refer to *#/definitions/list_annotation*.
 >>> - **`list_annotation`** *(object)*: Cannot contain additional properties.
@@ -563,7 +563,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >>>- **`iri_value_annotation`** *(object)*: Cannot contain additional properties.
 >>>  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >>>  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
->>>  - **`annotations`** *(array)*
+>>>  - **`annotations`** *(list)*
 >>>    - **Items**: Refer to *#/definitions/annotations*.
 >   - **`not`** *(boolean)*: Optional field for negated OPAs.
 

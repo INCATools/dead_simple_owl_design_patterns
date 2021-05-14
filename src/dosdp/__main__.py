@@ -1,8 +1,12 @@
 import argparse
 import sys
 import pathlib
+import os
+import logging
 from dosdp import validator
-from dosdp import document
+from dosdp.document import document
+
+logging.basicConfig(level=logging.INFO)
 
 
 def main():
@@ -18,8 +22,9 @@ def main():
     parser_document = subparsers.add_parser("document", add_help=False,
                                             description="The document generation parser",
                                             help="Generates documentation for the given YAML schema.")
-    parser_document.add_argument('-i', '--input', action='store', type=pathlib.Path, required=True)
-    parser_document.add_argument('-o', '--output', action='store', type=pathlib.Path, required=True)
+    parser_document.add_argument('-s', '--schema', action='store_true')
+    parser_document.add_argument('-i', '--input', action='store', type=pathlib.Path)
+    parser_document.add_argument('-o', '--output', action='store', type=pathlib.Path)
 
     args = parser.parse_args()
 
@@ -28,7 +33,13 @@ def main():
         if not is_valid:
             sys.exit(1)
     elif args.action == "document":
-        document.generate_documentation(str(args.input), str(args.output))
+        if 'schema' in args and args.schema:
+            document.generate_schema_documentation(args.output)
+        elif 'input' in args:
+            document.generate_pattern_documentation(str(args.input), args.output)
+        else:
+            logging.error("Please use '--schema' to generate schema documentation "
+                          "or '--input' for pattern documentation.")
 
 
 if __name__ == "__main__":
