@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="dosdp",
-    version="0.1.1.dev1",
+    version="0.1.5.dev1",
     description="The aim of this project is to specify a simple OWL design pattern system that can easily be consumed, whatever your code base.",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -23,7 +23,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     package_dir={'': 'src'},
-    packages=["dosdp", "schema"],
+    packages=["dosdp", "schema", "dosdp.document", "dosdp.document.pattern", "dosdp.document.schema"],
     include_package_data=True,
     install_requires=["PyYAML", "jsonschema", "requests", "jsonpath_rw", "ruamel.yaml", "jsonschema2md", "pandas"],
     entry_points={

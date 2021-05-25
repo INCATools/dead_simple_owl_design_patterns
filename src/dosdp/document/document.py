@@ -16,7 +16,7 @@ def generate_schema_documentation(md_location=None):
     """
     logging.info("Documenting dosdp schema.")
     if md_location is None:
-        md_location = os.path.dirname(os.path.realpath(__file__))
+        md_location = os.getcwd()
 
     schema_create_docs.generate_schema_documentation(md_output=md_location)
 

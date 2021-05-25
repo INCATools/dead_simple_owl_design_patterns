@@ -10,6 +10,7 @@ NESTED_REFERENCE_LIMIT = 3
 DEFINITION_PREFIX = "def_"
 
 CROSS_REF_TERM = "Refer to *#/definitions/"
+CROSS_REF_TERM_ALT = "Values from *"
 
 logging.basicConfig(level=logging.INFO)
 
@@ -197,9 +198,9 @@ def print_element(element, md_out, plain_doc, prefix="", nesting_list=[]):
     for line in lines:
         line = customize_doc_content(line)
         md_out.write("%s\n" % (prefix + (" " * (len(nesting_list) % 2)) + line))
-        if CROSS_REF_TERM in line:
+        if CROSS_REF_TERM_ALT in line:
             nesting_list.append(element)
-            ref_term_start = line.index(CROSS_REF_TERM) + len(CROSS_REF_TERM)
+            ref_term_start = line.index(CROSS_REF_TERM_ALT) + len(CROSS_REF_TERM_ALT)
             referred_element = line[ref_term_start:len(line) - 2]
             if (DEFINITION_PREFIX + referred_element) not in nesting_list:
                 print_element(DEFINITION_PREFIX + referred_element, md_out, plain_doc, ">" + prefix, nesting_list)
@@ -214,6 +215,9 @@ def customize_doc_content(line):
 
     if "*(array)*" in line:
         line = line.replace("*(object)*", "*(dict)*")
+
+    if CROSS_REF_TERM in line:
+        line = line.replace(CROSS_REF_TERM, CROSS_REF_TERM_ALT)
 
     return line
 

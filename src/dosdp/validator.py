@@ -20,14 +20,16 @@ def test_jschema(validator, pattern):
 
     Returns: True if schema is valid, False otherwise.
     """
+    is_valid = True
 
     if not validator.is_valid(pattern):
         es = validator.iter_errors(pattern)
         for e in es:
             warnings.warn(" => ".join([str(e.schema_path), str(e.message), str(e.context)]))
-            return False
-    else:
-        return True
+            is_valid = False
+
+    return is_valid
+
 
 
 def test_vars(pattern):
@@ -148,6 +150,10 @@ def validate(pattern):
             except YAMLError as exc:
                 stat = False
                 logging.error('Failed to load pattern file: ' + pattern_doc)
+            except AttributeError as exc:
+                stat = False
+                logging.error('Unexpected pattern file content: ' + pattern_doc)
+                logging.error(exc)
     if stat:
         logging.info("Validation completed without any issues to report.")
     else:
