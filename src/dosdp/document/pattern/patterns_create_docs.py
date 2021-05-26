@@ -144,6 +144,26 @@ def generate_pattern_documentation(pattern_file, md_file_path):
     return pattern
 
 
+def is_dosdp_pattern_file(yaml_path):
+    """
+    Checks if given file is a dosdp pattern file.
+
+    Return: True if given file is a dosdp pattern file, otherwise False.
+    """
+    is_dosdp_pattern = False
+    ryaml = YAML(typ='safe')
+    with open(yaml_path, "r") as stream:
+        try:
+            content = ryaml.load(stream)
+
+            if "pattern_name" in content or "pattern_iri" in content:
+                is_dosdp_pattern = True
+
+        except YAMLError as exc:
+            logging.error('Failed to load pattern file: ' + yaml_path)
+
+    return is_dosdp_pattern
+
 # We might need to make changes to the mkdocs.yaml file
 # mkdocs_yaml = yaml.load(mkdocs_file.read_text(), Loader=yaml.FullLoader)
 

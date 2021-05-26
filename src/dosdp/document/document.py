@@ -3,7 +3,7 @@ import glob
 import logging
 from ruamel.yaml import YAML, YAMLError
 from dosdp.document.schema import schema_create_docs
-from dosdp.document.pattern import patterns_create_docs
+from dosdp.document.pattern import patterns_create_docs, patterns_create_overview
 
 
 logging.basicConfig(level=logging.INFO)
@@ -44,7 +44,8 @@ def generate_pattern_documentation(yaml_location, md_location=None):
         else:
             for pattern_doc in pattern_docs:
                 create_indv_pattern_doc(pattern_doc, md_location)
-
+            patterns_create_overview.create_overview(yaml_location,
+                                                     md_file=os.path.join(md_location, "overview.md"))
     elif yaml_location.endswith('.yaml') or yaml_location.endswith('.yaml'):
         create_indv_pattern_doc(yaml_location, md_location)
     else:
@@ -52,31 +53,10 @@ def generate_pattern_documentation(yaml_location, md_location=None):
 
 
 def create_indv_pattern_doc(yaml_location, md_location):
-    if is_dosdp_pattern_file(yaml_location):
+    if patterns_create_docs.is_dosdp_pattern_file(yaml_location):
         if os.path.isdir(md_location):
             file_name = os.path.basename(yaml_location)
             md_location = os.path.join(md_location, (os.path.splitext(file_name)[0] + ".md"))
         patterns_create_docs.generate_pattern_documentation(yaml_location, md_location)
     else:
         logging.warning("File is not a pattern file, skipping: " + yaml_location)
-
-
-def is_dosdp_pattern_file(yaml_path):
-    """
-    Checks if given file is a dosdp pattern file.
-
-    Return: True if given file is a dosdp pattern file, otherwise False.
-    """
-    is_dosdp_pattern = False
-    ryaml = YAML(typ='safe')
-    with open(yaml_path, "r") as stream:
-        try:
-            content = ryaml.load(stream)
-
-            if "pattern_name" in content or "pattern_iri" in content:
-                is_dosdp_pattern = True
-
-        except YAMLError as exc:
-            logging.error('Failed to load pattern file: ' + yaml_path)
-
-    return is_dosdp_pattern
