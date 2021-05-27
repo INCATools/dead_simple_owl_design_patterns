@@ -7,6 +7,29 @@ additionalProperties: False
 
 definitions:
 
+  multi_clause_printf:
+    required: ['sep', 'clauses']
+    additionalProperties: False
+    properties:
+      sep:
+        type: string
+      clauses:
+        type: array
+        items: { $ref: '#defintions/clause'}
+
+  printf_clause:
+    required: [ 'text', 'vars' ]
+    additionalProperties: False
+    properties:
+      text:
+        type: string
+      vars:
+        type: array
+        items: string
+      sub_clauses:
+       type: {$ref: '#defintions/multi_clause_print'}
+
+
   printf_annotation:
     type: object
     additionalProperties: False
@@ -35,6 +58,7 @@ definitions:
          leaving this field out.
         items: {type: string}
         type: array
+
         
   list_annotation:
     type: object
