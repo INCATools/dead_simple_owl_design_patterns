@@ -8,6 +8,8 @@ from jsonschema import Draft7Validator
 from jsonpath_rw import parse
 from ruamel.yaml import YAML, YAMLError
 
+SCHEMA_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../schema/dosdp_schema2.yaml")
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -115,7 +117,7 @@ def validate(pattern):
 
     Returns: True if patterns are valid, False otherwise.
     """
-    schema_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../schema/dosdp_schema.yaml")
+    schema_path = SCHEMA_PATH
     ryaml = YAML(typ='safe')
 
     dosdp = None
