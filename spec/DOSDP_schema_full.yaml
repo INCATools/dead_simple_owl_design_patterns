@@ -8,14 +8,16 @@ additionalProperties: False
 definitions:
 
   multi_clause_printf:
-    required: ['sep', 'clauses']
+    required: ['clauses']
     additionalProperties: False
     properties:
       sep:
         type: string
+        description: >
+          A string used as clause separator while aggregating multiple clauses.
       clauses:
         type: array
-        items: { $ref: '#defintions/clause'}
+        items: { $ref: '#/definitions/printf_clause' }
 
   printf_clause:
     required: [ 'text', 'vars' ]
@@ -27,23 +29,37 @@ definitions:
         type: array
         items: string
       sub_clauses:
-       type: {$ref: '#defintions/multi_clause_print'}
+        type: array
+        items: { $ref: '#/definitions/multi_clause_printf' }
 
+  function:
+    oneOf:
+      - { $ref: "#/definitions/join" }
+      - { $ref: "#/definitions/regex_sub" }
+
+  join:
+    properties:
+      sep:
+        type: string
+        description: >
+          A string used as value separator while joining multi value inputs.
 
   printf_annotation:
     type: object
     additionalProperties: False
-    required: [annotationProperty, text]
+    one_of:
+      - required: [ annotationProperty, text ]
+      - required: [ multi_clause ]
     properties:
       annotationProperty:
-        description: > 
+        description: >
          A string corresponding to the rdfs:label
          of an owl annotation property. If the annotation property has no label,
          the shortForm ID should be used. The annotation property must be listed
          in the annotation property dictionary.'
         type: string
       annotations:
-        items: { $ref: "#/definitions/annotations" } 
+        items: { $ref: "#/definitions/annotations" }
         type: array
       text:
         description: A print format string.
@@ -58,15 +74,17 @@ definitions:
          leaving this field out.
         items: {type: string}
         type: array
+      multi_clause:
+        items: { $ref: '#/definitions/multi_clause_printf' }
 
-        
+
   list_annotation:
     type: object
     additionalProperties: False
     required: [annotationProperty, value]
     properties:
       annotationProperty:
-        description: > 
+        description: >
          A string corresponding to the rdfs:label
          of an owl annotation property. If the annotation property has no label,
          the shortForm ID should be used. The annotation property must be listed
@@ -74,7 +92,7 @@ definitions:
         type: string
       value:
         description: >
-         A single list variable (list_var or data_list_var).  Each item in this list 
+         A single list variable (list_var or data_list_var).  Each item in this list
          should be used to generate a separate annotation axiom.
         type: string
 
@@ -90,11 +108,11 @@ definitions:
         description: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
         type: string
       annotations:
-        items: { $ref: "#/definitions/annotations" } 
+        items: { $ref: "#/definitions/annotations" }
         type: array
 
   annotations:
-   oneOf: 
+   oneOf:
      - { $ref: "#/definitions/printf_annotation" }
      - { $ref: "#/definitions/list_annotation" }
      - { $ref: "#/definitions/iri_value_annotation" }
@@ -102,44 +120,50 @@ definitions:
   printf_owl:
     type: object
     additionalProperties: False
-    required: [axiom_type, text, vars]
+    one_of:
+      - required: [ axiom_type, text, vars ]
+      - required: [ multi_clause ]
     properties:
       annotations:
         items: {$ref: '#/definitions/annotations'}
         type: array
       axiom_type:
-        description: > 
+        description: >
          OWL axiom type expressed as manchester syntax: equivalentTo,
          subClassOf, disjointWith. GCI  - for general class inclusion axioms, is
          also valid (although missing from manchester syntax.) This specifies the
          axiom type to be generated from the text following substitution.'
         enum: [equivalentTo, subClassOf, disjointWith, GCI]
         type: string
-      text: 
+      text:
         type: string
-        description: > 
+        description: >
          A print format string in OWL Manchester syntax. Each entry
          must correspond to an entry in o the name of a var in the var field of the
          pattern. Entries in single quotes must correspond to the labels of entries
-         in owl_entity dictionaries (classes, relations, dataProperties)    
+         in owl_entity dictionaries (classes, relations, dataProperties)
       vars:
         description: >
          An ordered list of variables for substitution into the accompanying
          print format string. Each entry must correspond to the name of a variable
-         specified in either the 'vars' field or the data_var field of the pattern.  
+         specified in either the 'vars' field or the data_var field of the pattern.
          An empty var list can be specified simply by leaving this field out.
         items: {type: string}
         type: array
+      multi_clause:
+        items: { $ref: '#/definitions/multi_clause_printf' }
 
   printf_owl_convenience:
     type: object
     additionalProperties: False
-    required: [text, vars]
+    one_of:
+      - required: [ text, vars ]
+      - required: [ multi_clause ]
     properties:
       annotations:
         items: {$ref: '#/definitions/annotations'}
         type: array
-      text: 
+      text:
         type: string
         description: >
          A print format string in OWL Manchester syntax. Each entry
@@ -153,25 +177,27 @@ definitions:
           specified in either the 'vars' field or the data_var field of the pattern.
         items: {type: string}
         type: array
+      multi_clause:
+        items: { $ref: '#/definitions/multi_clause_printf' }
 
   regex_sub:
     additionalProperties: False
     required: [in, out, match, sub]
     type: object
     properties:
-      in: 
-        type: string 
+      in:
+        type: string
         description: name of input var
-      out: 
-        type: string 
-        description: > 
-          Name of output var.  If input var specified an OWL entity then 
+      out:
+        type: string
+        description: >
+          Name of output var.  If input var specified an OWL entity then
           readable identifier is used as input to substitution
       match:
-        type: string 
-        description: perl style regex match             
-      sub: 
-        type: string 
+        type: string
+        description: perl style regex match
+      sub:
+        type: string
         description: perl style regex sub.  May include backreferences.
 
   opa:
@@ -192,27 +218,29 @@ definitions:
         minItems: 3
         maxItems: 3
       annotations:
-        type: array 
+        type: array
         items: { $ref: '#/definitions/annotations' }
       not:
         description: "Optional field for negated OPAs"
         type: boolean
 
   # TODO - split into separate schema file
-  printf_annotation_obo: 
+  printf_annotation_obo:
     type: object
     additionalProperties: False
-    required: [text, vars]
+    one_of:
+      - required: [text, vars]
+      - required: [multi_clause]
     properties:
       annotations:
-        items: { $ref: "#/definitions/annotations" } 
+        items: { $ref: "#/definitions/annotations" }
         type: array
       xrefs:
-        description: > 
-         Takes the name of a single data_list_var specifying a list of database 
+        description: >
+         Takes the name of a single data_list_var specifying a list of database
          cross references.
         type: string
-        mapping: "oboInOwl:hasDbXref" 
+        mapping: "oboInOwl:hasDbXref"
       text:
         description: A print format string.
         type: string
@@ -225,7 +253,9 @@ definitions:
          used in the substitution.
         items: {type: string}
         type: array
-        
+      multi_clause:
+        items: { $ref: '#/definitions/multi_clause_printf' }
+
   list_annotation_obo:
     type: object
     additionalProperties: False
@@ -233,13 +263,13 @@ definitions:
     properties:
       value:
         description: >
-         A single list variable (list_var or data_list_var).  Each item in this list 
+         A single list variable (list_var or data_list_var).  Each item in this list
          should be used to generate a separate annotation axiom.
         type: string
       xrefs:
-        description: > 
-         Takes the name of a single data_list_var specifying a list of database 
-         cross references. Use of this field should add the same xref set to all 
+        description: >
+         Takes the name of a single data_list_var specifying a list of database
+         cross references. Use of this field should add the same xref set to all
          annotation axioms generated.
         type: string
         mapping: "oboInOwl:hasDbXref"
@@ -255,47 +285,47 @@ properties:
       no spaces. The only special characters allowed are '_' and '-'.
       By convention, this is used as the file name of the
       pattern - with an appropriate extension.
-      
-  pattern_iri: 
+
+  pattern_iri:
     type: string
-    description: > 
-       A global identifier for the pattern. This can be a full IRI or a CURIE, using 
+    description: >
+       A global identifier for the pattern. This can be a full IRI or a CURIE, using
        the same prefix mappings as other CURIEs in the pattern.
-      
+
   base_IRI:  # not rqd, give JSON-LD base.
     type: string # how to spec IRI?
     description: "Specifies the base IRI to be used to generate new classes."
-    
+
   contributors:
     type: array
     items: { type: string }
     description: >
-       A list of authors of a pattern.  
-       Each author must be specified using a URL or Curie - we recommend ORCID. 
+       A list of authors of a pattern.
+       Each author must be specified using a URL or Curie - we recommend ORCID.
        We do not recommend that this list is instantiated in terms generated using a pattern,
        but where it is it should be instantiated as a set of annotation axioms using dc:contributor.
 
   description:
     type: string # specify UTF-8 string?
     description: "A free text description of the pattern.  Must be UTF-8 encoded."
-    
+
   examples:
     type: list
     items: string
     description:  "A list of example terms implementing this pattern."
-    
+
   status:
     type: string
     description: "Implementation status of pattern."
-    enum: 
+    enum:
        - development
        - published
-    
+
   tags:
     type: list
     items: string
     description: >
-       A list of strings used to tag a pattern for the purposes of arbitrary, 
+       A list of strings used to tag a pattern for the purposes of arbitrary,
        cross-cutting grouping of patterns.
 
   readable_identifiers:
@@ -326,39 +356,52 @@ properties:
 
   vars:
     type: object
-    propertyNames: 
+    propertyNames:
        pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
     description: >
-     A dictionary of variables ranging over OWL classes.  
+     A dictionary of variables ranging over OWL classes.
      Key = variable name, value = variable range as manchester syntax string.
-     
+
   list_vars:
     type: object
-    propertyNames: 
+    propertyNames:
        pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
     description: >
      A dictionary of variables refering to lists of owl classes.
      Key = variable name, value = variable range of items in list specified as a valid OWL
      data-type.
-  
+
   data_vars:
     type: object
-    propertyNames: 
+    propertyNames:
        pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
     description: >
      A dictionary of variables ranging over OWL data-types.
      Key = variable name, value = variable range specified as a valid OWL
      data-type.
-     
+
   data_list_vars:
     type: object
-    propertyNames: 
+    propertyNames:
        pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
     description: >
-        A dictionary of variables rrefering to lists of some specified OWL data-types.
-        Key = variable name, value = variable range of all items in list, 
+        A dictionary of variables referring to lists of some specified OWL data-types.
+        Key = variable name, value = variable range of all items in list,
         specified as a valid OWL data-type.
-        
+
+  internal_vars:
+    type: array
+    properties:
+      var_name:
+        pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
+      apply: { $ref: "#/definitions/function" }
+      input:
+        description: >
+          A variable to which the given function applied.
+        type: string
+      description: >
+        List of internal variable construction definitions. Given function is applied to the given input and result stored as a new internal variable.
+
 # Var munging
 
   substitutions:
@@ -368,14 +411,14 @@ properties:
 # Specifying axioms:
 
   annotations:
-    items: { $ref: "#/definitions/annotations" } 
+    items: { $ref: "#/definitions/annotations" }
     type: array
-    
+
   logical_axioms:
     items: { $ref: '#/definitions/printf_owl'}
     type: array
 
-# logical convenience fields.  
+# logical convenience fields.
 # Where only one of any OWL axiom type is present, these convenience fields may be used.
 
   equivalentTo:
@@ -386,8 +429,8 @@ properties:
 
   GCI:
     { $ref: '#/definitions/printf_owl_convenience' }
- 
-  disjointWith: 
+
+  disjointWith:
     { $ref: '#/definitions/printf_owl_convenience' }
 
 # OBO fields - TODO split to a separate file with import statement.
@@ -401,7 +444,7 @@ properties:
   namespace:
     { $ref: '#/definitions/printf_annotation_obo', mapping: "oboInOwl:hasOBONamespace" }
 
-  # TODO: make all these into list_annotations 
+  # TODO: make all these into list_annotations
   exact_synonym:
     $ref: '#/definitions/list_annotation_obo'
     mapping: "oboInOwl:hasExactSynonym"
@@ -422,40 +465,40 @@ properties:
     description: >
       An OBO convenience field to allow the specification of exact synonyms
       generated by interpolation of OWL entity names into printf text.
-      Each entry may be annotated. 
+      Each entry may be annotated.
     type: array
-    items:  
-      $ref: '#/definitions/printf_annotation_obo' 
+    items:
+      $ref: '#/definitions/printf_annotation_obo'
       mapping: "oboInOwl:hasExactSynonym"
-      
+
   generated_narrow_synonyms:
     description: >
       An OBO convenience field to allow the specification of narrow synonyms
       generated by interpolation of OWL entity names into printf text.
-      Each entry may be annotated. 
+      Each entry may be annotated.
     type: array
-    items:  
-      $ref: '#/definitions/printf_annotation_obo' 
+    items:
+      $ref: '#/definitions/printf_annotation_obo'
       mapping: "oboInOwl:hasNarrowSynonym"
 
   generated_broad_synonyms:
     description: >
       An OBO convenience field to allow the specification of broad synonyms
       generated by interpolation of OWL entity names into printf text.
-      Each entry may be annotated. 
+      Each entry may be annotated.
     type: array
-    items:  
-      $ref: '#/definitions/printf_annotation_obo' 
+    items:
+      $ref: '#/definitions/printf_annotation_obo'
       mapping: "oboInOwl:hasBroadSynonym"
-      
+
   generated_related_synonyms:
     description: >
       An OBO convenience field to allow the specification of related synonyms
       generated by interpolation of OWL entity names into printf text.
-      Each entry may be annotated. 
+      Each entry may be annotated.
     type: array
-    items:  
-      $ref: '#/definitions/printf_annotation_obo' 
+    items:
+      $ref: '#/definitions/printf_annotation_obo'
       mapping: "oboInOwl:hasBroadSynonym"
 
 # instance graph spec - TODO be split to a separate file
@@ -466,18 +509,18 @@ properties:
     required: [nodes, edges]
     properties:
       nodes:
-        description: > 
+        description: >
                        Key = name of individual within this pattern doc
-                       Value = Type of individual specified using either 
+                       Value = Type of individual specified using either
                        the quoted name of a class in the class dictionary of this pattern
-                       or a var name.  This field does not support typing via 
+                       or a var name.  This field does not support typing via
                        anonymous class expressions
         type: object
       edges:
         type: array
-        items: { $ref : '#/definitions/opa' } 
+        items: { $ref : '#/definitions/opa' }
 
- 
+
 
 
 
