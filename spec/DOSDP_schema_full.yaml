@@ -17,6 +17,8 @@ definitions:
           A string used as clause separator while aggregating multiple clauses.
       clauses:
         type: array
+        description: >
+          List of optional clauses.
         items: { $ref: '#/definitions/printf_clause' }
 
   printf_clause:
@@ -24,11 +26,21 @@ definitions:
     additionalProperties: False
     properties:
       text:
+        description: A print format string.
         type: string
       vars:
+        description: >
+          An ordered list of variables for substitution into the accompanying
+          print format string. Each entry must correspond to the name of a variable
+          specified in either the 'vars', 'internal_vars' or the data_var field of the pattern.
+          Where an OWL entity is specified, the label for the OWL entity should be
+          used in the substitution.
         type: array
         items: string
       sub_clauses:
+        description: >
+          List of clauses that depends on this clause. If parent clause cannot be printed,
+          all sub_clauses are also discarded.
         type: array
         items: { $ref: '#/definitions/multi_clause_printf' }
 
@@ -42,7 +54,7 @@ definitions:
       sep:
         type: string
         description: >
-          A string used as value separator while joining multi value inputs.
+          A string used as value separator while joining list type (multi value) variables.
 
   printf_annotation:
     type: object
@@ -397,10 +409,11 @@ properties:
       apply: { $ref: "#/definitions/function" }
       input:
         description: >
-          A variable to which the given function applied.
+          A list_vars or data_list_vars variable to which the given function applied.
         type: string
       description: >
-        List of internal variable construction definitions. Given function is applied to the given input and result stored as a new internal variable.
+        List of internal variable construction definitions. Given function is applied to the given multi value input
+        and the result is defined as a new internal variable.
 
 # Var munging
 
