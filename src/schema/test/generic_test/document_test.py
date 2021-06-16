@@ -47,9 +47,6 @@ class DocumentGenerationCase(unittest.TestCase):
     def test_mapping_definition_search(self):
         mappings = schema_create_docs.find_mapping_definitions()
 
-        for key in mappings.keys():
-            print(key + " -->" + mappings[key])
-
         self.assertTrue("printf_annotation_obo$xrefs" in mappings.keys())
         self.assertEqual("oboInOwl:hasDbXref", mappings["printf_annotation_obo$xrefs"])
 
@@ -123,6 +120,30 @@ class DocumentGenerationCase(unittest.TestCase):
 
         self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                                     "../positive_test_set/patterns/data/generated/overview.md")))
+
+    def test_pattern_interface_with_sample_data(self):
+        document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/acute.yaml"),
+                                                md_location=os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                                        "../positive_test_set/patterns/data/acute.md"),
+                                                sample_data_dir=os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                                            "../positive_test_set/patterns/data/sample_data"))
+        self.assertFalse(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                     "../positive_test_set/patterns/data/generated/acute.md")))
+
+    def test_pattern_interface_folder_with_sample_data(self):
+        document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/"),
+                                                os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                             "../positive_test_set/patterns/data/generated"),
+                                                sample_data_dir=os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                                             "../positive_test_set/patterns/data/sample_data"))
+        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                    "../positive_test_set/patterns/data/generated/acute.md")))
+        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                    "../positive_test_set/patterns/data/generated/acute2.md")))
+        self.assertFalse(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                                     "../positive_test_set/patterns/data/generated/dummy.md")))
 
     def test_schema_interface(self):
         document.generate_schema_documentation()

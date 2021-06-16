@@ -25,6 +25,7 @@ def main():
     parser_document.add_argument('-s', '--schema', action='store_true')
     parser_document.add_argument('-i', '--input', action='store', type=pathlib.Path)
     parser_document.add_argument('-o', '--output', action='store', type=pathlib.Path)
+    parser_document.add_argument('-d', '--data', action='store', type=pathlib.Path)
 
     args = parser.parse_args()
 
@@ -36,7 +37,7 @@ def main():
         if 'schema' in args and args.schema:
             document.generate_schema_documentation(args.output)
         elif 'input' in args:
-            document.generate_pattern_documentation(str(args.input), args.output)
+            document.generate_pattern_documentation(str(args.input), args.output, args.data)
         else:
             logging.error("Please use '--schema' to generate schema documentation "
                           "or '--input' for pattern documentation.")
