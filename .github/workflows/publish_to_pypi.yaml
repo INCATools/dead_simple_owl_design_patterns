@@ -1,15 +1,14 @@
 name: Publish Python distributions to PyPI
 
 on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
   release:
     types: [created]
   # For testing purpose, delete this trigger afterwards
 #  push:
 #    paths:
 #      - '.github/workflows/publish_to_pypi.yaml'
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 jobs:
   build-and-publish:
