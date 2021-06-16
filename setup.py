@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="dosdp",
-    version="0.1.6.dev1",
+    version="0.1.7.dev1",
     description="The aim of this project is to specify a simple OWL design pattern system that can easily be consumed, whatever your code base.",
     long_description=README,
     long_description_content_type="text/markdown",

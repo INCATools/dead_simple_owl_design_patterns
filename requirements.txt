@@ -5,4 +5,5 @@ jsonpath_rw
 ruamel.yaml
 jsonschema2md
 pandas
+tabulate
 
