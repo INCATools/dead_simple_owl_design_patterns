@@ -9,7 +9,6 @@ from pathlib import Path
 import yaml
 import re
 import os
-import glob
 import logging
 import pandas as pd
 from ruamel.yaml import YAML, YAMLError
@@ -18,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 mkdocs_file = ROOT / "mkdocs.yml"
 pattern_files = (ROOT / "src/patterns/dosdp-patterns").glob("*.yaml")
 pattern_doc_dir = ROOT / "docs/editors-guide/patterns"
-sample_data_dir = ROOT / "src/patterns/data/matches"
+# sample_data_dir = ROOT / "src/patterns/data/matches"
 pattern_matches_location_raw = "https://raw.githubusercontent.com/monarch-initiative/mondo/master/src/patterns/data/matches"
 pattern_matches_location_gh = "https://github.com/monarch-initiative/mondo/blob/master/src/patterns/data/matches"
 
@@ -76,11 +75,10 @@ def render_str(text, vars, pattern):
     return ret
 
 
-def generate_pattern_documentation(pattern_file, md_file_path):
+def generate_pattern_documentation(pattern_file, md_file_path, sample_data_dir=None):
     """
     Creates md formatted documentation for the given pattern file in the given location.
     """
-    print(pattern_file)
     pattern_file = Path(pattern_file)
     md_file_path = Path(md_file_path)
     pattern = yaml.load(pattern_file.read_text(), Loader=yaml.FullLoader)
@@ -117,8 +115,9 @@ def generate_pattern_documentation(pattern_file, md_file_path):
             fout.write("\n\n")
 
         # Create sample table
-        tsv_file = sample_data_dir / (pattern_file.stem + ".tsv")
-        if tsv_file.exists():
+        sample_file = pattern_file.stem + ".tsv"
+        if sample_data_dir is not None and Path(os.path.join(sample_data_dir, sample_file)).exists():
+            tsv_file = os.path.join(sample_data_dir, sample_file)
             examples = []
             try:
                 df = pd.read_csv(tsv_file, sep="\t")
@@ -137,9 +136,10 @@ def generate_pattern_documentation(pattern_file, md_file_path):
                 else:
                     print("No matches!")
             except Exception as e:
-                print("Error processing the tsv file!", e)
+                logging.error("Error processing the tsv file!", e)
         else:
-            print(str(tsv_file) + " does not exist to provide sample data!")
+            logging.warning("Data dir: '" + os.path.join(str(sample_data_dir),
+                                                         sample_file) + "' does not exist to provide sample data!")
 
     return pattern
 

@@ -9,14 +9,17 @@ Created on Mon Oct 8 14:24:37 2018
 import os, sys
 import yaml
 import re
+import logging
 import pandas as pd
 from dosdp.document.pattern import patterns_create_docs as pattern_doc
+
+logging.basicConfig(level=logging.INFO)
 
 pattern_matches_location = "https://raw.githubusercontent.com/monarch-initiative/mondo/master/src/patterns/data/matches"
 pattern_matches_location_gh = "https://github.com/monarch-initiative/mondo/blob/master/src/patterns/data/matches"
 
 
-def create_overview(pattern_dirs, matches_dir="None", md_file=None):
+def create_overview(pattern_dirs, matches_dir=None, md_file=None):
     """
     Creates an overview document for the pattern files located in the given folder.
     Args:
@@ -24,6 +27,7 @@ def create_overview(pattern_dirs, matches_dir="None", md_file=None):
     matches_dir: Directory of pattern sample tsv files
     md_file: Overview document path.
     """
+    logging.info("Creating overview documentation.")
     lines = []
     lines.append("# Pattern directory")
     lines.append("This is a listing of all the patterns hosted as part of this directory")
@@ -35,7 +39,7 @@ def create_overview(pattern_dirs, matches_dir="None", md_file=None):
         files.sort()
 
         for filename in files:
-            print("Processing %s" % filename)
+            logging.info("Processing %s" % filename)
             f_path = os.path.join(pattern_dir, filename)
             if filename.endswith(".yaml") and pattern_doc.is_dosdp_pattern_file(f_path):
                 f = open(f_path)
@@ -69,14 +73,12 @@ def create_overview(pattern_dirs, matches_dir="None", md_file=None):
 
                     examples = []
                     fn_yaml = fn.replace(".yaml", ".tsv")
-                    tsv = os.path.join(matches_dir, fn_yaml)
                     url = "{}/{}".format(pattern_matches_location, fn_yaml)
                     ghurl = "{}/{}".format(pattern_matches_location_gh, fn_yaml)
-                    print(url)
-                    print(tsv)
                     sample_table = ""
                     example = ""
-                    if os.path.isfile(tsv):
+                    if matches_dir is not None and os.path.exists(os.path.join(matches_dir, fn_yaml)):
+                        tsv = os.path.join(matches_dir, fn_yaml)
                         try:
                             df = pd.read_csv(tsv, sep="\t")
                             if not df.empty:
@@ -86,11 +88,11 @@ def create_overview(pattern_dirs, matches_dir="None", md_file=None):
                                 sample_table = dfh.to_markdown(index=False)
                                 i = i + 1
                             else:
-                                print("No matches!")
+                                logging.warning("No matches for overview!")
                         except Exception as e:
-                            print("No matches!")
+                            logging.error("No matches for overview!", e)
                     else:
-                        print(tsv + " does not exist!")
+                        logging.warning(str(matches_dir) + "/" + fn_yaml + " does not exist!")
 
                     lines.append("### " + splitted.replace("_", " "))
                     lines.append("*" + y['description'].strip() + "*")
@@ -111,11 +113,15 @@ def create_overview(pattern_dirs, matches_dir="None", md_file=None):
                         lines.append("")
                         lines.append("See full table [here]({})".format(example))
 
+                    f.close()
                 except yaml.YAMLError as exc:
-                    print(exc)
+                    f.close()
+                    logging.error("Error occurred while processing yaml!", exc)
 
     with open(md_file, 'w') as f:
         for item in lines:
             f.write("%s\n" % item)
+
+    logging.info("Overview documentation created: " + str(md_file))
 
 
