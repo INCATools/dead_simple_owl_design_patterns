@@ -1,0 +1,103 @@
+pattern_name: multiClauseTest
+pattern_iri: http://purl.obolibrary.org/obo/odk/brainCellRegionMinimalMarkers.yaml
+description: "Naming scheme and axiomatisation for brain cells from BDS."
+
+classes:
+  "animal cell": "CL:0000548"
+  "Vertebrata <vertebrates>": "NCBITaxon:7742"
+  "regional part of brain": "UBERON:0002616"
+  "cell": "CL:0000000"
+  "sequence_feature": "SO:0000110"
+  "layer of neocortex": "UBERON:0002301"
+  "projection type": "PATO:..."
+
+relations:
+  part_of: "BFO:0000050"
+  in_taxon: "RO:0002162"
+  has_soma_location: "RO:0002100"
+  bearer_of: "RO:0002162"
+
+vars:
+  gross_cell_type: "'cell'"
+  taxon: "'Vertebrata <vertebrates>'"
+  brain_region: "'regional part of brain'"
+  projection_type: "'projection type'"
+
+data_vars:
+  cell_set_preferred_alias: "xsd:string"
+
+list_vars:
+  minimal_markers: "'sequence_feature'"
+  allen_markers: "'sequence_feature'"
+  layers: "'layer of neocortex'"
+
+internal_vars:
+  - var_name: minimal_markers_cat
+    input: minimal_markers
+    apply:
+      join:
+        sep: ','
+  - var_name: allen_markers_cat
+    input: allen_markers
+    apply:
+      join:
+        sep: ','
+  - var_name: cortical_layer_cat
+    input: layers
+    apply:
+      join:
+        sep: ' or '
+
+name:
+   text: "%s %s %s (%s)"
+   vars:
+      - cell_set_preferred_alias
+      - brain_region
+      - gross_cell_type
+      - taxon
+
+def:
+  multi_clause:
+    sep: " "
+    clauses:
+      - text: 'A %s of the %s %s. These cells can be distinguished from other cells in the %s by their expression of %s.'
+        vars:
+          - gross_cell_type
+          - taxon
+          - brain_region
+          - brain_region
+          - minimal_markers_cat
+        sub_clauses:
+          - sep: ' '
+          - clauses:
+              - text: 'These cells also express %s.'
+                vars:
+                  - allen_markers_cat
+              - text: 'These cells have projection type %s.'
+                vars:
+                  - projection_type
+              - text: 'The soma of these cells in located in: %s.'
+                vars:
+                  - cortical_layer_cat
+
+generated_synonyms:
+   - text: "%s expressing %s of %s (%s)"
+     vars:
+        - minimal_markers_cat
+        - gross_cell_type
+        - brain_region
+        - taxon
+
+logical_axioms:
+   - axiom_type: subClassOf
+     text: "'in_taxon' some %s"
+     vars:
+        - taxon
+   - axiom_type: subClassOf
+     text: "%s"
+     vars:
+       - gross_cell_type
+   - axiom_type: subClassOf
+     text: "'bearer_of' some %s"
+     vars:
+       - projection_type
