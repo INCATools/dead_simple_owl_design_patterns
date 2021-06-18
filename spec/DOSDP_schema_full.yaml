@@ -59,7 +59,7 @@ definitions:
   printf_annotation:
     type: object
     additionalProperties: False
-    one_of:
+    oneOf:
       - required: [ annotationProperty, text ]
       - required: [ multi_clause ]
     properties:
@@ -132,7 +132,7 @@ definitions:
   printf_owl:
     type: object
     additionalProperties: False
-    one_of:
+    oneOf:
       - required: [ axiom_type, text, vars ]
       - required: [ multi_clause ]
     properties:
@@ -168,7 +168,7 @@ definitions:
   printf_owl_convenience:
     type: object
     additionalProperties: False
-    one_of:
+    oneOf:
       - required: [ text, vars ]
       - required: [ multi_clause ]
     properties:
@@ -240,7 +240,7 @@ definitions:
   printf_annotation_obo:
     type: object
     additionalProperties: False
-    one_of:
+    oneOf:
       - required: [text, vars]
       - required: [multi_clause]
     properties:
