@@ -51,7 +51,10 @@ def test_vars(pattern):
         vars.update(set(pattern['data_vars'].keys()))
     if 'substitutions' in pattern.keys():
         subvars = [X['out'] for X in pattern['substitutions']]
-        vars.update(set(subvars))       
+        vars.update(set(subvars))
+    if 'internal_vars' in pattern.keys():
+        internal_vars = [X['var_name'] for X in pattern['internal_vars']]
+        vars.update(set(internal_vars))
     expr = parse('*..vars')
     var_fields = [match for match in expr.find(pattern)]
     stat = True
