@@ -73,7 +73,7 @@ class DocumentGenerationCase(unittest.TestCase):
         document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                                              "../positive_test_set/patterns/data/acute.yaml"))
         self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                                    "../generic_test/acute.md")))
+                                                    "./acute.md")))
 
     def test_pattern_interface_two_param(self):
         document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
@@ -102,7 +102,7 @@ class DocumentGenerationCase(unittest.TestCase):
         document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                                              "../positive_test_set/patterns/data/dummy.yaml"))
         self.assertFalse(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                                     "../generic_test/dummy.md")))
+                                                     "./dummy.md")))
 
     def test_pattern_interface_folder_none_params(self):
         document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
@@ -145,8 +145,7 @@ class DocumentGenerationCase(unittest.TestCase):
 
     def test_schema_interface(self):
         document.generate_schema_documentation()
-        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                                    "./dosdp_schema.md")))
+        self.assertTrue(os.path.exists(os.path.join(os.getcwd(), "./dosdp_schema.md")))
 
     def test_schema_interface_single_param(self):
         document.generate_schema_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
