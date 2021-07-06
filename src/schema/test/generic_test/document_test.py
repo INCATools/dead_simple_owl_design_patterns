@@ -35,9 +35,9 @@ class DocumentGenerationCase(unittest.TestCase):
                                    "../positive_test_set/patterns/data/generated/overview.md"))
 
         if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                       "./dosdp_schema2.md")):
+                                       "./dosdp_schema.md")):
             os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                   "./dosdp_schema2.md"))
+                                   "./dosdp_schema.md"))
 
         if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        "../positive_test_set/patterns/data/generated/schema.md")):
@@ -62,8 +62,6 @@ class DocumentGenerationCase(unittest.TestCase):
     def test_is_schema(self):
         self.assertTrue(pattern_doc.is_dosdp_pattern_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                                                     "../positive_test_set/patterns/anchored_membrane_component.yaml")))
-        self.assertFalse(pattern_doc.is_dosdp_pattern_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                                                     "../../dosdp_schema2.yaml")))
         self.assertFalse(pattern_doc.is_dosdp_pattern_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                                                      "../../dosdp_schema.yaml")))
         self.assertTrue(pattern_doc.is_dosdp_pattern_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
@@ -148,7 +146,7 @@ class DocumentGenerationCase(unittest.TestCase):
     def test_schema_interface(self):
         document.generate_schema_documentation()
         self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                                    "./dosdp_schema2.md")))
+                                                    "./dosdp_schema.md")))
 
     def test_schema_interface_single_param(self):
         document.generate_schema_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),

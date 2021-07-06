@@ -14,7 +14,7 @@ CROSS_REF_TERM_ALT = "Values from *"
 
 logging.basicConfig(level=logging.INFO)
 
-DOSDP_SCHEMA = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../../schema/dosdp_schema2.yaml")
+DOSDP_SCHEMA = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../../schema/dosdp_schema.yaml")
 DOSDP_SCHEMA_MD = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../../schema/dosdp_schema.md")
 DOSDP_DOCUMENTATION_CONF = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                         "../../../schema/dosdp_schema_doc.ini")
@@ -153,7 +153,8 @@ def handle_one_of_definitions(plain_documentation):
                     element_lines = ["- **`annotations`** *(array)*: One of the followings:"]
                     one_of_defs = definitions[key]["oneOf"]
                     for one_of_item in one_of_defs:
-                        element_lines.append("  - **Items**: Refer to *" + one_of_item["$ref"] + "*.")
+                        if "$ref" in one_of_item:
+                            element_lines.append("  - **Items**: Refer to *" + one_of_item["$ref"] + "*.")
                     plain_documentation[DEFINITION_PREFIX + key] = element_lines
         except YAMLError as exc:
             logging.error('Failed to load pattern file: ' + DOSDP_SCHEMA)
