@@ -72,8 +72,7 @@ class DocumentGenerationCase(unittest.TestCase):
     def test_pattern_interface_single_param(self):
         document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                                              "../positive_test_set/patterns/data/acute.yaml"))
-        self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                                    "./acute.md")))
+        self.assertTrue(os.path.exists(os.path.join(os.getcwd(), "./acute.md")))
 
     def test_pattern_interface_two_param(self):
         document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
