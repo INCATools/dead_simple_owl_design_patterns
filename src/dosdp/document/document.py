@@ -34,8 +34,7 @@ def generate_pattern_documentation(yaml_location, md_location=None, sample_data_
     """
     logging.info("Documenting pattern file: " + yaml_location)
     if md_location is None:
-        file_name = os.path.basename(yaml_location)
-        md_location = os.path.splitext(file_name)[0] + ".md"
+        md_location = os.path.splitext(yaml_location)[0] + ".md"
 
     if os.path.isdir(yaml_location):
         if not yaml_location.endswith(os.path.sep):
