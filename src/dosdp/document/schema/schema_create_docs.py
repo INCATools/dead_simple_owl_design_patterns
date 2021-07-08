@@ -196,9 +196,10 @@ def print_element(element, md_out, plain_doc, prefix="", nesting_list=[], in_ref
     in order to prevent indefinite circular references.
     """
     # prefix = ">" * (len(nesting_list))
-    indentation = prefix + (" " * (len(nesting_list) % 2))
+    indentation = prefix + ("  " * (len(nesting_list) % 2))
     lines = plain_doc[element]
 
+    # postpone writing references (as last items) to make it more readable
     reference_defs = list()
     reference_elements = dict()
     is_annotation = False
@@ -226,18 +227,19 @@ def print_element(element, md_out, plain_doc, prefix="", nesting_list=[], in_ref
         else:
             is_annotation = False
             if not (element.startswith(DEFINITION_PREFIX) and count == 0 and not in_reference) \
-                    and "- **Items**" not in line:
+                    and "- **Items**" not in line and "_annotation`** *(object)*:" not in line:
                 md_out.write("%s\n" % (indentation + line))
 
     for count, reference in enumerate(reference_defs):
-        if "**`annotations`** *(list)*: One of the followings:" not in reference:
-            # skip 'one of' definition lines
+        if "**`annotations`** *(list)*: One of the followings:" in reference:
+            md_out.write("%s\n" % (indentation + "*Use one of the followings:*"))
+        else:
             md_out.write("%s\n" % reference)
         for element in reference_elements[reference]:
             if element not in nesting_list:
                 md_out.write("\n")
                 print_element(element, md_out, plain_doc,
-                              "" if len(nesting_list) == 1 else ">" + prefix, nesting_list, in_reference=True)
+                              prefix if prefix.startswith(">") else ">" + prefix, nesting_list, in_reference=True)
 
 
 def customize_doc_content(line):
