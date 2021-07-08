@@ -34,7 +34,7 @@ def generate_pattern_documentation(yaml_location, md_location=None, sample_data_
     """
     logging.info("Documenting pattern file: " + yaml_location)
     if md_location is None:
-        md_location = str(yaml_location).split(".yaml")[0] + ".md"
+        md_location = os.path.splitext(yaml_location)[0] + ".md"
 
     if os.path.isdir(yaml_location):
         if not yaml_location.endswith(os.path.sep):
@@ -49,7 +49,7 @@ def generate_pattern_documentation(yaml_location, md_location=None, sample_data_
             patterns_create_overview.create_overview(yaml_location,
                                                      md_file=os.path.join(md_location, "overview.md"),
                                                      matches_dir=sample_data_dir)
-    elif yaml_location.endswith('.yaml') or yaml_location.endswith('.yaml'):
+    elif yaml_location.endswith('.yaml') or yaml_location.endswith('.yml'):
         create_indv_pattern_doc(yaml_location, md_location, sample_data_dir)
     else:
         logging.error("Given path has unsupported file extension:", yaml_location)

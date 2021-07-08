@@ -11,13 +11,15 @@ class DocumentGenerationCase(unittest.TestCase):
         """
         Delete files generated during tests
         """
-        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../generic_test/acute.md")):
-            os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../generic_test/acute.md"))
-
         if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        "../positive_test_set/patterns/data/acute.md")):
             os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                    "../positive_test_set/patterns/data/acute.md"))
+
+        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                       "../positive_test_set/patterns/data/acute2.md")):
+            os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                   "../positive_test_set/patterns/data/acute2.md"))
 
         if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        "../positive_test_set/patterns/data/generated/acute.md")):
@@ -34,10 +36,8 @@ class DocumentGenerationCase(unittest.TestCase):
             os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                    "../positive_test_set/patterns/data/generated/overview.md"))
 
-        if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                       "./dosdp_schema.md")):
-            os.remove(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                   "./dosdp_schema.md"))
+        # if os.path.exists(os.path.join(os.getcwd(), "./dosdp_schema.md")):
+        #     os.remove(os.path.join(os.getcwd(), "./dosdp_schema.md"))
 
         if os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                        "../positive_test_set/patterns/data/generated/schema.md")):
@@ -79,9 +79,9 @@ class DocumentGenerationCase(unittest.TestCase):
         document.generate_pattern_documentation(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                                              "../positive_test_set/patterns/data/acute.yaml"),
                                                 os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                                             "../positive_test_set/patterns/data/acute.md"))
+                                                             "../positive_test_set/patterns/data/acute2.md"))
         self.assertTrue(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                                    "../positive_test_set/patterns/data/acute.md")))
+                                                    "../positive_test_set/patterns/data/acute2.md")))
 
         self.assertFalse(os.path.exists(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                                      "../positive_test_set/patterns/data/overview.md")))

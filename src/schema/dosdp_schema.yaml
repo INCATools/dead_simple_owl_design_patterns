@@ -424,11 +424,14 @@ properties:
     properties:
       var_name:
         pattern: "^[A-Za-z_][A-Za-z0-9_]*$"
-      apply: { $ref: "#/definitions/function" }
+        description: >
+          Name of the internal variable to be defined. Expected naming pattern is ^[A-Za-z_][A-Za-z0-9_]*$
+        type: string
       input:
         description: >
           A list_vars or data_list_vars variable to which the given function applied.
         type: string
+      apply: { $ref: "#/definitions/function" }
     description: >
       List of internal variable construction definitions. Given function is applied to the given multi value input
       and the result is defined as a new internal variable.
