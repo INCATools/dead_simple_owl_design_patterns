@@ -112,12 +112,14 @@
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
-  >  - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-  >  - **`clauses`** *(list)*: List of optional clauses.
-    >    - **`text`** *(string)*: A print format string.
-    >    - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
-    >    - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+>    - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
+>    - **`clauses`** *(list)*: List of optional clauses.
+>        - **`text`** *(string)*: A print format string.
+>        - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>        - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+>            - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -125,6 +127,7 @@
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`logical_axioms`** *(list)*
@@ -137,6 +140,7 @@
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -145,7 +149,9 @@
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -153,6 +159,7 @@
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 ### Logical Convenience Fields
@@ -168,6 +175,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -176,7 +184,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -184,6 +194,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`subClassOf`**:
@@ -195,6 +206,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -203,7 +215,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -211,6 +225,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`GCI`**:
@@ -222,6 +237,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -230,7 +246,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -238,6 +256,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`disjointWith`**:
@@ -249,6 +268,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -257,7 +277,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -265,6 +287,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 ### OBO fields
@@ -281,6 +304,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -289,7 +313,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -297,6 +323,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`comment`**: Mapped to `rdfs:comment`.
@@ -309,6 +336,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -317,7 +345,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -325,6 +355,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`def`**: Mapped to `obo:IAO_0000115`.
@@ -337,6 +368,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -345,7 +377,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -353,6 +387,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`namespace`**: Mapped to `oboInOwl:hasOBONamespace`.
@@ -365,6 +400,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -373,7 +409,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -381,6 +419,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`exact_synonym`**: Mapped to `oboInOwl:hasExactSynonym`.
@@ -418,6 +457,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -426,7 +466,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -434,6 +476,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`generated_narrow_synonyms`** *(list)*: An OBO convenience field to allow the specification of narrow synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
@@ -446,6 +489,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -454,7 +498,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -462,6 +508,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`generated_broad_synonyms`** *(list)*: An OBO convenience field to allow the specification of broad synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
@@ -474,6 +521,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -482,7 +530,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -490,6 +540,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 - **`generated_related_synonyms`** *(list)*: An OBO convenience field to allow the specification of related synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.
@@ -502,6 +553,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
           - **`text`** *(string)*: A print format string.
           - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+              - ...
     - **`annotations`** *(list)*
 
 >  *Use one of the followings:*
@@ -510,7 +562,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`text`** *(string)*: A print format string.
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
+>      - ...
 >  - **`annotations`** *(list)*
+>    - ...
 
 >  - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >  - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -518,6 +572,7 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >  - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >  - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >  - **`annotations`** *(list)*
+>    - ...
 
 
 ### Instance Graph Spec
@@ -537,12 +592,14 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >    - **`text`** *(string)*: A print format string.
 >    - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >    - **`multi_clause`**
-  >      - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-  >      - **`clauses`** *(list)*: List of optional clauses.
-    >      - **`text`** *(string)*: A print format string.
-    >      - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
-    >      - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+>        - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
+>        - **`clauses`** *(list)*: List of optional clauses.
+>          - **`text`** *(string)*: A print format string.
+>          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>          - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
+>              - ...
 >    - **`annotations`** *(list)*
+>        - ...
 
 >    - **`annotationProperty`** *(string)*: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.
 >    - **`value`** *(string)*: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.
@@ -550,5 +607,6 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >    - **`annotationProperty`** *(string)*: A string corresponding to a key in the annotation property dictionary.
 >    - **`var`** *(string)*: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.
 >    - **`annotations`** *(list)*
+>        - ...
 
 

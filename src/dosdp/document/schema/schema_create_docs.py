@@ -223,7 +223,10 @@ def print_element(element, md_out, plain_doc, prefix="", nesting_list=[], in_ref
                     # md_out.write("%s\n" % (indentation + line))
                 if (DEFINITION_PREFIX + referred_element) not in nesting_list:
                     print_element(DEFINITION_PREFIX + referred_element, md_out, plain_doc,
-                                  "" if len(nesting_list) == 1 else "  " + indentation, nesting_list)
+                                  "" if len(nesting_list) == 1 else indentation + "  ", nesting_list)
+                else:
+                    # ellipsis to indicate recursion
+                    md_out.write("%s\n" % (indentation + " " * (len(line) - len(line.lstrip())) + "  - ..."))
         else:
             is_annotation = False
             if not (element.startswith(DEFINITION_PREFIX) and count == 0 and not in_reference) \
@@ -240,6 +243,10 @@ def print_element(element, md_out, plain_doc, prefix="", nesting_list=[], in_ref
                 md_out.write("\n")
                 print_element(element, md_out, plain_doc,
                               prefix if prefix.startswith(">") else ">" + prefix, nesting_list, in_reference=True)
+            else:
+                # ellipsis to indicate recursion
+                line_content = reference.replace(">", "")
+                md_out.write("%s\n" % (indentation + " " * (len(line_content) - len(line_content.lstrip())) + "  - ..."))
 
 
 def customize_doc_content(line):
