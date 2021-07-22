@@ -27,6 +27,8 @@ jobs:
     - name: Install Project Dependencies
       run: |
         pip install -r requirements.txt
+    - name: Auto-Generate schema documentation
+      run: PYTHONPATH=./src:$PYTHONPATH python -m dosdp document --schema -o ./src/schema/
     - name: Package Distribution
       run: >-
         python
