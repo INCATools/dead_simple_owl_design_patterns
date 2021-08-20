@@ -1,0 +1,56 @@
+pattern_name: brainCellClasses
+pattern_iri: http://purl.obolibrary.org/obo/odk/brainCellClasses.yaml
+description: "Class template for BDS."
+
+classes:
+  "cell": "CL:0000000"
+  "thing": "owl:Thing"
+
+relations:
+  expresses: "RO:0002292"
+
+annotationProperties:
+  hasExactSynonym: "oboInOwl:hasExactSynonym"
+  rdfsComment: "rdfs:comment"
+  hasDbXref: "oboInOwl:hasDbXref"
+
+list_vars:
+  Expresses: "'thing'"
+  Expresses2: "'thing'"
+
+vars:
+  Classification: "'cell'"
+
+data_list_vars:
+  Curated_synonyms: "xsd:string"
+  Expresses_comment: "xsd:string"
+  Expresses_pub: "xsd:string"
+
+data_vars:
+  Comment: "xsd:string"
+
+comment:
+   text: "%s"
+   vars:
+      - Comment
+
+logical_axioms:
+   - axiom_type: subClassOf
+     multi_clause:
+      sep: " may "
+      clauses:
+        - text: "'expresses' some %s"
+          vars:
+            - Expresses
+     annotations:
+       - annotationProperty: rdfsComment
+         text: "%s"
+         vars:
+           - Expresses_comment
+       - annotationProperty: hasDbXref
+         multi_clause:
+           sep: " "
+           clauses:
+             - text: '%s'
+               vars:
+                 - Expresses_pub
