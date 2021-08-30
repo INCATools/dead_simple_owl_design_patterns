@@ -18,7 +18,11 @@ definitions:
       clauses:
         type: array
         description: >
-          List of optional clauses.
+           List of optional clauses.  Rules for optional clauses:  list_vars may be passed, 
+           but only one list_var per multi-clause printf is permitted. If an empty list_var is passed,
+           the clause, and any subclauses, are omitted. If list_var with length n is passed, the 
+           clause is repeated n times, using the specified separtor to join clauses.  There is no 
+           effect on the number of subclauses in this case.  
         items: { $ref: '#/definitions/printf_clause' }
 
   printf_clause:
@@ -34,7 +38,10 @@ definitions:
           print format string. Each entry must correspond to the name of a variable
           specified in either the 'vars', 'internal_vars' or the data_var field of the pattern.
           Where an OWL entity is specified, the label for the OWL entity should be
-          used in the substitution.
+          used in the substitution.   
+          SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. 
+          If an list is empty, the clause and any subclauses must not be added.  for lists of 
+          length > 1, mutiple clauses should be added, using the specified separator 
         type: array
         items: string
       sub_clauses:
