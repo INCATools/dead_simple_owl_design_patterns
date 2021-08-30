@@ -113,9 +113,9 @@
 >  - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >  - **`multi_clause`**
 >    - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
->    - **`clauses`** *(list)*: List of optional clauses.
+>    - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
 >        - **`text`** *(string)*: A print format string.
->        - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>        - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
 >        - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
 >            - ...
 >  - **`annotations`** *(list)*
@@ -136,9 +136,9 @@
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. An empty var list can be specified simply by leaving this field out.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -171,9 +171,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -202,9 +202,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -233,9 +233,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -264,9 +264,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -300,9 +300,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -332,9 +332,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -364,9 +364,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -396,9 +396,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -453,9 +453,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -485,9 +485,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -517,9 +517,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -549,9 +549,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
     - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
     - **`multi_clause`**
         - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
-        - **`clauses`** *(list)*: List of optional clauses.
+        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
           - **`text`** *(string)*: A print format string.
-          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
           - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
               - ...
     - **`annotations`** *(list)*
@@ -593,9 +593,9 @@ Where only one of any OWL axiom type is present, these convenience fields may be
 >    - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.
 >    - **`multi_clause`**
 >        - **`sep`** *(string)*: A string used as clause separator while aggregating multiple clauses.
->        - **`clauses`** *(list)*: List of optional clauses.
+>        - **`clauses`** *(list)*: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.
 >          - **`text`** *(string)*: A print format string.
->          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.
+>          - **`vars`** *(list)*: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length > 1, mutiple clauses should be added, using the specified separator.
 >          - **`sub_clauses`** *(list)*: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.
 >              - ...
 >    - **`annotations`** *(list)*
