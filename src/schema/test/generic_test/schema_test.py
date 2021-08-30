@@ -5,7 +5,7 @@ from ruamel.yaml import YAML, YAMLError
 from jsonschema import Draft4Validator
 
 SCHEMA = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                      "../../../../spec/DOSDP_schema_full.yaml")
+                      "../../dosdp_schema.yaml")
 POSITIVE_PATTERN_1 = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                   "../positive_test_set/patterns/acute.yaml")
 POSITIVE_PATTERN_2 = os.path.join(os.path.dirname(os.path.realpath(__file__)),
