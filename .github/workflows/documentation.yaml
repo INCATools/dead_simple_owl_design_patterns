@@ -5,10 +5,12 @@ on:
   workflow_dispatch:
   release:
     types: [created]
-  # For testing purpose in dev branch, delete this trigger afterwards
   push:
+    branches:
+      - main
     paths:
-      - '.github/workflows/documentation.yaml'
+      - 'README.md'
+      - 'docs/**'
 
 jobs:
   build-and-publish:
