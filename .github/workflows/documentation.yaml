@@ -30,6 +30,10 @@ jobs:
       - name: Copy the Readme
         run: |
           cp "./README.md" "./docs/overview.md"
+#      change relative paths to docs folder in the README '(docs/xx'  -> '(xx'
+      - name: Update relative paths
+        run: |
+          sed -i 's/(docs\//(/g' ./docs/overview.md
 #      - name: Commit documentation
 #        run: |
 #          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
