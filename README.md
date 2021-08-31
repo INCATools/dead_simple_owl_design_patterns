@@ -29,7 +29,7 @@ Human readability and editability requires that Manchester syntax be written usi
 
 ## Specification:
 
-See [full specification documentation](https://github.com/INCATools/dead_simple_owl_design_patterns/tree/master/src/schema/dosdp_schema.md)
+See [full specification documentation](https://github.com/INCATools/dead_simple_owl_design_patterns/tree/master/docs/dosdp_schema.md)
 
 ## Setup
 
@@ -41,11 +41,11 @@ See https://pypi.org/project/dosdp/
 
 ## Validator spec
 
-See [validator documentation](https://github.com/INCATools/dead_simple_owl_design_patterns/tree/master/src/dosdp/validator.md)
+See [validator documentation](https://github.com/INCATools/dead_simple_owl_design_patterns/tree/master/docs/validator.md)
 
 ## Documentation generation spec
 
-See [documentation_generation](https://github.com/INCATools/dead_simple_owl_design_patterns/tree/master/src/dosdp/document/document.md)
+See [documentation_generation](https://github.com/INCATools/dead_simple_owl_design_patterns/tree/master/docs/document.md)
 
 ## Implementation
 

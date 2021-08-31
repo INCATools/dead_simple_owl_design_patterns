@@ -1,0 +1,10 @@
+site_name: Dead simple owl design pattern (DOS-DP)
+theme: readthedocs
+nav:
+  - Getting started: index.md
+  - Cite: cite.md
+  - How-to guides:
+      - Overview: overview.md
+      - Schema Specification: dosdp_schema.md
+      - Documentation Generation: document.md
+      - Validation: validator.md

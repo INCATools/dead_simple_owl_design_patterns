@@ -1,0 +1,29 @@
+name: Publish mkdocs documentation
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  release:
+    types: [created]
+
+jobs:
+  build-and-publish:
+    name: Publish mkdocs documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Copy the Readme
+        run: |
+          cp "./README.md" "./docs/overview.md"
+#      - name: Commit documentation
+#        run: |
+#          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+#          git config user.name "github-actions[bot]"
+#          git add ./docs/overview.md
+#          git commit -m "Automatic documentation update." || echo "No changes to commit"
+#          git push || echo "No changes to push"
+      - run: mkdocs gh-deploy --force
