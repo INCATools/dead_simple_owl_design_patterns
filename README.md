@@ -3,6 +3,7 @@
 # Dead simple owl design pattern (DOS-DP) exchange format
 
 ## For details please see:
+TEST
 
 [Dead Simple OWL Design Patterns](https://jbiomedsem.biomedcentral.com/articles/10.1186/s13326-017-0126-0)
 David Osumi-Sutherland, Melanie Courtot, James P. Balhoff and Christopher Mungall
