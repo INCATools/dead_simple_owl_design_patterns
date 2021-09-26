@@ -27,9 +27,11 @@ Human readability and editability requires that Manchester syntax be written usi
 
 * Variables are specified in a dictionary with variable name as key and value as range specified as a Manchester syntax expresssion.
 
-## Specification:
+## DOSDP Specification:
 
-See [full specification documentation](docs/dosdp_schema.md)
+[JSON schema specification in YAML](https://github.com/INCATools/dead_simple_owl_design_patterns/blob/master/src/schema/dosdp_schema.yaml)
+
+The same specification [rendered in mardown](docs/dosdp_schema.md), with references resolved. This is generate from the original spec by the dosdp document comment (see below for details). 
 
 ## Setup
 
