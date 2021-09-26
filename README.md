@@ -29,9 +29,9 @@ Human readability and editability requires that Manchester syntax be written usi
 
 ## DOSDP Specification:
 
-[JSON schema specification in YAML](https://github.com/INCATools/dead_simple_owl_design_patterns/blob/master/src/schema/dosdp_schema.yaml)
+[JSON schema specification in YAML](https://github.com/INCATools/dead_simple_owl_design_patterns/blob/master/src/schema/dosdp_schema.yaml).
 
-The same specification [rendered in mardown](docs/dosdp_schema.md), with references resolved. This is generate from the original spec by the dosdp document comment (see below for details). 
+The same specification [rendered in mardown](docs/dosdp_schema.md), with references resolved. This is generated from the original spec using the `dosdp document` command (see below for details). 
 
 ## Setup
 
