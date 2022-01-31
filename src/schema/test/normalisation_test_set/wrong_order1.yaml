@@ -1,0 +1,47 @@
+pattern_name: acute
+
+description: 'This pattern is applied to diseases that are described as having an acute onset, i.e. the sudden appearance of disease manifestations over a short period of time.
+
+Examples: [acute bronchiolitis](http://purl.obolibrary.org/obo/MONDO_0020680),
+  [acute liver failure](http://purl.obolibrary.org/obo/MONDO_0019542)'
+
+pattern_iri: http://purl.obolibrary.org/obo/mondo/patterns/acute.yaml
+
+relations:
+  has modifier: RO:0002573
+
+annotationProperties:
+  exact_synonym: oio:hasExactSynonym
+  related_synonym: oio:hasRelatedSynonym
+
+classes:
+  acute: PATO:0000389
+  disease: MONDO:0000001
+
+vars:
+  disease: '''disease'''
+
+name:
+  vars:
+  - disease
+  text: acute %s
+
+equivalentTo:
+  vars:
+  - disease
+  text: '%s and ''has modifier'' some ''acute'''
+
+annotations:
+- text: '%s, acute'
+  annotationProperty: exact_synonym
+  vars:
+  - disease
+
+def:
+  text: Acute form of %s.
+  vars:
+  - disease
+
+contributors:
+- https://orcid.org/0000-0002-6601-2165
+- https://orcid.org/0000-0001-5208-3432
