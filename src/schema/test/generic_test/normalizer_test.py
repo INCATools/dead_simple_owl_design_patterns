@@ -13,6 +13,8 @@ WRONG_SPACING = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                   "../normalisation_test_set/wrong_spacing.yaml")
 NORMALISED_OUTPUT = Path(os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                       "../normalisation_test_set/normalised_output.yaml"))
+COMMENTS_ORDER = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                              "../normalisation_test_set/comments_ordering.yaml")
 
 
 class NormalizerTest(unittest.TestCase):
@@ -33,6 +35,11 @@ class NormalizerTest(unittest.TestCase):
                           "annotationProperties", "vars", "annotations", "equivalentTo", "name", "def"]
 
         self.assertEqual(list(output.keys()), expected_order)
+
+    # def test_comment_order_normalisation(self):
+    #     normalizer.normalise(COMMENTS_ORDER, NORMALISED_OUTPUT)
+    #     print(NORMALISED_OUTPUT)
+    #     output = normalizer.read_yaml_file(NORMALISED_OUTPUT)
 
     def test_sub_element_order_normalisation(self):
         normalizer.normalise(WRONG_ORDER_1, NORMALISED_OUTPUT)
