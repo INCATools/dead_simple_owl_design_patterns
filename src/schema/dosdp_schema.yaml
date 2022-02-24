@@ -348,7 +348,7 @@ properties:
     doc_type: root
 
   tags:
-    type: list
+    type: array
     items: { type: string }
     description: >
        A list of strings used to tag a pattern for the purposes of arbitrary,
