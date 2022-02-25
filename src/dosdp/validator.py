@@ -27,7 +27,7 @@ def test_jschema(validator, pattern):
     if not validator.is_valid(pattern):
         es = validator.iter_errors(pattern)
         for e in es:
-            warnings.warn(" => ".join([str(e.schema_path), str(e.message), str(e.context)]))
+            warnings.warn(str(e.message))
             is_valid = False
 
     return is_valid
@@ -262,7 +262,8 @@ def validate(pattern):
 
     stat = True
     for pattern_doc in pattern_docs:
-        logging.info("Checking %s" % pattern_doc)
+        if len(pattern_docs) > 1:
+            logging.info("Checking %s" % pattern_doc)
         with open(pattern_doc, "r") as stream:
             try:
                 pattern = ryaml.load(stream)

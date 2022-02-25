@@ -30,6 +30,8 @@ NEGATIVE_PATTERN_MULTI_CLAUSE_MULTI_LIST2 = os.path.join(os.path.dirname(os.path
                                                          "../negative_test_set/multi_clause_with_multi_list2.yaml")
 NEGATIVE_PATTERN_UNDECLARED_ANNOT_PROP = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                                                       "../negative_test_set/undeclared_annotation_prop.yaml")
+NEGATIVE_PATTERN_SCHEMA = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                       "../negative_test_set/not_schema_compliant.yaml")
 
 
 class ValidatorTest(unittest.TestCase):
@@ -65,3 +67,6 @@ class ValidatorTest(unittest.TestCase):
 
     def test_undeclared_annotation_prop(self):
         self.assertFalse(validate(NEGATIVE_PATTERN_UNDECLARED_ANNOT_PROP))
+
+    def test_schema_validation(self):
+        self.assertFalse(validate(NEGATIVE_PATTERN_SCHEMA))
