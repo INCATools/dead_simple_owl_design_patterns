@@ -213,12 +213,10 @@ def test_annotation_properties(pattern):
     expr = parse('annotations.[*].annotationProperty')
     used_annotations = [match for match in expr.find(pattern)]
 
-    print(declared_annotations)
     stat = True
     if used_annotations:
         for annotation_prop in used_annotations:
             val = annotation_prop.value
-            print(val)
             if val not in declared_annotations:
                 warnings.warn("Annotation property '%s' didn't declared before use." % val)
                 stat = False
