@@ -27,7 +27,7 @@ def test_jschema(validator, pattern):
     if not validator.is_valid(pattern):
         es = validator.iter_errors(pattern)
         for e in es:
-            warnings.warn(" => ".join([str(e.schema_path), str(e.message), str(e.context)]))
+            warnings.warn(str(e.message))
             is_valid = False
 
     return is_valid
@@ -200,6 +200,29 @@ def test_multi_clause_multi_list(pattern):
     return stat
 
 
+def test_annotation_properties(pattern):
+    """
+    Structurally tests whether an annotation property is declared before use.
+     Args:
+         pattern: schema in yaml format to validate
+
+    Returns: True if all used annotation properties are declared, False otherwise.
+    """
+    declared_annotations = set()
+    if 'annotationProperties' in pattern.keys(): declared_annotations.update(set(pattern['annotationProperties'].keys()))
+    expr = parse('annotations.[*].annotationProperty')
+    used_annotations = [match for match in expr.find(pattern)]
+
+    stat = True
+    if used_annotations:
+        for annotation_prop in used_annotations:
+            val = annotation_prop.value
+            if val not in declared_annotations:
+                warnings.warn("Annotation property '%s' didn't declared before use." % val)
+                stat = False
+    return stat
+
+
 def format_warning(message, category, filename, lineno, line=None):
     return '%s:%s: %s:%s\n' % (filename, lineno, category.__name__, message)
 
@@ -239,7 +262,8 @@ def validate(pattern):
 
     stat = True
     for pattern_doc in pattern_docs:
-        logging.info("Checking %s" % pattern_doc)
+        if len(pattern_docs) > 1:
+            logging.info("Checking %s" % pattern_doc)
         with open(pattern_doc, "r") as stream:
             try:
                 pattern = ryaml.load(stream)
@@ -249,6 +273,7 @@ def validate(pattern):
                 if not test_clause_nesting(pattern): stat = False
                 if not test_axiom_separator(pattern): stat = False
                 if not test_multi_clause_multi_list(pattern): stat = False
+                if not test_annotation_properties(pattern): stat = False
             except YAMLError as exc:
                 stat = False
                 logging.error('Failed to load pattern file: ' + pattern_doc)
