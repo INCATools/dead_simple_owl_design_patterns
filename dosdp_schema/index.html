@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Schema Specification - Dead simple owl design pattern (DOS-DP)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Schema Specification";
+    var mkdocs_page_input_path = "dosdp_schema.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Dead simple owl design pattern (DOS-DP)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Getting started</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../cite/">Cite</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">How-to guides</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Schema Specification</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#owl-entity-dictionaries">OWL Entity Dictionaries</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#var-types">Var Types</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#var-munging">Var Munging</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#axioms">Axioms</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#logical-convenience-fields">Logical Convenience Fields</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#obo-fields">OBO fields</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#instance-graph-spec">Instance Graph Spec</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../document/">Documentation Generation</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../validator/">Validation</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Dead simple owl design pattern (DOS-DP)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>How-to guides &raquo;</li>
+        
+      
+    
+    <li>Schema Specification</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="dosdp">DOSDP</h1>
+<ul>
+<li><a href="#properties">Properties</a></li>
+<li><a href="#owl-entity-dictionaries">OWL Entity Dictionaries</a></li>
+<li><a href="#var-types">Var Types</a></li>
+<li><a href="#var-munging">Var Munging</a></li>
+<li><a href="#axioms">Axioms</a></li>
+<li><a href="#logical-convenience-fields">Logical Convenience Fields</a></li>
+<li><a href="#obo-fields">OBO fields</a></li>
+<li><a href="#instance-graph-spec">Instance Graph Spec</a></li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li>
+<p><strong><code>pattern_name</code></strong> <em>(string)</em>: The name of the pattern.  This must be an ASCII string with no spaces. The only special characters allowed are '_' and '-'. By convention, this is used as the file name of the pattern - with an appropriate extension.</p>
+</li>
+<li>
+<p><strong><code>pattern_iri</code></strong> <em>(string)</em>: A global identifier for the pattern. This can be a full IRI or a CURIE, using the same prefix mappings as other CURIEs in the pattern.</p>
+</li>
+<li>
+<p><strong><code>base_IRI</code></strong> <em>(string)</em>: Specifies the base IRI to be used to generate new classes.</p>
+</li>
+<li>
+<p><strong><code>contributors</code></strong> <em>(list)</em>: A list of authors of a pattern. Each author must be specified using a URL or Curie - we recommend ORCID. We do not recommend that this list is instantiated in terms generated using a pattern, but where it is it should be instantiated as a set of annotation axioms using dc:contributor.</p>
+</li>
+<li>
+<p><strong><code>description</code></strong> <em>(string)</em>: A free text description of the pattern.  Must be UTF-8 encoded.</p>
+</li>
+<li>
+<p><strong><code>examples</code></strong> <em>(list)</em>: A list of example terms implementing this pattern.</p>
+</li>
+<li>
+<p><strong><code>status</code></strong> <em>(string)</em>: Implementation status of pattern. Must be one of: <code>['development', 'published']</code>.</p>
+</li>
+<li>
+<p><strong><code>tags</code></strong> <em>(list)</em>: A list of strings used to tag a pattern for the purposes of arbitrary, cross-cutting grouping of patterns.</p>
+</li>
+<li>
+<p><strong><code>readable_identifiers</code></strong> <em>(list)</em>: A list of annotation properties used as naming fields, in order of preference.</p>
+</li>
+</ul>
+<h3 id="owl-entity-dictionaries">OWL Entity Dictionaries</h3>
+<ul>
+<li>
+<p><strong><code>classes</code></strong> <em>(object)</em>: A dictionary of OWL classes. key :label; value : short form id.</p>
+</li>
+<li>
+<p><strong><code>objectProperties</code></strong> <em>(object)</em>: A dictionary of OWL object properties. key : label; value : short form id.</p>
+</li>
+<li>
+<p><strong><code>relations</code></strong> <em>(object)</em>: A dictionary of OWL object properties. key : label; value : short form id.</p>
+</li>
+<li>
+<p><strong><code>dataProperties</code></strong> <em>(object)</em>: A dictionary of OWL data properties key : label; value : short form id.</p>
+</li>
+<li>
+<p><strong><code>annotationProperties</code></strong> <em>(object)</em>: A dictionary of OWL annotation properties key : label; value : short form id.</p>
+</li>
+</ul>
+<h3 id="var-types">Var Types</h3>
+<ul>
+<li>
+<p><strong><code>vars</code></strong> <em>(object)</em>: A dictionary of variables ranging over OWL classes. Key = variable name, value = variable range as manchester syntax string.</p>
+</li>
+<li>
+<p><strong><code>list_vars</code></strong> <em>(object)</em>: A dictionary of variables refering to lists of owl classes. Key = variable name, value = variable range of items in list specified as a valid OWL data-type.</p>
+</li>
+<li>
+<p><strong><code>data_vars</code></strong> <em>(object)</em>: A dictionary of variables ranging over OWL data-types. Key = variable name, value = variable range specified as a valid OWL data-type.</p>
+</li>
+<li>
+<p><strong><code>data_list_vars</code></strong> <em>(object)</em>: A dictionary of variables rrefering to lists of some specified OWL data-types. Key = variable name, value = variable range of all items in list, specified as a valid OWL data-type.</p>
+</li>
+<li>
+<p><strong><code>internal_vars</code></strong> <em>(list)</em>: List of internal variable construction definitions. Given function is applied to the given multi value input and the result is defined as a new internal variable.</p>
+</li>
+<li><strong><code>var_name</code></strong> <em>(string)</em>: Name of the internal variable to be defined. Expected naming pattern is ^[A-Za-z_][A-Za-z0-9_]*$.</li>
+<li><strong><code>input</code></strong> <em>(string)</em>: A list_vars or data_list_vars variable to which the given function applied.</li>
+<li><strong><code>apply</code></strong>:
+  <em>Use one of the followings:</em></li>
+</ul>
+<blockquote>
+<ul>
+<li><strong><code>join</code></strong></li>
+<li>
+<p><strong><code>sep</code></strong> <em>(string)</em>: A string used as value separator while joining list type (multi value) variables.</p>
+</li>
+<li>
+<p><strong><code>regex_sub</code></strong> <em>(object)</em>: Cannot contain additional properties.</p>
+</li>
+<li><strong><code>in</code></strong> <em>(string)</em>: name of input var.</li>
+<li><strong><code>out</code></strong> <em>(string)</em>: Name of output var.  If input var specified an OWL entity then readable identifier is used as input to substitution.</li>
+<li><strong><code>match</code></strong> <em>(string)</em>: perl style regex match.</li>
+<li><strong><code>sub</code></strong> <em>(string)</em>: perl style regex sub.  May include backreferences.</li>
+</ul>
+</blockquote>
+<h3 id="var-munging">Var Munging</h3>
+<ul>
+<li><strong><code>substitutions</code></strong> <em>(list)</em><ul>
+<li><strong><code>in</code></strong> <em>(string)</em>: name of input var.</li>
+<li><strong><code>out</code></strong> <em>(string)</em>: Name of output var.  If input var specified an OWL entity then readable identifier is used as input to substitution.</li>
+<li><strong><code>match</code></strong> <em>(string)</em>: perl style regex match.</li>
+<li><strong><code>sub</code></strong> <em>(string)</em>: perl style regex sub.  May include backreferences.</li>
+</ul>
+</li>
+</ul>
+<h3 id="axioms">Axioms</h3>
+<ul>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong></li>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.<ul>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>logical_axioms</code></strong> <em>(list)</em><ul>
+<li><strong><code>axiom_type</code></strong> <em>(string)</em>: OWL axiom type expressed as manchester syntax: equivalentTo, subClassOf, disjointWith. GCI  - for general class inclusion axioms, is also valid (although missing from manchester syntax.) This specifies the axiom type to be generated from the text following substitution.'. Must be one of: <code>['equivalentTo', 'subClassOf', 'disjointWith', 'GCI']</code>.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<h3 id="logical-convenience-fields">Logical Convenience Fields</h3>
+<p>Where only one of any OWL axiom type is present, these convenience fields may be used.</p>
+<ul>
+<li><strong><code>equivalentTo</code></strong>:<ul>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>subClassOf</code></strong>:<ul>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>GCI</code></strong>:<ul>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>disjointWith</code></strong>:<ul>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string in OWL Manchester syntax. Each entry must correspond to an entry in o the name of a var in the var field of the pattern. Entries in single quotes must correspond to the labels of entries in owl_entity dictionaries (classes, relations, dataProperties).</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<h3 id="obo-fields">OBO fields</h3>
+<ul>
+<li><strong><code>name</code></strong>: Mapped to <code>rdfs:label</code>.<ul>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>comment</code></strong>: Mapped to <code>rdfs:comment</code>.<ul>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>def</code></strong>: Mapped to <code>obo:IAO_0000115</code>.<ul>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>namespace</code></strong>: Mapped to <code>oboInOwl:hasOBONamespace</code>.<ul>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p><strong><code>exact_synonym</code></strong>: Mapped to <code>oboInOwl:hasExactSynonym</code>.</p>
+<ul>
+<li><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</li>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references. Use of this field should add the same xref set to all annotation axioms generated.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>narrow_synonym</code></strong>: Mapped to <code>oboInOwl:hasNarrowSynonym</code>.</p>
+<ul>
+<li><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</li>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references. Use of this field should add the same xref set to all annotation axioms generated.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>related_synonym</code></strong>: Mapped to <code>oboInOwl:hasRelatedSynonym</code>.</p>
+<ul>
+<li><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</li>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references. Use of this field should add the same xref set to all annotation axioms generated.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>broad_synonym</code></strong>: Mapped to <code>oboInOwl:hasBroadSynonym</code>.</p>
+<ul>
+<li><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</li>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references. Use of this field should add the same xref set to all annotation axioms generated.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>xref</code></strong>: Mapped to <code>oboInOwl:hasDbXref</code>.</p>
+<ul>
+<li><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</li>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references. Use of this field should add the same xref set to all annotation axioms generated.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>generated_synonyms</code></strong> <em>(list)</em>: An OBO convenience field to allow the specification of exact synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.</p>
+<ul>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>generated_narrow_synonyms</code></strong> <em>(list)</em>: An OBO convenience field to allow the specification of narrow synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.<ul>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>generated_broad_synonyms</code></strong> <em>(list)</em>: An OBO convenience field to allow the specification of broad synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.<ul>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong><code>generated_related_synonyms</code></strong> <em>(list)</em>: An OBO convenience field to allow the specification of related synonyms generated by interpolation of OWL entity names into printf text. Each entry may be annotated.<ul>
+<li><strong><code>xrefs</code></strong> <em>(string)</em>: Mapped to <code>oboInOwl:hasDbXref</code>.  Takes the name of a single data_list_var specifying a list of database cross references.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li>...</li>
+</ul>
+</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>
+<p>...</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+<li>...</li>
+</ul>
+</blockquote>
+<h3 id="instance-graph-spec">Instance Graph Spec</h3>
+<ul>
+<li><strong><code>instance_graph</code></strong> <em>(object)</em>: Cannot contain additional properties.</li>
+<li><strong><code>nodes</code></strong> <em>(object)</em>: Key = name of individual within this pattern doc Value = Type of individual specified using either the quoted name of a class in the class dictionary of this pattern or a var name.  This field does not support typing via anonymous class expressions.</li>
+<li><strong><code>edges</code></strong> <em>(list)</em><ul>
+<li><strong><code>edge</code></strong> <em>(list)</em>: A triple specified as an ordered array with 3 elements [subject, rel, object] * rel must be the quoted name of a relation from the relations (object property) dictionary. * subject and object must be the name of an individual specified in the nodes field.</li>
+<li><strong><code>not</code></strong> <em>(boolean)</em>: Optional field for negated OPAs.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em>Use one of the followings:</em></p>
+<ul>
+<li><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</li>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars' field or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution.  An empty var list can be specified simply by leaving this field out.</li>
+<li><strong><code>multi_clause</code></strong><ul>
+<li><strong><code>sep</code></strong> <em>(string)</em>: A string used as clause separator while aggregating multiple clauses.</li>
+<li><strong><code>clauses</code></strong> <em>(list)</em>: List of optional clauses.  Rules for optional clauses:  list_vars may be passed, but only one list_var per multi-clause printf is permitted. If an empty list_var is passed, the clause, and any subclauses, are omitted. If list_var with length n is passed, the clause is repeated n times, using the specified separtor to join clauses.  There is no effect on the number of subclauses in this case.<ul>
+<li><strong><code>text</code></strong> <em>(string)</em>: A print format string.</li>
+<li><strong><code>vars</code></strong> <em>(list)</em>: An ordered list of variables for substitution into the accompanying print format string. Each entry must correspond to the name of a variable specified in either the 'vars', 'internal_vars' or the data_var field of the pattern. Where an OWL entity is specified, the label for the OWL entity should be used in the substitution. SPECIAL RULES FOR multi_clause_printf context: In this context, list_vars are permitted. If an list is empty, the clause and any subclauses must not be added.  for lists of length &gt; 1, mutiple clauses should be added, using the specified separator.</li>
+<li><strong><code>sub_clauses</code></strong> <em>(list)</em>: List of clauses that depends on this clause. If parent clause cannot be printed, all sub_clauses are also discarded.<ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>annotations</code></strong> <em>(list)</em></p>
+<ul>
+<li>...</li>
+</ul>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to the rdfs:label of an owl annotation property. If the annotation property has no label, the shortForm ID should be used. The annotation property must be listed in the annotation property dictionary.'.</p>
+</li>
+<li>
+<p><strong><code>value</code></strong> <em>(string)</em>: A single list variable (list_var or data_list_var).  Each item in this list should be used to generate a separate annotation axiom.</p>
+</li>
+<li>
+<p><strong><code>annotationProperty</code></strong> <em>(string)</em>: A string corresponding to a key in the annotation property dictionary.</p>
+</li>
+<li><strong><code>var</code></strong> <em>(string)</em>: The name of a variable specified in the 'vars' field. The IRI of the variable value will be the object of the annotation axiom.</li>
+<li><strong><code>annotations</code></strong> <em>(list)</em><ul>
+<li>...</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../document/" class="btn btn-neutral float-right" title="Documentation Generation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../overview/" class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../overview/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../document/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
