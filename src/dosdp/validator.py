@@ -200,6 +200,31 @@ def test_multi_clause_multi_list(pattern):
     return stat
 
 
+def test_annotation_properties(pattern):
+    """
+    Structurally tests whether an annotation property is declared before use.
+     Args:
+         pattern: schema in yaml format to validate
+
+    Returns: True if all used annotation properties are declared, False otherwise.
+    """
+    declared_annotations = set()
+    if 'annotationProperties' in pattern.keys(): declared_annotations.update(set(pattern['annotationProperties'].keys()))
+    expr = parse('annotations.[*].annotationProperty')
+    used_annotations = [match for match in expr.find(pattern)]
+
+    print(declared_annotations)
+    stat = True
+    if used_annotations:
+        for annotation_prop in used_annotations:
+            val = annotation_prop.value
+            print(val)
+            if val not in declared_annotations:
+                warnings.warn("Annotation property '%s' didn't declared before use." % val)
+                stat = False
+    return stat
+
+
 def format_warning(message, category, filename, lineno, line=None):
     return '%s:%s: %s:%s\n' % (filename, lineno, category.__name__, message)
 
@@ -249,6 +274,7 @@ def validate(pattern):
                 if not test_clause_nesting(pattern): stat = False
                 if not test_axiom_separator(pattern): stat = False
                 if not test_multi_clause_multi_list(pattern): stat = False
+                if not test_annotation_properties(pattern): stat = False
             except YAMLError as exc:
                 stat = False
                 logging.error('Failed to load pattern file: ' + pattern_doc)
