@@ -1,4 +1,4 @@
-name: Publish Python distributions to PyPI
+name: Publish to PyPI
 
 on:
   # Allows you to run this workflow manually from the Actions tab
