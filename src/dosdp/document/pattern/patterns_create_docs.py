@@ -136,7 +136,7 @@ def generate_pattern_documentation(pattern_file, md_file_path, sample_data_dir=N
                 else:
                     print("No matches!")
             except Exception as e:
-                logging.error("Error processing the tsv file!", e)
+                logging.error("Error processing the tsv file! %s", e)
         else:
             logging.warning("Data dir: '" + os.path.join(str(sample_data_dir),
                                                          sample_file) + "' does not exist to provide sample data!")
