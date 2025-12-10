@@ -3,7 +3,7 @@ jsonschema
 requests
 jsonpath_rw
 ruamel.yaml
-jsonschema2md
+jsonschema2md>=0.4,<0.5
 pandas
 tabulate
 
