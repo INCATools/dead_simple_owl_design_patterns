@@ -93,6 +93,15 @@ definitions:
          leaving this field out.
         items: {type: string}
         type: array
+      permutations:
+        description: >
+         Optional list of permutation specifications. For each variable specified,
+         generates additional annotations using the values of the specified annotation
+         properties from the filler term. The label-based annotation is always generated
+         in addition to the permutations. If multiple permutation entries exist for
+         different variables, the cartesian product of all values is generated.
+        type: array
+        items: { $ref: '#/definitions/permutation' }
       multi_clause:
         items: { $ref: '#/definitions/multi_clause_printf' }
 
@@ -219,6 +228,24 @@ definitions:
         type: string
         description: perl style regex sub.  May include backreferences.
 
+  permutation:
+    type: object
+    additionalProperties: False
+    required: [var, annotationProperties]
+    properties:
+      var:
+        description: >
+          The name of a single variable for which to generate permutations.
+          Must correspond to a variable specified in the 'vars' field of the pattern.
+        type: string
+      annotationProperties:
+        description: >
+          A list of annotation property names (as declared in the annotationProperties
+          dictionary) whose values from the filler term will be used to generate
+          additional annotations. Each value found generates a separate annotation.
+        type: array
+        items: { type: string }
+
   opa:
     type: object
     additionalProperties: False
@@ -272,6 +299,15 @@ definitions:
          used in the substitution.
         items: {type: string}
         type: array
+      permutations:
+        description: >
+         Optional list of permutation specifications. For each variable specified,
+         generates additional annotations using the values of the specified annotation
+         properties from the filler term. The label-based annotation is always generated
+         in addition to the permutations. If multiple permutation entries exist for
+         different variables, the cartesian product of all values is generated.
+        type: array
+        items: { $ref: '#/definitions/permutation' }
       multi_clause:
         items: { $ref: '#/definitions/multi_clause_printf' }
 

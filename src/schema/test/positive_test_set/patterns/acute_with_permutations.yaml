@@ -1,0 +1,49 @@
+pattern_name: acute_with_permutations
+
+pattern_iri: http://purl.obolibrary.org/obo/mondo/patterns/acute_with_permutations.yaml
+
+description: 'Test pattern demonstrating the permutations feature for synonym generation.
+  This pattern generates additional synonyms by permuting over the exact_synonym
+  values of the disease filler term.'
+
+contributors:
+- https://orcid.org/0000-0002-6601-2165
+
+classes:
+  acute: PATO:0000389
+  disease: MONDO:0000001
+
+relations:
+  has modifier: RO:0002573
+
+annotationProperties:
+  exact_synonym: oio:hasExactSynonym
+  related_synonym: oio:hasRelatedSynonym
+
+vars:
+  disease: '''disease'''
+
+name:
+  text: acute %s
+  vars:
+  - disease
+
+annotations:
+- annotationProperty: exact_synonym
+  text: '%s, acute'
+  permutations:
+  - var: disease
+    annotationProperties:
+    - exact_synonym
+  vars:
+  - disease
+
+def:
+  text: Acute form of %s.
+  vars:
+  - disease
+
+equivalentTo:
+  text: '%s and ''has modifier'' some ''acute'''
+  vars:
+  - disease
