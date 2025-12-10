@@ -41,7 +41,7 @@ setup(
     package_dir={'': 'src'},
     packages=["dosdp", "schema", "dosdp.document", "dosdp.document.pattern", "dosdp.document.schema"],
     include_package_data=True,
-    install_requires=["PyYAML", "jsonschema", "requests", "jsonpath_rw", "ruamel.yaml", "jsonschema2md", "pandas"],
+    install_requires=["PyYAML", "jsonschema", "requests", "jsonpath_rw", "ruamel.yaml", "jsonschema2md>=0.4,<0.5", "pandas", "tabulate"],
     entry_points={
         "console_scripts": [
             "dosdp=dosdp.__main__:main",
