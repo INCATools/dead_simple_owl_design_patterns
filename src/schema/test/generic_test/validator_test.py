@@ -2,7 +2,7 @@ import unittest
 import os
 
 
-from dosdp.validator import validate
+from dosdp.validator import test_text_fields, validate
 
 POSITIVE_PATTERNS_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../positive_test_set/patterns")
 POSITIVE_PATTERN_1 = os.path.join(os.path.dirname(os.path.realpath(__file__)),
@@ -67,6 +67,23 @@ class ValidatorTest(unittest.TestCase):
 
     def test_undeclared_annotation_prop(self):
         self.assertFalse(validate(NEGATIVE_PATTERN_UNDECLARED_ANNOT_PROP))
+
+    def test_text_fields_accept_all_declared_owl_entity_types(self):
+        pattern = {
+            "dataProperties": {
+                "mortality_rate": "RO:0002029",
+            },
+            "annotationProperties": {
+                "source": "dc:source",
+            },
+            "logical_axioms": [
+                {
+                    "text": "'mortality_rate' and 'source'",
+                },
+            ],
+        }
+
+        self.assertTrue(test_text_fields(pattern))
 
     def test_schema_validation(self):
         self.assertFalse(validate(NEGATIVE_PATTERN_SCHEMA))
