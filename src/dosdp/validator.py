@@ -82,8 +82,13 @@ def test_text_fields(pattern):
     Returns: True if schema text fields are valid, False otherwise.
     """
     owl_entities = set()
-    if 'classes' in pattern.keys(): owl_entities.update(set(pattern['classes'].keys()))
-    if 'relations' in pattern.keys(): owl_entities.update(set(pattern['relations'].keys()))
+    for entity_type in (
+        'classes',
+        'relations',
+        'dataProperties',
+        'annotationProperties',
+    ):
+        owl_entities.update(pattern.get(entity_type, {}).keys())
     expr = parse('logical_axioms.[*].text')
     ms_fields = [match for match in expr.find(pattern)]
     expr = parse('logical_axioms.[*].multi_clause.clauses.[*].text')
